@@ -1,5 +1,5 @@
-let renderuser = document.querySelector(".renderuser") as HTMLDivElement;
-function hendelget() {
+let renderUser = document.querySelector("#render-user") as HTMLDivElement;
+function handelGet() {
   try {
     fetch("/api/user-get")
       .then((res) => res.json())
@@ -7,7 +7,7 @@ function hendelget() {
         try {
           if (!data) throw new Error("no data");
           console.log(data);
-          henelrender(data.users);
+          handelRender(data.users);
         } catch (error) {
           console.log(error);
         }
@@ -23,21 +23,21 @@ interface User {
   _id: string;
 }
 
-function henelrender(users: Array<User>) {
+function handelRender(users: Array<User>) {
   try {
     if (!users) throw new Error("no data");
     let renderHtml = users
       .map((user) => {
         return `<div>
               <img src="${user.src}" alt="${user.name}">
-              <p contenteditable oninput="hendelUpdate(event,'${user._id}')">${user.name}</p>
-              <button onclick="hendelDeleteUser('${user._id}')">Delete<button>
+              <p contentEditable oninput="handelUpdate(event,'${user._id}')">${user.name}</p>
+              <button onclick="handelDeleteUser('${user._id}')">Delete<button>
             </div>`;
       })
       .join(" ");
 
     // console.log(13719283)
-    renderuser.innerHTML = renderHtml;
+    renderUser.innerHTML = renderHtml;
   } catch (error) {
     console.log(error);
   }
