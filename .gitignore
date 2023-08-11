@@ -87,33 +87,4 @@ typings/
 .dynamodb/
 
 .DS_Store
-04-CRUD-Project/Bella/server.ts
-98-Projects/GRJ/server.ts
-98-Projects/GRJ/server.ts
-.vscode/settings.json
-.vscode/settings.json
-01-HTML-CSS/01-tags/daniel levy/index.html
-01-HTML-CSS/01-tags/gal even paz/list.html
-01-HTML-CSS/01-tags/lihi/blog.html
-01-HTML-CSS/01-tags/lihi/index.html
-01-HTML-CSS/01-tags/maor chanimov/blog.html
-01-HTML-CSS/01-tags/maor chanimov/Blog/blog.html
-01-HTML-CSS/01-tags/maor chanimov/index.html
-01-HTML-CSS/01-tags/maor chanimov/pages/blog.html
-01-HTML-CSS/02-html-css/exsample/index.html
-01-HTML-CSS/02-html-css/homework/gal even paz/close-up-man-writing-code-laptop.jpg
-01-HTML-CSS/02-html-css/homework/gal even paz/code-1076536_640.jpg
-01-HTML-CSS/02-html-css/homework/gal even paz/content.txt
-01-HTML-CSS/02-html-css/homework/gal even paz/flash-2568381_960_720.jpg
-01-HTML-CSS/02-html-css/homework/gal even paz/index.html
-01-HTML-CSS/02-html-css/homework/gal even paz/links.txt
-01-HTML-CSS/02-html-css/homework/gal even paz/woman-with-curly-hair-dances_417.jpg
-01-HTML-CSS/02-html-css/aliyah mesika/pages/discography.html
-01-HTML-CSS/02-html-css/aliyah mesika/images/tupac8.png
-01-HTML-CSS/02-html-css/aliyah mesika/images/tupac7.png
-01-HTML-CSS/02-html-css/aliyah mesika/images/tupac4.png
-01-HTML-CSS/02-html-css/aliyah mesika/images/tupac3.png
-01-HTML-CSS/02-html-css/aliyah mesika/images/tupac2.png
-01-HTML-CSS/02-html-css/aliyah mesika/images/tupac10.png
-01-HTML-CSS/02-html-css/aliyah mesika/images/all eyes on me.jpeg
-Node/01-basic/ziv/
+
