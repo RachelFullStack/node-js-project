@@ -35,7 +35,7 @@ body {
 .container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Change to center */
+  align-items: center;
   gap: 200px;
   margin: 50px auto;
   max-width: 800px;
