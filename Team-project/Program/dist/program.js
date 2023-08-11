@@ -8,7 +8,10 @@ var startButton = document.getElementById("startButton");
 var pauseButton = document.getElementById("pauseButton");
 var resetButton = document.getElementById("resetButton");
 function updateDisplay() {
-    var totalSeconds = Math.floor((elapsedTime + (Date.now() - startTime)) / 1000);
+    var currentTime = isPaused
+        ? elapsedTime
+        : Date.now() - startTime + elapsedTime;
+    var totalSeconds = Math.floor(currentTime / 1000);
     var minutes = Math.floor(totalSeconds / 60);
     var seconds = totalSeconds % 60;
     timerDisplay.textContent = minutes.toString().padStart(2, "0") + ":" + seconds
@@ -26,7 +29,7 @@ function startTimer() {
 function pauseTimer() {
     if (!isPaused) {
         isPaused = true;
-        elapsedTime += Date.now() - startTime;
+        elapsedTime = Date.now() - startTime + elapsedTime;
         clearInterval(timerInterval);
     }
 }
@@ -43,15 +46,15 @@ pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
 ///// WORKOUT TABLE /////
 var workoutData = [
-    { exercise: "Push-ups", sets: 3, reps: 15 },
-    { exercise: "Squats", sets: 4, reps: 12 },
-    { exercise: "Plank", sets: 3, reps: "30s" },
+    { exercise: "Push-ups", Image: "./Images/pushup.png", sets: 3, reps: 15 },
+    { exercise: "Squats", Image: "./Images/squat.png", sets: 4, reps: 12 },
+    { exercise: "Plank", Image: "./Images/plank.png", sets: 3, reps: "30s" },
 ];
 var tableBody = document.getElementById("tableBody");
 function populateTable() {
     workoutData.forEach(function (exercise) {
         var row = document.createElement("tr");
-        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
+        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td><img src=\"images/" + exercise.Image + "\" alt=\"" + exercise.exercise + "\" class=\"exercise-image\"></td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
         tableBody.appendChild(row);
     });
 }
