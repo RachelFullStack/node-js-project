@@ -1,3 +1,10 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
 .navbar {
     background-color: #00ced1;
     height: 50px;
@@ -30,25 +37,28 @@
     }
     }
     .container {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 30px;
-        margin-top: 50px;
-      }
-      
-      .timer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .Program_info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        color: black;
-      }
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      margin: 50px auto;
+      max-width: 800px;
+    }
+    
+    .timer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto; 
+    }
+    
+    .Program_info {
+      display: flex;
+      flex-direction: column;
+      color: black;
+      margin-left: 10px;
+      flex: 1; 
+    }
       
       .timer__display {
         font-size: 3rem;
@@ -83,4 +93,40 @@
       
       .Program_info {
         margin-left: auto;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      
+      .workout-table {
+        max-width: 800px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      
+      th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      th {
+        background-color: #00ced1;
+        color: white;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
       }

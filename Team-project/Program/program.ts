@@ -1,3 +1,5 @@
+///// TIMER /////
+
 let timerInterval: NodeJS.Timeout | null = null;
 let startTime: number = 0;
 let elapsedTime: number = 0;
@@ -48,3 +50,29 @@ function resetTimer() {
 startButton.addEventListener("click", startTimer);
 pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
+
+///// WORKOUT TABLE /////
+
+const workoutData = [
+  { exercise: "Push-ups", sets: 3, reps: 15 },
+  { exercise: "Squats", sets: 4, reps: 12 },
+  { exercise: "Plank", sets: 3, reps: "30s" },
+];
+
+const tableBody = document.getElementById(
+  "tableBody"
+) as HTMLTableSectionElement;
+
+function populateTable() {
+  workoutData.forEach((exercise) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${exercise.exercise}</td>
+        <td>${exercise.sets}</td>
+        <td>${exercise.reps}</td>
+      `;
+    tableBody.appendChild(row);
+  });
+}
+
+window.addEventListener("load", populateTable);
