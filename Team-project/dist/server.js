@@ -42,7 +42,7 @@ var dotenv = require("dotenv");
 var mongoose_2 = require("mongoose");
 dotenv.config();
 var app = express_1["default"]();
-var uri = process.env.MONGOOSE_URI + "playground";
+var uri = process.env.MONGOOSE_URI + "Training";
 if (uri) {
     mongoose_1["default"]
         .connect(uri)
