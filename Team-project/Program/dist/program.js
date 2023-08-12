@@ -60,16 +60,28 @@ pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
 ///// WORKOUT TABLE /////
 var workoutData = [
-    { exercise: "Push-ups", Image: "./Images/pushup.png", sets: 3, reps: 15 },
-    { exercise: "Squats", Image: "./Images/squat.png", sets: 4, reps: 12 },
-    { exercise: "Plank", Image: "./Images/plank.png", sets: 3, reps: "30s" },
+    { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
+    { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
+    { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
 ];
 var tableBody = document.getElementById("tableBody");
 function populateTable() {
     workoutData.forEach(function (exercise) {
         var row = document.createElement("tr");
-        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td><img src=\"images/" + exercise.Image + "\" alt=\"" + exercise.exercise + "\" class=\"exercise-image\"/></td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
+        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td><img src=\"images/" + exercise.image + "\" alt=\"" + exercise.exercise + "\" class=\"exercise-image\"/></td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
         tableBody.appendChild(row);
     });
 }
 window.addEventListener("load", populateTable);
+///// COMPLETE BUTTON /////
+var completeButton = document.getElementById("completeButton");
+if (completeButton) {
+    var isCompleted_1 = false;
+    completeButton.addEventListener("click", function () {
+        if (!isCompleted_1) {
+            completeButton.textContent = "Workout Completed!";
+            completeButton.classList.add("completed");
+            isCompleted_1 = true;
+        }
+    });
+}

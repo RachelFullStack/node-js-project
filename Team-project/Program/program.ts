@@ -66,9 +66,9 @@ resetButton.addEventListener("click", resetTimer);
 ///// WORKOUT TABLE /////
 
 const workoutData = [
-  { exercise: "Push-ups", Image: "./Images/pushup.png", sets: 3, reps: 15 },
-  { exercise: "Squats", Image: "./Images/squat.png", sets: 4, reps: 12 },
-  { exercise: "Plank", Image: "./Images/plank.png", sets: 3, reps: "30s" },
+  { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
+  { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
+  { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
 ];
 
 const tableBody = document.getElementById(
@@ -80,7 +80,7 @@ function populateTable() {
     const row = document.createElement("tr");
     row.innerHTML = `
         <td>${exercise.exercise}</td>
-        <td><img src="images/${exercise.Image}" alt="${exercise.exercise}" class="exercise-image"/></td>
+        <td><img src="images/${exercise.image}" alt="${exercise.exercise}" class="exercise-image"/></td>
         <td>${exercise.sets}</td>
         <td>${exercise.reps}</td>
       `;
@@ -89,3 +89,18 @@ function populateTable() {
 }
 
 window.addEventListener("load", populateTable);
+
+///// COMPLETE BUTTON /////
+const completeButton = document.getElementById("completeButton");
+
+if (completeButton) {
+  let isCompleted = false;
+
+  completeButton.addEventListener("click", () => {
+    if (!isCompleted) {
+      completeButton.textContent = "Workout Completed!";
+      completeButton.classList.add("completed");
+      isCompleted = true;
+    }
+  });
+}

@@ -80,11 +80,11 @@ body {
 }
 
 .timer__button:hover {
-  background-color: #f05d9a;
+  background-color: #0099a8;
 }
 
 .timer__button:active {
-  background-color: #f05d9a;
+  background-color: #007885;
 }
 
 .Program_info {
@@ -116,7 +116,7 @@ table {
 th,
 td {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
 }
 
@@ -127,32 +127,4 @@ th {
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
-}
-
-img {
-  width: 100px;
-  height: auto;
-}
-
-.completeButton {
-  display: block;
-  margin: 20px auto; /* Center the button */
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #00ced1;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.completeButton.completed {
-  background-color: #f05d9a;
-  pointer-events: none;
-}
-
-.completeButton:hover {
-  background-color: #f05d9a;
-  transform: scale(1.05);
 }/*# sourceMappingURL=style.css.map */

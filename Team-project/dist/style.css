@@ -36,7 +36,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Change to center */
   gap: 200px;
   margin: 50px auto;
   max-width: 800px;
@@ -81,11 +80,11 @@ body {
 }
 
 .timer__button:hover {
-  background-color: #0099a8;
+  background-color: #f05d9a;
 }
 
 .timer__button:active {
-  background-color: #007885;
+  background-color: #f05d9a;
 }
 
 .Program_info {
@@ -117,7 +116,7 @@ table {
 th,
 td {
   padding: 10px;
-  text-align: center;
+  text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
@@ -128,4 +127,33 @@ th {
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+img {
+  width: 100px;
+  height: auto;
+}
+
+.completeButton {
+  display: block;
+  margin: 20px auto;
+  /* Center the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #00ced1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.completeButton.completed {
+  background-color: #f05d9a;
+  pointer-events: none;
+}
+
+.completeButton:hover {
+  background-color: #f05d9a;
+  transform: scale(1.05);
 }
