@@ -6,7 +6,7 @@ import { Schema, model } from "mongoose";
 dotenv.config();
 
 const app = express();
-const uri: string | undefined = process.env.MONGOOSE_URI + "playground";
+const uri: string | undefined = process.env.MONGOOSE_URI + "Training";
 
 if (uri) {
   mongoose
