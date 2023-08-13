@@ -2,30 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,
-                         initial-scale=1.0"
-    />
-    <title>To Do List</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
     <link rel="stylesheet" href="./dist/style.css" />
+    <script src="./dist/index.js" defer></script>
   </head>
   <body>
-    <fieldset class="FirstFieldset">
-      <br />
-      <br />
-      <br />
-      <br />
-      <img src="./images/todo.png" alt="ToDo" width="80px" height="80px" />
-      <h1>Just do it.</h1>
-      <h2>organized.</h2>
+    <!-- <h3>Registration Page</h3> -->
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <a href="signup.html" class="button1">register</a>
-      <a href="Login.html" class="button1">Login </a>
+    <fieldset class="FirstFieldset">
+      <img
+        src="https://images.pexels.com/photos/1821694/pexels-photo-1821694.jpeg?auto=compress&cs=tinysrgb&w=600"
+        alt="ToDo"
+        width="80px"
+        height="80px"
+      />
+      <h1>Bring happiness into your life</h1>
+
+      <form onsubmit="handleRegistration(event)">
+        <input
+          class="name-input"
+          type="text"
+          name="userName"
+          placeholder="name"
+          required
+        />
+        <input
+          class="password-input"
+          type="password"
+          name="userPassword"
+          placeholder="password"
+          required
+        />
+        <button class="register-btn" type="submit">Register</button>
+      </form>
+
+      <a href="./login.html" class="button1">already registered?</a>
+      <a href="./admin.html" class="button2">admin login</a>
     </fieldset>
+    <div id="users"></div>
   </body>
 </html>

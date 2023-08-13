@@ -1,12 +1,17 @@
-import express from "express";
+import express, { Router } from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import { Schema, model } from "mongoose";
+import router from "./API/users/usersRoute";
+// import  cookieParser  from "cookie-parser";
+
+const app = express();
+app.use(express.json());
+app.use(express.static("./client"));
+app.use("/api/", router);
 
 dotenv.config();
 
-const app = express();
-const uri: string | undefined = process.env.MONGOOSE_URI + "playground";
+const uri: string | undefined = process.env.MONGOOSE_URI + "Fitness-App";
 
 if (uri) {
   mongoose
@@ -17,20 +22,7 @@ if (uri) {
   console.log("No URI");
 }
 
-app.use(express.json());
-
-const UserSchema = new Schema({ name: String, src: String });
-const UserModel = mongoose.model("users", UserSchema);
-
-app.get("/api/user-get", async (req: any, res: any) => {
-  try {
-    const users = await UserModel.find({});
-    res.send({ users });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
+const myPort = 3000;
 app.listen(3000, () => {
-  console.log("server listen on port 3000");
+  console.log(`server listen in http://localhost:${myPort}`);
 });

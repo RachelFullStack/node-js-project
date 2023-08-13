@@ -16,13 +16,11 @@
 //     console.log(error);
 //   }
 // }
-
 // interface User {
 //   name: string;
 //   src: string;
 //   _id: string;
 // }
-
 // function handelRender(users: Array<User>) {
 //   try {
 //     if (!users) throw new Error("no data");
@@ -35,7 +33,6 @@
 //             </div>`;
 //       })
 //       .join(" ");
-
 //     // console.log(13719283)
 //     renderUser.innerHTML = renderHtml;
 //   } catch (error) {
