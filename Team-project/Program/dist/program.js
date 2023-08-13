@@ -59,20 +59,24 @@ startButton.addEventListener("click", startTimer);
 pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
 ///// WORKOUT TABLE /////
-var workoutData = [
-    { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
-    { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
-    { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
-];
-var tableBody = document.getElementById("tableBody");
-function populateTable() {
-    workoutData.forEach(function (exercise) {
-        var row = document.createElement("tr");
-        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td><img src=\"images/" + exercise.image + "\" alt=\"" + exercise.exercise + "\" class=\"exercise-image\"/></td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
-        tableBody.appendChild(row);
-    });
-}
-window.addEventListener("load", populateTable);
+document.addEventListener("DOMContentLoaded", function () {
+    var workoutData = window.workoutData || [];
+    console.log(workoutData);
+    // const workoutData = [
+    //   { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
+    //   { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
+    //   { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
+    // ];
+    var tableBody = document.getElementById("tableBody");
+    function populateTable() {
+        workoutData.forEach(function (exercise) {
+            var row = document.createElement("tr");
+            row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td><img src=\"images/" + exercise.image + "\" alt=\"" + exercise.exercise + "\" class=\"exercise-image\"/></td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
+            tableBody.appendChild(row);
+        });
+    }
+    window.addEventListener("load", populateTable);
+});
 ///// COMPLETE BUTTON /////
 var completeButton = document.getElementById("completeButton");
 if (completeButton) {

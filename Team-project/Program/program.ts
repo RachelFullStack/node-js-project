@@ -65,31 +65,36 @@ resetButton.addEventListener("click", resetTimer);
 
 ///// WORKOUT TABLE /////
 
-const workoutData = [
-  { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
-  { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
-  { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
-];
+document.addEventListener("DOMContentLoaded", function () {
+  const workoutData = window.workoutData || [];
 
-const tableBody = document.getElementById(
-  "tableBody"
-) as HTMLTableSectionElement;
+  console.log(workoutData);
 
-function populateTable() {
-  workoutData.forEach((exercise) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
+  // const workoutData = [
+  //   { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
+  //   { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
+  //   { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
+  // ];
+
+  const tableBody = document.getElementById(
+    "tableBody"
+  ) as HTMLTableSectionElement;
+
+  function populateTable() {
+    workoutData.forEach((exercise) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
         <td>${exercise.exercise}</td>
         <td><img src="images/${exercise.image}" alt="${exercise.exercise}" class="exercise-image"/></td>
         <td>${exercise.sets}</td>
         <td>${exercise.reps}</td>
       `;
-    tableBody.appendChild(row);
-  });
-}
+      tableBody.appendChild(row);
+    });
+  }
 
-window.addEventListener("load", populateTable);
-
+  window.addEventListener("load", populateTable);
+});
 ///// COMPLETE BUTTON /////
 const completeButton = document.getElementById("completeButton");
 
