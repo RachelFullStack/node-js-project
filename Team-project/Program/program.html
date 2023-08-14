@@ -13,10 +13,13 @@
           <a href="./index.html" class="navbar__link">sign in</a>
         </li>
         <li class="navbar__item">
-          <a href="../admin.html" class="navbar__link">Admin</a>
+          <a href="../create-program/create.html" class="navbar__link">Admin</a>
         </li>
         <li class="navbar__item">
           <a href="../home.html" class="navbar__link">All Programs</a>
+        </li>
+        <li class="navbar__item">
+          <a href="../Program/program.html" class="navbar__link">My Program</a>
         </li>
       </ul>
     </nav>
@@ -31,7 +34,7 @@
       </div>
       <div class="Program_info" id="ProgramInfo">
         <h2>Your Program:</h2>
-        <div class="display_program_info"></div>
+        <div class="renderProgramInfo"></div>
       </div>
     </div>
     <div class="workout-table">
@@ -45,7 +48,7 @@
             <th>Reps</th>
           </tr>
         </thead>
-        <tbody id="workoutDataContainer"></tbody>
+        <tbody id="renderWorkoutTable"></tbody>
       </table>
       <br />
       <button id="completeButton" class="completeButton">done!</button>

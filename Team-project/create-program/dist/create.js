@@ -82,23 +82,64 @@ if (addButton) {
         }
     });
 }
+function validateForm() {
+    var inputField = document.getElementById("someInputField");
+    if (!inputField.value) {
+        alert("Please fill out the required field.");
+        return false;
+    }
+    return true;
+}
 var submitButton = document.getElementById("submit-button");
 if (submitButton) {
     submitButton.addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
-        var programForm, isValid;
-        return __generator(this, function (_a) {
-            programForm = document.getElementById("program-form");
-            if (programForm) {
-                isValid = validateForm();
-                if (isValid) {
-                    programForm.submit();
-                    window.location.href = "../program/program.html";
-                }
+        var programForm, isValid, programData, tableIndex, tableData, i, exercise, image, sets, reps, response, result, error_1;
+        var _a, _b, _c, _d;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
+                case 0:
+                    programForm = document.getElementById("program-form");
+                    if (!programForm) return [3 /*break*/, 6];
+                    isValid = validateForm();
+                    if (!isValid) return [3 /*break*/, 6];
+                    programData = [];
+                    for (tableIndex = 1; tableIndex <= tableCounter; tableIndex++) {
+                        tableData = [];
+                        for (i = 1; i <= 8; i++) {
+                            exercise = (_a = programForm.elements["exercise_" + i + "_" + tableIndex]) === null || _a === void 0 ? void 0 : _a.value;
+                            image = (_b = programForm.elements["image_" + i + "_" + tableIndex]) === null || _b === void 0 ? void 0 : _b.files[0];
+                            sets = (_c = programForm.elements["sets_" + i + "_" + tableIndex]) === null || _c === void 0 ? void 0 : _c.value;
+                            reps = (_d = programForm.elements["reps_" + i + "_" + tableIndex]) === null || _d === void 0 ? void 0 : _d.value;
+                            tableData.push({ exercise: exercise, image: image, sets: sets, reps: reps });
+                        }
+                        programData.push(tableData);
+                    }
+                    _e.label = 1;
+                case 1:
+                    _e.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, fetch("/api/add-program", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(programData)
+                        })];
+                case 2:
+                    response = _e.sent();
+                    return [4 /*yield*/, response.json()];
+                case 3:
+                    result = _e.sent();
+                    console.log(result);
+                    return [3 /*break*/, 5];
+                case 4:
+                    error_1 = _e.sent();
+                    console.error(error_1);
+                    return [3 /*break*/, 5];
+                case 5:
+                    window.location.href = "../Program/program.html";
+                    _e.label = 6;
+                case 6: return [2 /*return*/];
             }
-            return [2 /*return*/];
         });
     }); });
-}
-function validateForm() {
-    return true;
 }

@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.addProgram = exports.addCategory = exports.deleteAllData = exports.getCategories = exports.getAllData = void 0;
+exports.getProgramData = exports.addProgram = exports.addCategory = exports.deleteAllData = exports.getCategories = exports.getAllData = void 0;
 var createModel_1 = require("./createModel");
 var createModel_2 = require("./createModel");
 var createModel_3 = require("./createModel");
@@ -46,7 +46,7 @@ exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, createModel_1["default"].find({}) // Use AllDataModel instead of AllData
+                return [4 /*yield*/, createModel_1["default"].find({})
                         .populate("category")
                         .populate("program")
                         .exec()];
@@ -114,7 +114,7 @@ exports.deleteAllData = function (req, res) { return __awaiter(void 0, void 0, v
     });
 }); };
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, Days, Equipment, level, WorkoutTime, nerCategory, error_4;
+    var _a, Days, Equipment, level, WorkoutTime, newCategory, error_4;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -127,7 +127,7 @@ exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, voi
                         WorkoutTime: WorkoutTime
                     })];
             case 1:
-                nerCategory = _b.sent();
+                newCategory = _b.sent();
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 3];
             case 2:
@@ -139,28 +139,113 @@ exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, voi
     });
 }); };
 exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, Exercise, image, sets, reps, newProgram, error_5;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var programData, newPrograms, newAllData, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, Exercise = _a.Exercise, image = _a.image, sets = _a.sets, reps = _a.reps;
-                return [4 /*yield*/, createModel_3.program.create({
-                        Exercise: Exercise,
-                        image: image,
-                        sets: sets,
-                        reps: reps
-                    })];
+                _a.trys.push([0, 3, , 4]);
+                programData = req.body;
+                return [4 /*yield*/, Promise.all(programData.map(function (tableData) { return __awaiter(void 0, void 0, void 0, function () {
+                        var exercises;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, Promise.all(tableData.map(function (exercise) { return __awaiter(void 0, void 0, void 0, function () {
+                                        var newExercise;
+                                        return __generator(this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0: return [4 /*yield*/, createModel_3.program.create(exercise)];
+                                                case 1:
+                                                    newExercise = _a.sent();
+                                                    return [2 /*return*/, newExercise._id];
+                                            }
+                                        });
+                                    }); }))];
+                                case 1:
+                                    exercises = _a.sent();
+                                    return [2 /*return*/, exercises];
+                            }
+                        });
+                    }); }))];
             case 1:
-                newProgram = _b.sent();
-                console.log(newProgram);
-                return [3 /*break*/, 3];
+                newPrograms = _a.sent();
+                return [4 /*yield*/, createModel_1["default"].create({
+                        category: req.body.categoryId,
+                        program: newPrograms.flat()
+                    })];
             case 2:
-                error_5 = _b.sent();
+                newAllData = _a.sent();
+                console.log(newAllData);
+                res.status(200).send({ ok: true });
+                return [3 /*break*/, 4];
+            case 3:
+                error_5 = _a.sent();
                 console.log(error_5);
                 res.status(500).send("didn't get data");
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getProgramData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var allProgramData, error_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, createModel_1["default"].find({})
+                        .populate("category")
+                        .populate("program")
+                        .exec()];
+            case 1:
+                allProgramData = _a.sent();
+                res.send({ allProgramData: allProgramData });
+                return [3 /*break*/, 3];
+            case 2:
+                error_6 = _a.sent();
+                console.log(error_6);
+                res.status(500).send("error");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
+function renderProgramInfo() {
+    return __awaiter(this, void 0, void 0, function () {
+        var programInfoContainer, programData;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    programInfoContainer = document.querySelector(".display_program_info");
+                    return [4 /*yield*/, fetchProgramData()];
+                case 1:
+                    programData = _a.sent();
+                    programData.forEach(function (program) {
+                        var programDiv = document.createElement("div");
+                        programDiv.textContent = "Program: " + program.name + ", Level: " + program.level;
+                        programInfoContainer.appendChild(programDiv);
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function renderWorkoutTable() {
+    return __awaiter(this, void 0, void 0, function () {
+        var workoutDataContainer, exerciseData;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    workoutDataContainer = document.getElementById("workoutDataContainer");
+                    return [4 /*yield*/, fetchExerciseData()];
+                case 1:
+                    exerciseData = _a.sent();
+                    exerciseData.forEach(function (exercise) {
+                        var row = document.createElement("tr");
+                        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td>" + exercise.image + "</td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
+                        workoutDataContainer.appendChild(row);
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    });
+}

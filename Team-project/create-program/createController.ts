@@ -4,7 +4,7 @@ import { program } from "./createModel";
 
 export const getAllData = async (req: any, res: any) => {
   try {
-    const allData = await AllDataModel.find({}) // Use AllDataModel instead of AllData
+    const allData = await AllDataModel.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -46,7 +46,7 @@ export const deleteAllData = async (req: any, res: any) => {
 export const addCategory = async (req: any, res: any) => {
   try {
     const { Days, Equipment, level, WorkoutTime } = req.body;
-    const nerCategory = await Category.create({
+    const newCategory = await Category.create({
       Days,
       Equipment,
       level,
@@ -61,18 +61,74 @@ export const addCategory = async (req: any, res: any) => {
 
 export const addProgram = async (req: any, res: any) => {
   try {
-    const { Exercise, image, sets, reps } = req.body;
+    const programData = req.body;
 
-    const newProgram = await program.create({
-      Exercise,
-      image,
-      sets,
-      reps,
+    const newPrograms = await Promise.all(
+      programData.map(async (tableData: any) => {
+        const exercises = await Promise.all(
+          tableData.map(async (exercise: any) => {
+            const newExercise = await program.create(exercise);
+            return newExercise._id;
+          })
+        );
+
+        return exercises;
+      })
+    );
+
+    const newAllData = await AllDataModel.create({
+      category: req.body.categoryId,
+      program: newPrograms.flat(),
     });
 
-    console.log(newProgram);
+    console.log(newAllData);
+    res.status(200).send({ ok: true });
   } catch (error) {
     console.log(error);
     res.status(500).send("didn't get data");
   }
 };
+
+export const getProgramData = async (req: any, res: any) => {
+  try {
+    const allProgramData = await AllDataModel.find({})
+      .populate("category")
+      .populate("program")
+      .exec();
+    res.send({ allProgramData });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("error");
+  }
+};
+
+async function renderProgramInfo() {
+  const programInfoContainer: Element | null = document.querySelector(
+    ".display_program_info"
+  );
+
+  const programData = await fetchProgramData();
+
+  programData.forEach((program) => {
+    const programDiv = document.createElement("div");
+    programDiv.textContent = `Program: ${program.name}, Level: ${program.level}`;
+    programInfoContainer.appendChild(programDiv);
+  });
+}
+
+async function renderWorkoutTable() {
+  const workoutDataContainer = document.getElementById("workoutDataContainer");
+
+  const exerciseData = await fetchExerciseData();
+
+  exerciseData.forEach((exercise) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${exercise.exercise}</td>
+        <td>${exercise.image}</td>
+        <td>${exercise.sets}</td>
+        <td>${exercise.reps}</td>
+      `;
+    workoutDataContainer.appendChild(row);
+  });
+}

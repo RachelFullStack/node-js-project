@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.AllDataModel = exports.program = exports.Category = void 0;
+exports.AllData = exports.program = exports.Category = void 0;
 var mongoose_1 = require("mongoose");
 var categorySchema = new mongoose_1["default"].Schema({
     Days: Number,
@@ -28,5 +28,5 @@ var AllDataSchema = new mongoose_1["default"].Schema({
         },
     ]
 });
-exports.AllDataModel = mongoose_1["default"].model("AllData", AllDataSchema);
-exports["default"] = exports.AllDataModel;
+exports.AllData = mongoose_1["default"].model("AllData", ProgramSchema);
+exports["default"] = exports.program;

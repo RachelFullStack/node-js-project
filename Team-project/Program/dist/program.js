@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 ///// TIMER /////
-var timerInterval = null;
+var timerInterval;
 var startTime = 0;
 var elapsedTime = 0;
 var accumulatedPauseTime = 0;
@@ -90,7 +90,7 @@ function resetTimer() {
     isPaused = true;
     elapsedTime = 0;
     accumulatedPauseTime = 0;
-    timerDisplay.textContent = "00:00";
+    updateDisplay();
 }
 startButton.addEventListener("click", startTimer);
 pauseButton.addEventListener("click", pauseTimer);
@@ -110,10 +110,43 @@ function fetchWorkoutData() {
                 case 2:
                     data = _a.sent();
                     workoutDataContainer_1 = document.getElementById("workoutDataContainer");
-                    data.workoutData.forEach(function (exercise) {
-                        var exerciseDiv = document.createElement("div");
-                        exerciseDiv.innerHTML = "\n        <h3>" + exercise.exercise + "</h3>\n        <img src=\"" + exercise.image + "\" alt=\"" + exercise.exercise + "\">\n        <p>Sets: " + exercise.sets + ", Reps: " + exercise.reps + "</p>\n      ";
-                        workoutDataContainer_1.appendChild(exerciseDiv);
+                    workoutDataContainer_1.innerHTML = "";
+                    data.allData.forEach(function (tableData, tableIndex) {
+                        var table = document.createElement("table");
+                        var tableHead = document.createElement("thead");
+                        var tableBody = document.createElement("tbody");
+                        var headerRow = document.createElement("tr");
+                        var headers = ["Exercise", "Image", "Sets", "Reps"];
+                        for (var _i = 0, headers_1 = headers; _i < headers_1.length; _i++) {
+                            var headerText = headers_1[_i];
+                            var headerCell = document.createElement("th");
+                            headerCell.textContent = headerText;
+                            headerRow.appendChild(headerCell);
+                        }
+                        tableHead.appendChild(headerRow);
+                        tableData.forEach(function (exercise) {
+                            var row = document.createElement("tr");
+                            var exerciseText = exercise.exercise, image = exercise.image, sets = exercise.sets, reps = exercise.reps;
+                            var exerciseCell = document.createElement("td");
+                            exerciseCell.textContent = exerciseText;
+                            row.appendChild(exerciseCell);
+                            var imageCell = document.createElement("td");
+                            var imageElement = document.createElement("img");
+                            imageElement.src = image;
+                            imageElement.alt = exerciseText;
+                            imageCell.appendChild(imageElement);
+                            row.appendChild(imageCell);
+                            var setsCell = document.createElement("td");
+                            setsCell.textContent = sets;
+                            row.appendChild(setsCell);
+                            var repsCell = document.createElement("td");
+                            repsCell.textContent = reps;
+                            row.appendChild(repsCell);
+                            tableBody.appendChild(row);
+                        });
+                        table.appendChild(tableHead);
+                        table.appendChild(tableBody);
+                        workoutDataContainer_1.appendChild(table);
                     });
                     return [3 /*break*/, 4];
                 case 3:
@@ -125,31 +158,19 @@ function fetchWorkoutData() {
         });
     });
 }
-fetchWorkoutData();
 ///// COMPLETE BUTTON /////
 var completeButton = document.getElementById("completeButton");
 if (completeButton) {
     var isCompleted_1 = false;
-    completeButton.addEventListener("click", function () {
-        if (!isCompleted_1) {
-            completeButton.textContent = "Workout Completed!";
-            completeButton.classList.add("completed");
-            isCompleted_1 = true;
-        }
-    });
-}
-var completeButton = document.getElementById("completeButton");
-if (completeButton) {
-    var isCompleted_2 = false;
     completeButton.addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
         var workoutData, response, result, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!!isCompleted_2) return [3 /*break*/, 5];
+                    if (!!isCompleted_1) return [3 /*break*/, 5];
                     completeButton.textContent = "Workout Completed!";
                     completeButton.classList.add("completed");
-                    isCompleted_2 = true;
+                    isCompleted_1 = true;
                     workoutData = window.workoutData || [];
                     _a.label = 1;
                 case 1:

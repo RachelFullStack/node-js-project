@@ -54,6 +54,16 @@ if (addButton) {
   });
 }
 
+function validateForm() {
+  const inputField = document.getElementById(
+    "someInputField"
+  ) as HTMLInputElement;
+  if (!inputField.value) {
+    alert("Please fill out the required field.");
+    return false;
+  }
+  return true;
+}
 const submitButton = document.getElementById("submit-button");
 if (submitButton) {
   submitButton.addEventListener("click", async () => {
@@ -64,14 +74,45 @@ if (submitButton) {
       const isValid = validateForm();
 
       if (isValid) {
-        programForm.submit();
+        const programData: Array<
+          Array<{ exercise: string; image: File; sets: number; reps: number }>
+        > = [];
+        for (let tableIndex = 1; tableIndex <= tableCounter; tableIndex++) {
+          const tableData: {
+            exercise: string;
+            image: File;
+            sets: number;
+            reps: number;
+          }[] = [];
+          for (let i = 1; i <= 8; i++) {
+            const exercise =
+              programForm.elements[`exercise_${i}_${tableIndex}`]?.value;
+            const image =
+              programForm.elements[`image_${i}_${tableIndex}`]?.files[0];
+            const sets = programForm.elements[`sets_${i}_${tableIndex}`]?.value;
+            const reps = programForm.elements[`reps_${i}_${tableIndex}`]?.value;
 
-        window.location.href = "../program/program.html";
+            tableData.push({ exercise, image, sets, reps });
+          }
+          programData.push(tableData);
+        }
+
+        try {
+          const response = await fetch("/api/add-program", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(programData),
+          });
+          const result = await response.json();
+          console.log(result);
+        } catch (error) {
+          console.error(error);
+        }
+
+        window.location.href = "../Program/program.html";
       }
     }
   });
-}
-
-function validateForm() {
-  return true;
 }

@@ -1,5 +1,5 @@
 ///// TIMER /////
-let timerInterval: number | null = null;
+let timerInterval: number | null;
 let startTime: number = 0;
 let elapsedTime: number = 0;
 let accumulatedPauseTime: number = 0;
@@ -21,6 +21,7 @@ function updateDisplay() {
     .toString()
     .padStart(2, "0")}`;
 }
+
 function startTimer() {
   console.log("Start Button Clicked");
   console.log("isPaused:", isPaused);
@@ -33,7 +34,7 @@ function startTimer() {
     }
     console.log("startTime:", startTime);
     updateDisplay();
-    timerInterval = setInterval(updateDisplay, 1000);
+    timerInterval = setInterval(updateDisplay, 1000) as unknown as number;
   }
 }
 
@@ -56,7 +57,7 @@ function resetTimer() {
   isPaused = true;
   elapsedTime = 0;
   accumulatedPauseTime = 0;
-  timerDisplay.textContent = "00:00";
+  updateDisplay();
 }
 
 startButton.addEventListener("click", startTimer);
@@ -64,46 +65,69 @@ pauseButton.addEventListener("click", pauseTimer);
 resetButton.addEventListener("click", resetTimer);
 
 ///// WORKOUT TABLE /////
-
 async function fetchWorkoutData() {
   try {
     const response = await fetch("/api/get-workout-data");
     const data = await response.json();
     const workoutDataContainer = document.getElementById(
       "workoutDataContainer"
-    );
+    ) as HTMLElement;
 
-    data.workoutData.forEach((exercise) => {
-      const exerciseDiv = document.createElement("div");
-      exerciseDiv.innerHTML = `
-        <h3>${exercise.exercise}</h3>
-        <img src="${exercise.image}" alt="${exercise.exercise}">
-        <p>Sets: ${exercise.sets}, Reps: ${exercise.reps}</p>
-      `;
-      workoutDataContainer.appendChild(exerciseDiv);
+    workoutDataContainer.innerHTML = "";
+
+    data.allData.forEach((tableData: any, tableIndex: number) => {
+      const table = document.createElement("table");
+      const tableHead = document.createElement("thead");
+      const tableBody = document.createElement("tbody");
+
+      const headerRow = document.createElement("tr");
+      const headers = ["Exercise", "Image", "Sets", "Reps"];
+      for (const headerText of headers) {
+        const headerCell = document.createElement("th");
+        headerCell.textContent = headerText;
+        headerRow.appendChild(headerCell);
+      }
+      tableHead.appendChild(headerRow);
+
+      tableData.forEach((exercise: any) => {
+        const row = document.createElement("tr");
+        const { exercise: exerciseText, image, sets, reps } = exercise;
+
+        const exerciseCell = document.createElement("td");
+        exerciseCell.textContent = exerciseText;
+        row.appendChild(exerciseCell);
+
+        const imageCell = document.createElement("td");
+        const imageElement = document.createElement("img");
+        imageElement.src = image;
+        imageElement.alt = exerciseText;
+        imageCell.appendChild(imageElement);
+        row.appendChild(imageCell);
+
+        const setsCell = document.createElement("td");
+        setsCell.textContent = sets;
+        row.appendChild(setsCell);
+
+        const repsCell = document.createElement("td");
+        repsCell.textContent = reps;
+        row.appendChild(repsCell);
+
+        tableBody.appendChild(row);
+      });
+
+      table.appendChild(tableHead);
+      table.appendChild(tableBody);
+      workoutDataContainer.appendChild(table);
     });
   } catch (error) {
     console.error(error);
   }
 }
 
-fetchWorkoutData();
 ///// COMPLETE BUTTON /////
-const completeButton = document.getElementById("completeButton");
-
-if (completeButton) {
-  let isCompleted = false;
-
-  completeButton.addEventListener("click", () => {
-    if (!isCompleted) {
-      completeButton.textContent = "Workout Completed!";
-      completeButton.classList.add("completed");
-      isCompleted = true;
-    }
-  });
-}
-
-const completeButton = document.getElementById("completeButton");
+const completeButton = document.getElementById(
+  "completeButton"
+) as HTMLButtonElement;
 
 if (completeButton) {
   let isCompleted = false;
@@ -114,7 +138,7 @@ if (completeButton) {
       completeButton.classList.add("completed");
       isCompleted = true;
 
-      const workoutData = window.workoutData || []; // Get your workout data
+      const workoutData: any[] = (window as any).workoutData || [];
       try {
         const response = await fetch("/api/add-workout-data", {
           method: "POST",
