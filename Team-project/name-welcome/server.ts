@@ -1,4 +1,4 @@
-\import express from "express";
+import express from "express";
 import { uuid } from "uuidv4";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
