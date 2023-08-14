@@ -65,36 +65,29 @@ resetButton.addEventListener("click", resetTimer);
 
 ///// WORKOUT TABLE /////
 
-document.addEventListener("DOMContentLoaded", function () {
-  const workoutData = window.workoutData || [];
+async function fetchWorkoutData() {
+  try {
+    const response = await fetch("/api/get-workout-data");
+    const data = await response.json();
+    const workoutDataContainer = document.getElementById(
+      "workoutDataContainer"
+    );
 
-  console.log(workoutData);
-
-  // const workoutData = [
-  //   { exercise: "Push-ups", image: "./images/pushup.png", sets: 3, reps: 15 },
-  //   { exercise: "Squats", image: "./images/squat.png", sets: 4, reps: 12 },
-  //   { exercise: "Plank", image: "./images/plank.png", sets: 3, reps: "30s" },
-  // ];
-
-  const tableBody = document.getElementById(
-    "tableBody"
-  ) as HTMLTableSectionElement;
-
-  function populateTable() {
-    workoutData.forEach((exercise) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${exercise.exercise}</td>
-        <td><img src="images/${exercise.image}" alt="${exercise.exercise}" class="exercise-image"/></td>
-        <td>${exercise.sets}</td>
-        <td>${exercise.reps}</td>
+    data.workoutData.forEach((exercise) => {
+      const exerciseDiv = document.createElement("div");
+      exerciseDiv.innerHTML = `
+        <h3>${exercise.exercise}</h3>
+        <img src="${exercise.image}" alt="${exercise.exercise}">
+        <p>Sets: ${exercise.sets}, Reps: ${exercise.reps}</p>
       `;
-      tableBody.appendChild(row);
+      workoutDataContainer.appendChild(exerciseDiv);
     });
+  } catch (error) {
+    console.error(error);
   }
+}
 
-  window.addEventListener("load", populateTable);
-});
+fetchWorkoutData();
 ///// COMPLETE BUTTON /////
 const completeButton = document.getElementById("completeButton");
 
@@ -106,6 +99,35 @@ if (completeButton) {
       completeButton.textContent = "Workout Completed!";
       completeButton.classList.add("completed");
       isCompleted = true;
+    }
+  });
+}
+
+const completeButton = document.getElementById("completeButton");
+
+if (completeButton) {
+  let isCompleted = false;
+
+  completeButton.addEventListener("click", async () => {
+    if (!isCompleted) {
+      completeButton.textContent = "Workout Completed!";
+      completeButton.classList.add("completed");
+      isCompleted = true;
+
+      const workoutData = window.workoutData || []; // Get your workout data
+      try {
+        const response = await fetch("/api/add-workout-data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ workoutData }),
+        });
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
     }
   });
 }

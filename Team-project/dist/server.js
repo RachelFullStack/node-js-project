@@ -73,6 +73,21 @@ app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, 
         }
     });
 }); });
+app.post("/api/add-workout-data", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var workoutData;
+    return __generator(this, function (_a) {
+        try {
+            workoutData = req.body.workoutData;
+            console.log("Received workout data:", workoutData);
+            res.status(200).json({ message: "Workout data saved successfully." });
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Failed to save workout data." });
+        }
+        return [2 /*return*/];
+    });
+}); });
 app.listen(3000, function () {
     console.log("server listen on port 3000");
 });

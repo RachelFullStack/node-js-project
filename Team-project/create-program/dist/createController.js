@@ -36,21 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getSelectedPriceCa = exports.updateBook = exports.getSelectedPrices = exports.getSelectedPriceDown = exports.getSelectedPriceUp = exports.addClient = exports.addCategory = exports.addBook = exports.deleteAllData = exports.getSelectedCategory = exports.getCategories = exports.getAllData = void 0;
+exports.addProgram = exports.addCategory = exports.deleteAllData = exports.getCategories = exports.getAllData = void 0;
 var createModel_1 = require("./createModel");
+var createModel_2 = require("./createModel");
+var createModel_3 = require("./createModel");
 exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var AllData_1, error_1;
+    var allData, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, AllData_1.find({})
+                return [4 /*yield*/, createModel_1["default"].find({}) // Use AllDataModel instead of AllData
                         .populate("category")
                         .populate("program")
                         .exec()];
             case 1:
-                AllData_1 = _a.sent();
-                res.send({ AllData: AllData_1 });
+                allData = _a.sent();
+                res.send({ allData: allData });
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
@@ -67,7 +69,7 @@ exports.getCategories = function (req, res) { return __awaiter(void 0, void 0, v
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, createModel_1.Category.find({})];
+                return [4 /*yield*/, createModel_2.Category.find({})];
             case 1:
                 category = _a.sent();
                 res.send({ category: category });
@@ -81,40 +83,8 @@ exports.getCategories = function (req, res) { return __awaiter(void 0, void 0, v
         }
     });
 }); };
-exports.getSelectedCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var category, categoryID, categoryIDString, AllData_2, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                category = req.body.category;
-                console.log(category);
-                return [4 /*yield*/, createModel_1.Category.find({ name: category }).select({
-                        _id: 1
-                    })];
-            case 1:
-                categoryID = _a.sent();
-                categoryIDString = categoryID[0]._id.toString();
-                console.log(categoryIDString);
-                return [4 /*yield*/, AllData_2.find({
-                        category: categoryIDString
-                    }).populate("category")];
-            case 2:
-                AllData_2 = _a.sent();
-                console.log(AllData_2);
-                res.send({ AllData: AllData_2 });
-                return [3 /*break*/, 4];
-            case 3:
-                error_3 = _a.sent();
-                console.log(error_3);
-                res.status(500).send("error");
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
 exports.deleteAllData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _id, AllDataIndex, AllData_3, error_4;
+    var _id, AllDataIndex, AllData, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -123,293 +93,74 @@ exports.deleteAllData = function (req, res) { return __awaiter(void 0, void 0, v
                 console.log(_id);
                 if (!_id)
                     throw new Error("uis not found");
-                return [4 /*yield*/, AllData_3.findByIdAndDelete(_id)];
+                return [4 /*yield*/, createModel_1["default"].findByIdAndDelete(_id)];
             case 1:
                 AllDataIndex = _a.sent();
-                return [4 /*yield*/, AllData_3.find({})
+                return [4 /*yield*/, createModel_1["default"].find({})
                         .populate("category")
                         .populate("program")
                         .exec()];
             case 2:
-                AllData_3 = _a.sent();
-                res.send({ AllData: AllData_3 });
+                AllData = _a.sent();
+                res.send({ AllData: AllData });
                 return [3 /*break*/, 4];
             case 3:
-                error_4 = _a.sent();
-                console.log(error_4);
+                error_3 = _a.sent();
+                console.log(error_3);
                 res.status(500).send("didn't get AllData to delete");
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
     });
 }); };
-exports.addBook = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, price, pic, category, categoryID, categoryIDString, newBook, books, error_5;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 4, , 5]);
-                _a = req.body, name = _a.name, price = _a.price, pic = _a.pic, category = _a.category;
-                return [4 /*yield*/, createModel_1.Category.find({ name: category }).select({
-                        _id: 1
-                    })];
-            case 1:
-                categoryID = _b.sent();
-                categoryIDString = categoryID[0]._id.toString();
-                console.log(categoryIDString);
-                return [4 /*yield*/, Book.create({
-                        name: name,
-                        price: price,
-                        pic: pic,
-                        category: categoryIDString
-                    })];
-            case 2:
-                newBook = _b.sent();
-                return [4 /*yield*/, Book.find({})
-                        .populate("category")
-                        .populate("client")
-                        .exec()];
-            case 3:
-                books = _b.sent();
-                res.send({ books: books });
-                return [3 /*break*/, 5];
-            case 4:
-                error_5 = _b.sent();
-                console.log(error_5);
-                res.status(500).send("didn't get data");
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
-        }
-    });
-}); };
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, website, nerCategory, error_6;
+    var _a, Days, Equipment, level, WorkoutTime, nerCategory, error_4;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, name = _a.name, website = _a.website;
-                return [4 /*yield*/, createModel_1.Category.create({ name: name, website: website })];
+                _a = req.body, Days = _a.Days, Equipment = _a.Equipment, level = _a.level, WorkoutTime = _a.WorkoutTime;
+                return [4 /*yield*/, createModel_2.Category.create({
+                        Days: Days,
+                        Equipment: Equipment,
+                        level: level,
+                        WorkoutTime: WorkoutTime
+                    })];
             case 1:
                 nerCategory = _b.sent();
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 3];
             case 2:
-                error_6 = _b.sent();
-                console.log(error_6);
+                error_4 = _b.sent();
+                console.log(error_4);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.addClient = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, nameID, name, phone, age, email, book, newClient, bookID, clientId, bookIDString, clientIDString, updateBook_1, books, error_7;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 6, , 7]);
-                _a = req.body, nameID = _a.nameID, name = _a.name, phone = _a.phone, age = _a.age, email = _a.email, book = _a.book;
-                return [4 /*yield*/, Client.create({
-                        nameID: nameID,
-                        name: name,
-                        phone: phone,
-                        age: age,
-                        email: email
-                    })];
-            case 1:
-                newClient = _b.sent();
-                console.log(newClient);
-                return [4 /*yield*/, Book.find({ name: book }).select({ _id: 1 })];
-            case 2:
-                bookID = _b.sent();
-                return [4 /*yield*/, Client.find({ nameID: nameID }).select({ _id: 1 })];
-            case 3:
-                clientId = _b.sent();
-                console.log(clientId);
-                console.log(bookID);
-                bookIDString = bookID[0]._id.toString();
-                clientIDString = clientId[0]._id.toString();
-                console.log(bookIDString);
-                console.log(clientIDString);
-                return [4 /*yield*/, Book.findByIdAndUpdate(bookIDString, { $push: { client: clientIDString } }, { "new": true })];
-            case 4:
-                updateBook_1 = _b.sent();
-                return [4 /*yield*/, Book.find({})
-                        .populate("category")
-                        .populate("client")
-                        .exec()];
-            case 5:
-                books = _b.sent();
-                res.send({ books: books });
-                return [3 /*break*/, 7];
-            case 6:
-                error_7 = _b.sent();
-                console.log(error_7);
-                res.status(500).send("didn't get data");
-                return [3 /*break*/, 7];
-            case 7: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getSelectedPriceUp = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var priceUp, books, error_8;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                priceUp = req.body.priceUp;
-                console.log(priceUp);
-                return [4 /*yield*/, Book.find({
-                        price: { $gt: priceUp }
-                    })
-                        .populate("client")
-                        .populate("category")
-                        .exec()];
-            case 1:
-                books = _a.sent();
-                console.log(books);
-                res.send({ books: books });
-                return [3 /*break*/, 3];
-            case 2:
-                error_8 = _a.sent();
-                console.log(error_8);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getSelectedPriceDown = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var priceDown, books, error_9;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                priceDown = req.body.priceDown;
-                console.log(priceDown);
-                return [4 /*yield*/, Book.find({
-                        price: { $lt: priceDown }
-                    })
-                        .populate("client")
-                        .populate("category")
-                        .exec()];
-            case 1:
-                books = _a.sent();
-                console.log(books);
-                res.send({ books: books });
-                return [3 /*break*/, 3];
-            case 2:
-                error_9 = _a.sent();
-                console.log(error_9);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getSelectedPrices = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, priceS, priceE, books, error_10;
+exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, Exercise, image, sets, reps, newProgram, error_5;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, priceS = _a.priceS, priceE = _a.priceE;
-                console.log(priceS, priceE);
-                return [4 /*yield*/, Book.find({
-                        price: { $gte: priceS, $lte: priceE }
-                    })
-                        .populate("client")
-                        .populate("category")
-                        .exec()];
+                _a = req.body, Exercise = _a.Exercise, image = _a.image, sets = _a.sets, reps = _a.reps;
+                return [4 /*yield*/, createModel_3.program.create({
+                        Exercise: Exercise,
+                        image: image,
+                        sets: sets,
+                        reps: reps
+                    })];
             case 1:
-                books = _b.sent();
-                console.log(books);
-                res.send({ books: books });
+                newProgram = _b.sent();
+                console.log(newProgram);
                 return [3 /*break*/, 3];
             case 2:
-                error_10 = _b.sent();
-                console.log(error_10);
+                error_5 = _b.sent();
+                console.log(error_5);
+                res.status(500).send("didn't get data");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.updateBook = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _id, name, price, pic, category, book, categoryID, categoryIDString, books, error_11;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 6, , 7]);
-                _a = req.body, _id = _a._id, name = _a.name, price = _a.price, pic = _a.pic, category = _a.category;
-                return [4 /*yield*/, Book.findById(_id).populate("category")];
-            case 1:
-                book = _b.sent();
-                if (name)
-                    book.name = name;
-                if (price)
-                    book.price = price;
-                if (pic)
-                    book.pic = pic;
-                if (!category) return [3 /*break*/, 3];
-                return [4 /*yield*/, createModel_1.Category.find({ name: category }).select({
-                        _id: 1
-                    })];
-            case 2:
-                categoryID = _b.sent();
-                categoryIDString = categoryID[0]._id.toString();
-                book.category = categoryIDString;
-                _b.label = 3;
-            case 3: return [4 /*yield*/, book.save()];
-            case 4:
-                _b.sent();
-                console.log(book);
-                return [4 /*yield*/, Book.find({})
-                        .populate("category")
-                        .populate("client")
-                        .exec()];
-            case 5:
-                books = _b.sent();
-                res.send({ books: books });
-                return [3 /*break*/, 7];
-            case 6:
-                error_11 = _b.sent();
-                console.log(error_11);
-                return [3 /*break*/, 7];
-            case 7: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getSelectedPriceCa = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, category, priceS, priceE, categoryID, categoryIDString, books, error_12;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 3, , 4]);
-                _a = req.body, category = _a.category, priceS = _a.priceS, priceE = _a.priceE;
-                console.log(category, priceS, priceE);
-                return [4 /*yield*/, createModel_1.Category.find({ name: category }).select({
-                        _id: 1
-                    })];
-            case 1:
-                categoryID = _b.sent();
-                categoryIDString = categoryID[0]._id.toString();
-                console.log(categoryIDString);
-                return [4 /*yield*/, Book.find({
-                        category: categoryIDString
-                    })
-                        .find({
-                        price: { $gte: priceS, $lte: priceE }
-                    })
-                        .populate("category")];
-            case 2:
-                books = _b.sent();
-                console.log(books);
-                res.send({ books: books });
-                return [3 /*break*/, 4];
-            case 3:
-                error_12 = _b.sent();
-                console.log(error_12);
-                res.status(500).send("error");
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
         }
     });
 }); };

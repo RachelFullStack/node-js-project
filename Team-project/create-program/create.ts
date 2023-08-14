@@ -1,9 +1,9 @@
 const maxTables = 5;
 let tableCounter = 0;
 
-document
-  .getElementById("add-table-button")
-  .addEventListener("click", function () {
+const addButton = document.getElementById("add-table-button");
+if (addButton) {
+  addButton.addEventListener("click", function () {
     if (tableCounter < maxTables) {
       tableCounter++;
 
@@ -52,10 +52,26 @@ document
       alert("Maximum number of tables reached.");
     }
   });
+}
 
-document.getElementById("submit-button").addEventListener("click", function () {
-  const programForm = document.getElementById("program-form");
-  if (programForm) {
-    programForm.submit();
-  }
-});
+const submitButton = document.getElementById("submit-button");
+if (submitButton) {
+  submitButton.addEventListener("click", async () => {
+    const programForm = document.getElementById(
+      "program-form"
+    ) as HTMLFormElement;
+    if (programForm) {
+      const isValid = validateForm();
+
+      if (isValid) {
+        programForm.submit();
+
+        window.location.href = "../program/program.html";
+      }
+    }
+  });
+}
+
+function validateForm() {
+  return true;
+}

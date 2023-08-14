@@ -31,6 +31,17 @@ app.get("/api/user-get", async (req: any, res: any) => {
   }
 });
 
+app.post("/api/add-workout-data", async (req: any, res: any) => {
+  try {
+    const { workoutData } = req.body;
+    console.log("Received workout data:", workoutData);
+    res.status(200).json({ message: "Workout data saved successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to save workout data." });
+  }
+});
+
 app.listen(3000, () => {
   console.log("server listen on port 3000");
 });
