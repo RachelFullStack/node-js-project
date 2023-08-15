@@ -140,7 +140,7 @@
   box-sizing: border-box;
 }
 
-body {
+.register-body {
   background: #939393;
   font-family: Arial, sans-serif;
   display: flex;
@@ -149,7 +149,15 @@ body {
   height: auto;
   margin: 50px;
 }
-
+.login-body {
+  // background: #939393;
+  // font-family: Arial, sans-serif;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // height: auto;
+  // margin: 50px;
+}
 h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
@@ -181,7 +189,8 @@ img {
   align-items: center;
 }
 
-.button1 {
+.button1,
+.links {
   display: block;
   margin: 10px auto;
   padding: 10px 20px;
@@ -196,6 +205,10 @@ img {
   position: relative;
   top: -328px;
   left: -133px;
+  // ----
+  width: 285px;
+  height: 60px;
+  margin-left: 549px;
 }
 .button2 {
   display: block;
@@ -303,6 +316,12 @@ img {
   height: 49px;
   width: 134px;
 }
+.registration-page {
+  position: relative;
+  bottom: 408px;
+  right: 294px;
+}
+
 h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;

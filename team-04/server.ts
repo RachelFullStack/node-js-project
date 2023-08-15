@@ -1,15 +1,16 @@
-import express, { Router } from "express";
-import mongoose from "mongoose";
+import express from "express";
+import mongoose, {Schema} from mongoose;
+// import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import router from "./API/users/usersRoute";
-// import  cookieParser  from "cookie-parser";
+import  cookieParser  from "cookie-parser";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(express.static("./client"));
 app.use("/api/", router);
-
-dotenv.config();
 
 const uri: string | undefined = process.env.MONGOOSE_URI + "Fitness-App";
 
