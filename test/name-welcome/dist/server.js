@@ -36,88 +36,126 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getDatabaseUser = exports.userLogin = exports.userRegistration = void 0;
-var usersModel_1 = require("./usersModel");
-// ----------------------------------------------------------------------
-exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, userPassword, userToDatabase, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+var express_1 = require("express");
+var uuidv4_1 = require("uuidv4");
+var mongoose_1 = require("mongoose");
+var dotenv = require("dotenv");
+var mongoose_2 = require("mongoose");
+dotenv.config();
+var uri = process.env.MONGOOSE_URI + "datatest";
+if (uri) {
+    mongoose_1["default"]
+        .connect(uri)
+        .then(function () { return console.log("we are have mongoosee"); })["catch"](function (err) { return console.log("no mongoose", err); });
+}
+else {
+    console.log("no uri");
+}
+var app = express_1["default"]();
+app.use(express_1["default"].json());
+var UserSchema = new mongoose_2.Schema({ name: String, src: String });
+var UserModel = mongoose_1["default"].model("users", UserSchema);
+app.use(express_1["default"].static(__dirname + "/public"));
+var User = /** @class */ (function () {
+    function User(name, src) {
+        this.name = name;
+        this.src = src;
+        this.uid = uuidv4_1.uuid();
+    }
+    User.prototype.getSimpelUser = function () {
+        return { name: this.name, src: this.src, uid: this.uid };
+    };
+    return User;
+}());
+app.use(express_1["default"].static("./public"));
+app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, userName = _a.userName, userPassword = _a.userPassword;
-                console.log("userName: " + userName + ", userPassword: " + userPassword);
-                return [4 /*yield*/, usersModel_1["default"].create({
-                        userName: userName,
-                        userPassword: userPassword
-                    })];
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, UserModel.find({})];
             case 1:
-                userToDatabase = _b.sent();
-                console.log("userToDatabase: " + userToDatabase);
-                res.status(200).send({ ok: true });
+                users = _a.sent();
+                res.send({ users: users });
                 return [3 /*break*/, 3];
             case 2:
-                error_1 = _b.sent();
+                error_1 = _a.sent();
                 console.log(error_1);
-                res.status(500).send("error in register");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
-}); };
-// ----------------------------------------------------------------------
-exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, userPassword, userFromDatabase, error_2;
+}); });
+app.post("/api/add-user", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, src, usersdb, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, userName = _a.userName, userPassword = _a.userPassword;
-                console.log(userName, userPassword);
-                return [4 /*yield*/, usersModel_1["default"].findOne({ userName: userName, userPassword: userPassword })];
+                _a = req.body, name = _a.name, src = _a.src;
+                return [4 /*yield*/, UserModel.create({ name: name, src: src })];
             case 1:
-                userFromDatabase = _b.sent();
-                if (!userFromDatabase)
-                    throw new Error("the date didn't arrive");
-                console.log(userFromDatabase);
-                res.cookie("user", userFromDatabase._id, {
-                    maxAge: 50000000,
-                    httpOnly: true
-                });
+                usersdb = _b.sent();
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _b.sent();
                 console.log(error_2);
-                res.status(500).send({ error: error_2.message });
+                res.status(500);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
-}); };
-// ----------------------------------------------------------------------
-exports.getDatabaseUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, userFromCookies, error_3;
+}); });
+app.patch("/api/update-user", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, uid, userdb, error_3;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, name = _a.name, uid = _a.uid;
+                if (!name)
+                    throw new Error("no name in date");
+                if (!uid)
+                    throw new Error("no uid in date");
+                return [4 /*yield*/, UserModel.findByIdAndUpdate(uid, { name: name })];
+            case 1:
+                userdb = _b.sent();
+                res.status(200).send({ ok: true });
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _b.sent();
+                console.log(error_3);
+                res.status(500);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+app["delete"]("/api/Delete-user", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var uid, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                user = req.cookies.user;
-                console.log(user);
-                return [4 /*yield*/, usersModel_1["default"].findById(user)];
+                uid = req.body.uid;
+                if (!uid)
+                    throw new Error("no uid for user ");
+                return [4 /*yield*/, UserModel.findByIdAndDelete(uid)];
             case 1:
-                userFromCookies = _a.sent();
-                if (!userFromCookies)
-                    throw new Error("problem with function getDatabaseUser");
-                console.log(userFromCookies);
-                res.send({ userFromCookies: userFromCookies });
+                _a.sent();
+                res.send({ message: "User deleted" });
                 return [3 /*break*/, 3];
             case 2:
-                error_3 = _a.sent();
-                console.log(error_3);
-                res.status(500).send({ error: error_3.message });
+                error_4 = _a.sent();
+                console.log(error_4);
+                res.status(500);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
-}); };
+}); });
+app.listen(3000, function () {
+    console.log("server listen 3000");
+});

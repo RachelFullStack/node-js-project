@@ -2,14 +2,14 @@
 exports.__esModule = true;
 var express_1 = require("express");
 var mongoose_1 = require("mongoose");
+// import mongoose from "mongoose";
 var dotenv = require("dotenv");
 var usersRoute_1 = require("./API/users/usersRoute");
-// import  cookieParser  from "cookie-parser";
+dotenv.config();
 var app = express_1["default"]();
 app.use(express_1["default"].json());
 app.use(express_1["default"].static("./client"));
 app.use("/api/", usersRoute_1["default"]);
-dotenv.config();
 var uri = process.env.MONGOOSE_URI + "Fitness-App";
 if (uri) {
     mongoose_1["default"]
