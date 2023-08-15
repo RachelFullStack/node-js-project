@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { Schema, model } from "mongoose";
+import router from "./users/usersRoute";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -20,6 +22,10 @@ if (uri) {
 }
 
 app.use(express.json());
+
+app.use(cookieParser());
+app.use(express.static("./client"));
+app.use("/api/", router);
 
 const UserSchema = new Schema({ name: String, src: String });
 const UserModel = mongoose.model("users", UserSchema);

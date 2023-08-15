@@ -40,6 +40,8 @@ var express_1 = require("express");
 var mongoose_1 = require("mongoose");
 var dotenv = require("dotenv");
 var mongoose_2 = require("mongoose");
+var usersRoute_1 = require("./users/usersRoute");
+var cookie_parser_1 = require("cookie-parser");
 dotenv.config();
 var app = express_1["default"]();
 var uri = process.env.MONGOOSE_URI +
@@ -53,6 +55,9 @@ else {
     console.log("No URI");
 }
 app.use(express_1["default"].json());
+app.use(cookie_parser_1["default"]());
+app.use(express_1["default"].static("./client"));
+app.use("/api/", usersRoute_1["default"]);
 var UserSchema = new mongoose_2.Schema({ name: String, src: String });
 var UserModel = mongoose_1["default"].model("users", UserSchema);
 app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {

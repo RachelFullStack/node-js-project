@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./dist/style.css" />
+    <script src="./dist/index.js" defer></script>
+  </head>
+  <body class="login-body">
+    <h1>Login Page</h1>
+    <form onsubmit="handleUserLogin(event)">
+      <input
+        class="name-input2"
+        type="text"
+        name="userName"
+        id="user-name"
+        placeholder="name"
+        required
+      />
+      <input
+        class="password-input2"
+        type="password"
+        name="user-password"
+        id="userPassword"
+        placeholder="password"
+        required
+      />
+      <button class="login-btn" type="submit">Login</button>
+    </form>
+    <div>
+      <p class="button123">
+        To register?
+        <a href="./index.html">Click Here!</a>
+      </p>
+    </div>
+    <div>
+      <p class="button123">
+        admin?
+        <a href="./admin.html">Click Here!</a>
+      </p>
+    </div>
+  </body>
+</html>
