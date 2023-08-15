@@ -58,9 +58,9 @@ function handleUserLogin(eve: any) {
   }
 }
 // ------------------------------
-async function handleShowDatabaseUser(eve: any) {
+async function handleShowUser(eve: any) {
   try {
-    const response = await fetch("/api/users/get-database-user");
+    const response = await fetch("/api/users/get-user");
     const data = await response.json();
     console.log("data", data);
     const { userFromCookies } = data;
@@ -71,6 +71,6 @@ async function handleShowDatabaseUser(eve: any) {
     if (!userHtml) throw new Error("No user element on DOM");
     userHtml.innerHTML = userFromCookies.name;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
