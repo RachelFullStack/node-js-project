@@ -155,3 +155,63 @@ if (completeButton) {
     }
   });
 }
+
+async function fetchProgramData() {
+  try {
+    const response = await fetch("/api/getProgramData");
+    const data = await response.json();
+    return data.allProgramData;
+  } catch (error) {
+    console.error("Error fetching program data:", error);
+    return [];
+  }
+}
+
+async function fetchExerciseData() {
+  try {
+    const response = await fetch("/api/getExerciseData");
+    const data = await response.json();
+    return data.exerciseData;
+  } catch (error) {
+    console.error("Error fetching exercise data:", error);
+    return [];
+  }
+}
+
+async function renderProgramInfo() {
+  const programInfoContainer = document.querySelector(".renderProgramInfo");
+
+  if (programInfoContainer) {
+    const programData = await fetchProgramData();
+
+    programData.forEach((program) => {
+      const programDiv = document.createElement("div");
+      programDiv.textContent = `Program: ${program.name}, Level: ${program.level}`;
+      programInfoContainer.appendChild(programDiv);
+    });
+  }
+}
+
+async function renderWorkoutTable() {
+  const workoutDataContainer = document.getElementById("renderWorkoutTable");
+
+  if (workoutDataContainer) {
+    const exerciseData = await fetchExerciseData();
+
+    exerciseData.forEach((exercise) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${exercise.exercise}</td>
+        <td>${exercise.image}</td>
+        <td>${exercise.sets}</td>
+        <td>${exercise.reps}</td>
+      `;
+      workoutDataContainer.appendChild(row);
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProgramInfo();
+  renderWorkoutTable();
+});

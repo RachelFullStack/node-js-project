@@ -42,7 +42,8 @@ var dotenv = require("dotenv");
 var mongoose_2 = require("mongoose");
 dotenv.config();
 var app = express_1["default"]();
-var uri = process.env.MONGOOSE_URI + "Training";
+var uri = process.env.MONGOOSE_URI +
+    "MONGOOSE_URI=mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project";
 if (uri) {
     mongoose_1["default"]
         .connect(uri)
