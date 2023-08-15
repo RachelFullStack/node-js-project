@@ -1,5 +1,6 @@
 import User from "./usersModel";
 
+// ----------------------------------------------------------------------
 export const userRegistration = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
@@ -17,6 +18,7 @@ export const userRegistration = async (req: any, res: any) => {
   }
 };
 
+// ----------------------------------------------------------------------
 export const userLogin = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
@@ -35,6 +37,7 @@ export const userLogin = async (req: any, res: any) => {
   }
 };
 
+// ----------------------------------------------------------------------
 export const getDatabaseUser = async (req: any, res: any) => {
   try {
     const { user } = req.cookies;

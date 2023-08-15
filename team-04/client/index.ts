@@ -58,21 +58,19 @@ function handleUserLogin(eve: any) {
   }
 }
 // ------------------------------
-function handleShowUser(eve: any) {
+async function handleShowDatabaseUser(eve: any) {
   try {
     const response = await fetch("/api/users/get-database-user");
     const data = await response.json();
-    console.log("data",data);
-//     const { userDB } = data;
-//     const userHTML = document.querySelector("#userName") as HTMLDivElement;
+    console.log("data", data);
+    const { userFromCookies } = data;
+    const userHtml = document.querySelector("#userName") as HTMLDivElement;
 
-//     if (!userDB) throw new Error("didnt find user in DB");
-//     if (!userHTML) throw new Error("No user element on DOM");
-//     userHTML.innerHTML = userDB.name;
-//     // userHTML.innerText = userDB.name;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-
+    if (!userFromCookies)
+      throw new Error("problem with Showing Database User function");
+    if (!userHtml) throw new Error("No user element on DOM");
+    userHtml.innerHTML = userFromCookies.name;
+  } catch (error) {
+    console.error(error);
+  }
+}
