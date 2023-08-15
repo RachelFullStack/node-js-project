@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./dist/style.css" />
     <script src="./dist/index.js" defer></script>
   </head>
-  <body>
+  <body class="register-body">
     <fieldset class="FirstFieldset">
       <img
         src="https://images.pexels.com/photos/1821694/pexels-photo-1821694.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -17,6 +17,7 @@
         height="80px"
       />
       <h1>Bring happiness into your life</h1>
+      <h3 class="registration-page">Registration Page</h3>
 
       <form onsubmit="handleRegistration(event)">
         <input
@@ -35,9 +36,20 @@
         />
         <button class="register-btn" type="submit">Register</button>
       </form>
-
-      <a href="./login.html" class="button1">already registered?</a>
-      <a href="./admin.html" class="button2">admin login</a>
+      <div class="links">
+        <div class="link-div-1">
+          <p class="clik1">
+            Already registered?
+            <a href="./login.html">Click Here!</a>
+          </p>
+        </div>
+        <div class="link-div-2">
+          <p class="clik2">
+            admin?
+            <a href="./admin.html">Click Here!</a>
+          </p>
+        </div>
+      </div>
     </fieldset>
     <div id="users"></div>
   </body>
