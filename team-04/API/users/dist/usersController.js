@@ -40,7 +40,7 @@ exports.getDatabaseUser = exports.userLogin = exports.userRegistration = void 0;
 var usersModel_1 = require("./usersModel");
 // ----------------------------------------------------------------------
 exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, userPassword, userToDatabase, error_1;
+    var _a, userName, userPassword, databaseUser, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -52,8 +52,8 @@ exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0
                         userPassword: userPassword
                     })];
             case 1:
-                userToDatabase = _b.sent();
-                console.log("userToDatabase: " + userToDatabase);
+                databaseUser = _b.sent();
+                console.log("databaseUser: " + databaseUser);
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 3];
             case 2:
@@ -67,7 +67,7 @@ exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0
 }); };
 // ----------------------------------------------------------------------
 exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, userPassword, userFromDatabase, error_2;
+    var _a, userName, userPassword, databaseUser, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -76,11 +76,11 @@ exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 
                 console.log(userName, userPassword);
                 return [4 /*yield*/, usersModel_1["default"].findOne({ userName: userName, userPassword: userPassword })];
             case 1:
-                userFromDatabase = _b.sent();
-                if (!userFromDatabase)
+                databaseUser = _b.sent();
+                if (!databaseUser)
                     throw new Error("the date didn't arrive");
-                console.log(userFromDatabase);
-                res.cookie("user", userFromDatabase._id, {
+                console.log(databaseUser);
+                res.cookie("user", databaseUser._id, {
                     maxAge: 50000000,
                     httpOnly: true
                 });
@@ -97,7 +97,7 @@ exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 
 }); };
 // ----------------------------------------------------------------------
 exports.getDatabaseUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, userFromCookies, error_3;
+    var user, databaseUser, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -106,11 +106,11 @@ exports.getDatabaseUser = function (req, res) { return __awaiter(void 0, void 0,
                 console.log(user);
                 return [4 /*yield*/, usersModel_1["default"].findById(user)];
             case 1:
-                userFromCookies = _a.sent();
-                if (!userFromCookies)
+                databaseUser = _a.sent();
+                if (!databaseUser)
                     throw new Error("problem with function getDatabaseUser");
-                console.log(userFromCookies);
-                res.send({ userFromCookies: userFromCookies });
+                console.log(databaseUser);
+                res.send({ databaseUser: databaseUser });
                 return [3 /*break*/, 3];
             case 2:
                 error_3 = _a.sent();

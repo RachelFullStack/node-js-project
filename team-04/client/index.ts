@@ -63,13 +63,13 @@ async function handleShowUser(eve: any) {
     const response = await fetch("/api/users/get-user");
     const data = await response.json();
     console.log("data", data);
-    const { userFromCookies } = data;
+    const { databaseUser } = data;
     const userHtml = document.querySelector("#userName") as HTMLDivElement;
 
-    if (!userFromCookies)
+    if (!databaseUser)
       throw new Error("problem with Showing Database User function");
     if (!userHtml) throw new Error("No user element on DOM");
-    userHtml.innerHTML = userFromCookies.name;
+    userHtml.innerHTML = databaseUser.userName;
   } catch (error) {
     console.log(error);
   }

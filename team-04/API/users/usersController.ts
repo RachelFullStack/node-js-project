@@ -5,11 +5,11 @@ export const userRegistration = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
     console.log(`userName: ${userName}, userPassword: ${userPassword}`);
-    const userToDatabase = await User.create({
+    const databaseUser = await User.create({
       userName,
       userPassword,
     });
-    console.log(`userToDatabase: ${userToDatabase}`);
+    console.log(`databaseUser: ${databaseUser}`);
 
     res.status(200).send({ ok: true });
   } catch (error) {
@@ -23,10 +23,10 @@ export const userLogin = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
     console.log(userName, userPassword);
-    const userFromDatabase = await User.findOne({ userName, userPassword });
-    if (!userFromDatabase) throw new Error("the date didn't arrive");
-    console.log(userFromDatabase);
-    res.cookie("user", userFromDatabase._id, {
+    const databaseUser = await User.findOne({ userName, userPassword });
+    if (!databaseUser) throw new Error("the date didn't arrive");
+    console.log(databaseUser);
+    res.cookie("user", databaseUser._id, {
       maxAge: 50000000,
       httpOnly: true,
     });
@@ -42,11 +42,11 @@ export const getDatabaseUser = async (req: any, res: any) => {
   try {
     const { user } = req.cookies;
     console.log(user);
-    const userFromCookies: any = await User.findById(user);
-    if (!userFromCookies)
+    const databaseUser: any = await User.findById(user);
+    if (!databaseUser)
       throw new Error("problem with function getDatabaseUser");
-    console.log(userFromCookies);
-    res.send({ userFromCookies });
+    console.log(databaseUser);
+    res.send({ databaseUser });
   } catch (error: any) {
     console.log(error);
     res.status(500).send({ error: error.message });

@@ -328,3 +328,8 @@ p {
   display: flex;
   justify-content: center;
 }
+
+#userName {
+  color: #e80c32;
+  font-size: xx-large;
+}

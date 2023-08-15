@@ -94,7 +94,7 @@ function handleUserLogin(eve) {
 // ------------------------------
 function handleShowUser(eve) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, userFromCookies, userHtml, error_1;
+        var response, data, databaseUser, userHtml, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -106,13 +106,13 @@ function handleShowUser(eve) {
                 case 2:
                     data = _a.sent();
                     console.log("data", data);
-                    userFromCookies = data.userFromCookies;
+                    databaseUser = data.databaseUser;
                     userHtml = document.querySelector("#userName");
-                    if (!userFromCookies)
+                    if (!databaseUser)
                         throw new Error("problem with Showing Database User function");
                     if (!userHtml)
                         throw new Error("No user element on DOM");
-                    userHtml.innerHTML = userFromCookies.name;
+                    userHtml.innerHTML = databaseUser.userName;
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
