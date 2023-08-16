@@ -1,18 +1,12 @@
-// import express from "express";
-// import {
-//   getAllData,
-//   getCategories,
-//   deleteAllData,
-//   addProgram,
-//   addCategory,
-//   getProgramData,
-// } from "./createController";
-// const router = express.Router();
-// router
-//   .get("/get-all-data", getAllData)
-//   .get("/get-categories", getCategories)
-//   .get("/get-program-data", getProgramData)
-//   .delete("/delete-all-data", deleteAllData)
-//   .post("/add-program", addProgram)
-//   .post("/add-category", addCategory);
-// export default router;
+"use strict";
+exports.__esModule = true;
+var express_1 = require("express");
+var createController_1 = require("./createController");
+var router = express_1["default"].Router();
+router
+    .get("/get-all-data", createController_1.getAllData)
+    .get("/get-categories", createController_1.getCategories)
+    .get("/get-program-data", createController_1.getProgramData)["delete"]("/delete-all-data", createController_1.deleteAllData)
+    .post("/add-program", createController_1.addProgram)
+    .post("/add-category", createController_1.addCategory);
+exports["default"] = router;

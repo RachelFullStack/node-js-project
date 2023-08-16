@@ -56,11 +56,12 @@
 
 // function validateForm() {
 //   const inputField = document.getElementById(
-//     "someInputField"
+//     "program-form"
 //   ) as HTMLInputElement;
 //   if (!inputField.value) {
 //     alert("Please fill out the required field.");
 //     return false;
+//     //     "someInputField"
 //   }
 //   return true;
 // }
