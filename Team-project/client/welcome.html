@@ -5,31 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="stylesheet" href="./dist/style.css" />
     <script src="../name-welcome/dist/welcome.js" defer></script>
     <script src="./dist/index.js" defer></script>
   </head>
-  <body>
+  <body onload="handleShowUser()">
     <nav class="navbar">
       <ul class="navbar__list">
         <li class="navbar__item">
-          <a href="../client/index.html" class="navbar__link">sign in</a>
+          <a href="./index.html" class="navbar__link">sign in</a>
         </li>
         <li class="navbar__item">
-          <a href="../add-program/add.html" class="navbar__link">Admin</a>
+          <a href="./create.html" class="navbar__link">Admin</a>
         </li>
         <li class="navbar__item">
-          <a href="../name-welcome/welcome.html" class="navbar__link"
-            >All Programs</a
-          >
+          <a href="./welcome.html" class="navbar__link">All Programs</a>
         </li>
         <li class="navbar__item">
-          <a href="../Program/program.html" class="navbar__link">My Program</a>
+          <a href="./program.html" class="navbar__link">My Program</a>
         </li>
       </ul>
     </nav>
-    <h1 id="welcome-heading">
+    <!-- <h1 id="welcome-heading">
       Welcome, <span id="username-placeholder"></span>!
+    </h1> -->
+    <h1 id="welcome-heading">
+      <strong>Welcome, <span id="userName"></span></strong>
     </h1>
     <form id="filter-form">
       <label for="filter-level">Filter by Level:</label>

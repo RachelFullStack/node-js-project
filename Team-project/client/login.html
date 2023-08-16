@@ -4,10 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
-    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="stylesheet" href="./dist/style.css" />
     <script src="./dist/index.js" defer></script>
   </head>
   <body class="login-body">
+    <nav class="navbar">
+      <ul class="navbar__list">
+        <li class="navbar__item">
+          <a href="./index.html" class="navbar__link">sign in</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./create.html" class="navbar__link">Admin</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./welcome.html" class="navbar__link">All Programs</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./program.html" class="navbar__link">My Program</a>
+        </li>
+      </ul>
+    </nav>
     <h1>Login Page</h1>
     <form onsubmit="handleUserLogin(event)">
       <input
@@ -36,8 +52,8 @@
     </div>
     <div>
       <p class="button123">
-        admin?
-        <a href="./create.html">Click Here!</a>
+        link to home page after login
+        <a href="./welcome.html">Click Here!</a>
       </p>
     </div>
   </body>
