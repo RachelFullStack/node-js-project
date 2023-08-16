@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import { Schema, model } from "mongoose";
 import router from "./users/usersRoute";
 import cookieParser from "cookie-parser";
+import User from "./users/usersModel";
 
 dotenv.config();
 
@@ -25,12 +26,12 @@ if (uri) {
   console.log("No URI");
 }
 
-const UserSchema = new Schema({ name: String, src: String });
-const UserModel = mongoose.model("users", UserSchema);
+// const UserSchema = new Schema({ name: String, src: String });
+// const UserModel = mongoose.model("users", UserSchema);
 
 app.get("/api/user-get", async (req: any, res: any) => {
   try {
-    const users = await UserModel.find({});
+    const users = await User.find({});
     res.send({ users });
   } catch (error) {
     console.log(error);

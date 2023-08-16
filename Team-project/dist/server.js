@@ -39,9 +39,9 @@ exports.__esModule = true;
 var express_1 = require("express");
 var mongoose_1 = require("mongoose");
 var dotenv = require("dotenv");
-var mongoose_2 = require("mongoose");
 var usersRoute_1 = require("./users/usersRoute");
 var cookie_parser_1 = require("cookie-parser");
+var usersModel_1 = require("./users/usersModel");
 dotenv.config();
 var app = express_1["default"]();
 app.use(express_1["default"].json());
@@ -57,15 +57,15 @@ if (uri) {
 else {
     console.log("No URI");
 }
-var UserSchema = new mongoose_2.Schema({ name: String, src: String });
-var UserModel = mongoose_1["default"].model("users", UserSchema);
+// const UserSchema = new Schema({ name: String, src: String });
+// const UserModel = mongoose.model("users", UserSchema);
 app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var users, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, UserModel.find({})];
+                return [4 /*yield*/, usersModel_1["default"].find({})];
             case 1:
                 users = _a.sent();
                 res.send({ users: users });
