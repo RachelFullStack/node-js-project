@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,66 +34,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var express_1 = require("express");
-var mongoose_1 = require("mongoose");
-var dotenv = require("dotenv");
-var usersRoute_1 = require("./users/usersRoute");
-var createRoute_1 = require("./create-program/createRoute");
-var cookie_parser_1 = require("cookie-parser");
-var usersModel_1 = require("./users/usersModel");
-dotenv.config();
-var app = express_1["default"]();
-app.use(express_1["default"].json());
-app.use(cookie_parser_1["default"]());
-app.use(express_1["default"].static("./client"));
-app.use("/api/", usersRoute_1["default"]);
-app.use("/program/", createRoute_1["default"]);
-var uri = process.env.MONGOOSE_URI + "Training";
-if (uri) {
-    mongoose_1["default"]
-        .connect(uri)
-        .then(function () { return console.log("DB connected"); })["catch"](function (err) { return console.log("DB error :", err); });
-}
-else {
-    console.log("No URI");
-}
-// const UserSchema = new Schema({ name: String, src: String });
-// const UserModel = mongoose.model("users", UserSchema);
-app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usersModel_1["default"].find({})];
-            case 1:
-                users = _a.sent();
-                res.send({ users: users });
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                console.log(error_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
+function fetchProgramData() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, fetch("/program/get-program-data")];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    return [2 /*return*/, data.allProgramData];
+                case 3:
+                    error_1 = _a.sent();
+                    console.error("Error fetching program data:", error_1);
+                    return [2 /*return*/, []];
+                case 4: return [2 /*return*/];
+            }
+        });
     });
-}); });
-app.post("/api/add-workout-data", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var workoutData;
-    return __generator(this, function (_a) {
-        try {
-            workoutData = req.body.workoutData;
-            console.log("Received workout data:", workoutData);
-            res.status(200).json({ message: "Workout data saved successfully." });
-        }
-        catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Failed to save workout data." });
-        }
-        return [2 /*return*/];
-    });
-}); });
-app.listen(3000, function () {
-    console.log("server listen on port 3000");
-});
+}

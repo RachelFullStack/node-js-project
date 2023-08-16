@@ -122,12 +122,11 @@ function handleShowUser(eve) {
         });
     });
 }
-// ----------------------------xxxxxx--------------------------------------//
-// ----------------------------create---------------------------------------//
-// ----------------------------xxxxxx--------------------------------------//
+// // ---- create-------
 var maxTables = 5;
 var tableCounter = 0;
 var addButton = document.getElementById("add-table-button");
+console.log(addButton);
 if (addButton) {
     addButton.addEventListener("click", function () {
         if (tableCounter < maxTables) {
@@ -173,25 +172,31 @@ if (addButton) {
     });
 }
 function validateForm() {
-    var inputField = document.getElementById("someInputField");
-    if (!inputField.value) {
-        alert("Please fill out the required field.");
-        return false;
-    }
+    var inputFields = document.querySelectorAll("#programForm > select");
+    console.log(inputFields);
+    inputFields.forEach(function (input) {
+        console.log(input.value);
+    });
+    // const inputField = document.getElementById("programForm") as HTMLInputElement;
+    // console.log(inputField);
+    // if (!inputField.value) {
+    //   alert("Please fill out the required field.");
+    //   return false;
+    //   //     "someInputField"
+    // }
     return true;
 }
 var submitButton = document.getElementById("submit-button");
 if (submitButton) {
     submitButton.addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
-        var programForm, isValid, programData, tableIndex, tableData, i, exercise, image, sets, reps, response, result, error_2;
+        var programForm, programData, tableIndex, tableData, i, exercise, image, sets, reps, response, result, error_2;
         var _a, _b, _c, _d;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
-                    programForm = document.getElementById("program-form");
-                    if (!programForm) return [3 /*break*/, 6];
-                    isValid = validateForm();
-                    if (!isValid) return [3 /*break*/, 6];
+                    _e.trys.push([0, 4, , 5]);
+                    programForm = document.getElementById("programForm");
+                    if (!programForm) return [3 /*break*/, 3];
                     programData = [];
                     for (tableIndex = 1; tableIndex <= tableCounter; tableIndex++) {
                         tableData = [];
@@ -204,65 +209,112 @@ if (submitButton) {
                         }
                         programData.push(tableData);
                     }
-                    _e.label = 1;
-                case 1:
-                    _e.trys.push([1, 4, , 5]);
-                    return [4 /*yield*/, fetch("/api/add-program", {
+                    return [4 /*yield*/, fetch("/program/add-program", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
                             },
                             body: JSON.stringify(programData)
                         })];
-                case 2:
+                case 1:
                     response = _e.sent();
                     return [4 /*yield*/, response.json()];
-                case 3:
+                case 2:
                     result = _e.sent();
                     console.log(result);
-                    return [3 /*break*/, 5];
+                    window.location.href = "./program.html";
+                    _e.label = 3;
+                case 3: return [3 /*break*/, 5];
                 case 4:
                     error_2 = _e.sent();
-                    console.error(error_2);
+                    console.log(error_2);
                     return [3 /*break*/, 5];
-                case 5:
-                    window.location.href = "./program.html";
-                    _e.label = 6;
-                case 6: return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     }); });
 }
-// ---------------------------------------------------------------------------//
-// ----------------------------WELCOME---------------------------------------//
-// ---------------------------------------------------------------------------//
-// import { fetchProgramData } from "../api";
-// const storedUsername = localStorage.getItem("username");
-// if (storedUsername) {
-//   const usernamePlaceholder = document.getElementById("username-placeholder");
-//   if (usernamePlaceholder) {
-//     usernamePlaceholder.textContent = storedUsername;
+// // ----program
+// async function fetchExerciseData() {
+//   try {
+//     const response = await fetch("/api/getExerciseData");
+//     const data = await response.json();
+//     return data.exerciseData;
+//   } catch (error) {
+//     console.error("Error fetching exercise data:", error);
+//     return [];
 //   }
 // }
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const programListContainer = document.getElementById("workout-list");
-//   if (programListContainer) {
-//     const programData = await fetchProgramData();
-//     programData.forEach((program) => {
-//       const programBox = document.createElement("div");
-//       programBox.classList.add("program-box");
-//       programBox.innerHTML = `
-//         <h2>${program.name}</h2>
-//         <p>Level: ${program.level}</p>
-//         <p>Days a Week: ${program.days}</p>
-//         <p>Equipment: ${program.equipment}</p>
-//         <p>Workout Time: ${program.workoutTime}</p>
-//       `;
-//       programBox.addEventListener("click", () => {
-//         localStorage.setItem("selectedProgram", JSON.stringify(program));
-//         window.location.href = "./program.html";
-//       });
-//       programListContainer.appendChild(programBox);
-//     });
-//   }
-// });
+function renderProgramInfo() {
+    return __awaiter(this, void 0, void 0, function () {
+        var programInfoContainer, programData;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    programInfoContainer = document.querySelector(".renderProgramInfo");
+                    if (!programInfoContainer) return [3 /*break*/, 2];
+                    return [4 /*yield*/, fetchProgramData()];
+                case 1:
+                    programData = _a.sent();
+                    console.log(programData);
+                    programData.forEach(function (program) {
+                        var programDiv = document.createElement("div");
+                        programDiv.textContent = "Program: " + program.name + ", Level: " + program.level;
+                        programInfoContainer.appendChild(programDiv);
+                    });
+                    _a.label = 2;
+                case 2: return [2 /*return*/];
+            }
+        });
+    });
+}
+document.addEventListener("DOMContentLoaded", function () { return __awaiter(_this, void 0, void 0, function () {
+    var selectedProgramString, selectedProgram_1, programInfoContainer, renderWorkoutTable;
+    var _this = this;
+    return __generator(this, function (_a) {
+        selectedProgramString = localStorage.getItem("selectedProgram");
+        if (selectedProgramString) {
+            selectedProgram_1 = JSON.parse(selectedProgramString);
+            programInfoContainer = document.querySelector(".renderProgramInfo");
+            if (programInfoContainer) {
+                programInfoContainer.innerHTML = "\n        <h2>Your Program:</h2>\n        <p>Name: " + selectedProgram_1.name + "</p>\n        <p>Level: " + selectedProgram_1.level + "</p>\n        <p>Days a Week: " + selectedProgram_1.days + "</p>\n        <p>Equipment: " + selectedProgram_1.equipment + "</p>\n        <p>Workout Time: " + selectedProgram_1.workoutTime + "</p>\n      ";
+            }
+            renderWorkoutTable = function () { return __awaiter(_this, void 0, void 0, function () {
+                var response, data, workoutData, workoutTableContainer, error_3;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, 3, , 4]);
+                            return [4 /*yield*/, fetch("/api/getWorkoutData")];
+                        case 1:
+                            response = _a.sent();
+                            return [4 /*yield*/, response.json()];
+                        case 2:
+                            data = _a.sent();
+                            workoutData = data.workoutData[selectedProgram_1._id];
+                            workoutTableContainer = document.getElementById("renderWorkoutTable");
+                            if (workoutTableContainer) {
+                                workoutTableContainer.innerHTML = "\n            <h3>Your workout</h3>\n            <table>\n              <thead>\n                <tr>\n                  <th>Exercise</th>\n                  <th>Image</th>\n                  <th>Sets</th>\n                  <th>Reps</th>\n                </tr>\n              </thead>\n              <tbody>\n                " + workoutData
+                                    .map(function (exercise) { return "\n                  <tr>\n                    <td>" + exercise.exercise + "</td>\n                    <td>" + exercise.image + "</td>\n                    <td>" + exercise.sets + "</td>\n                    <td>" + exercise.reps + "</td>\n                  </tr>\n                "; })
+                                    .join("") + "\n              </tbody>\n            </table>\n          ";
+                            }
+                            return [3 /*break*/, 4];
+                        case 3:
+                            error_3 = _a.sent();
+                            console.error("Error fetching workout data:", error_3);
+                            return [3 /*break*/, 4];
+                        case 4: return [2 /*return*/];
+                    }
+                });
+            }); };
+            renderWorkoutTable();
+        }
+        else {
+            //inform the user that the data is not exist
+        }
+        return [2 /*return*/];
+    });
+}); });
+document.addEventListener("DOMContentLoaded", function () {
+    renderProgramInfo();
+});

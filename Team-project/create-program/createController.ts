@@ -63,6 +63,8 @@ export const addProgram = async (req: any, res: any) => {
   try {
     const programData = req.body;
 
+    console.log(req.body);
+
     const newPrograms = await Promise.all(
       programData.map(async (tableData: any) => {
         const exercises = await Promise.all(
@@ -81,7 +83,7 @@ export const addProgram = async (req: any, res: any) => {
       program: newPrograms.flat(),
     });
 
-    console.log(newAllData);
+    // console.log(newAllData);
     res.status(200).send({ ok: true });
   } catch (error) {
     console.log(error);

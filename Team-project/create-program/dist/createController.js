@@ -145,6 +145,7 @@ exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void
             case 0:
                 _a.trys.push([0, 3, , 4]);
                 programData = req.body;
+                console.log(req.body);
                 return [4 /*yield*/, Promise.all(programData.map(function (tableData) { return __awaiter(void 0, void 0, void 0, function () {
                         var exercises;
                         return __generator(this, function (_a) {
@@ -174,7 +175,7 @@ exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void
                     })];
             case 2:
                 newAllData = _a.sent();
-                console.log(newAllData);
+                // console.log(newAllData);
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 4];
             case 3:

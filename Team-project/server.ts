@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { Schema, model } from "mongoose";
-import router from "./users/usersRoute";
+import routerUserRouter from "./users/usersRoute";
+import routerCreateRouter from "./create-program/createRoute";
 import cookieParser from "cookie-parser";
 import User from "./users/usersModel";
 
@@ -13,7 +14,8 @@ app.use(express.json());
 
 app.use(cookieParser());
 app.use(express.static("./client"));
-app.use("/api/", router);
+app.use("/api/", routerUserRouter);
+app.use("/program/", routerCreateRouter);
 
 const uri: string | undefined = process.env.MONGOOSE_URI + "Training";
 

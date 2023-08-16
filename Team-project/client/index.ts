@@ -73,14 +73,13 @@ async function handleShowUser(eve: any) {
   }
 }
 
-// ----------------------------xxxxxx--------------------------------------//
-// ----------------------------create---------------------------------------//
-// ----------------------------xxxxxx--------------------------------------//
-
+// // ---- create-------
 const maxTables = 5;
 let tableCounter = 0;
 
 const addButton = document.getElementById("add-table-button");
+console.log(addButton);
+
 if (addButton) {
   addButton.addEventListener("click", function () {
     if (tableCounter < maxTables) {
@@ -134,25 +133,36 @@ if (addButton) {
 }
 
 function validateForm() {
-  const inputField = document.getElementById(
-    "someInputField"
-  ) as HTMLInputElement;
-  if (!inputField.value) {
-    alert("Please fill out the required field.");
-    return false;
-  }
+  const inputFields = document.querySelectorAll("#programForm > select") as any;
+
+  console.log(inputFields);
+
+  inputFields.forEach((input) => {
+    console.log(input.value);
+  });
+  // const inputField = document.getElementById("programForm") as HTMLInputElement;
+
+  // console.log(inputField);
+
+  // if (!inputField.value) {
+  //   alert("Please fill out the required field.");
+  //   return false;
+  //   //     "someInputField"
+  // }
   return true;
 }
 const submitButton = document.getElementById("submit-button");
 if (submitButton) {
   submitButton.addEventListener("click", async () => {
-    const programForm = document.getElementById(
-      "program-form"
-    ) as HTMLFormElement;
-    if (programForm) {
-      const isValid = validateForm();
+    try {
+      const programForm = document.getElementById(
+        "programForm"
+      ) as HTMLFormElement;
 
-      if (isValid) {
+      if (programForm) {
+        // const isValid = validateForm();
+
+        // if (isValid) {
         const programData: Array<
           Array<{ exercise: string; image: File; sets: number; reps: number }>
         > = [];
@@ -166,6 +176,8 @@ if (submitButton) {
           for (let i = 1; i <= 8; i++) {
             const exercise =
               programForm.elements[`exercise_${i}_${tableIndex}`]?.value;
+            // console.log(programForm.elements[`exercise_${i}_${tableIndex}`]);
+
             const image =
               programForm.elements[`image_${i}_${tableIndex}`]?.files[0];
             const sets = programForm.elements[`sets_${i}_${tableIndex}`]?.value;
@@ -176,62 +188,119 @@ if (submitButton) {
           programData.push(tableData);
         }
 
-        try {
-          const response = await fetch("/api/add-program", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(programData),
-          });
-          const result = await response.json();
-          console.log(result);
-        } catch (error) {
-          console.error(error);
-        }
+        // console.log(programData);
+
+        const response = await fetch("/program/add-program", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(programData),
+        });
+        const result = await response.json();
+        console.log(result);
 
         window.location.href = "./program.html";
       }
+    } catch (error) {
+      console.log(error);
     }
   });
 }
 
-// ---------------------------------------------------------------------------//
-// ----------------------------WELCOME---------------------------------------//
-// ---------------------------------------------------------------------------//
+// // ----program
 
-// import { fetchProgramData } from "../api";
-
-// const storedUsername = localStorage.getItem("username");
-// if (storedUsername) {
-//   const usernamePlaceholder = document.getElementById("username-placeholder");
-//   if (usernamePlaceholder) {
-//     usernamePlaceholder.textContent = storedUsername;
+// async function fetchExerciseData() {
+//   try {
+//     const response = await fetch("/api/getExerciseData");
+//     const data = await response.json();
+//     return data.exerciseData;
+//   } catch (error) {
+//     console.error("Error fetching exercise data:", error);
+//     return [];
 //   }
 // }
 
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const programListContainer = document.getElementById("workout-list");
+async function renderProgramInfo() {
+  const programInfoContainer = document.querySelector(".renderProgramInfo");
 
-//   if (programListContainer) {
-//     const programData = await fetchProgramData();
+  if (programInfoContainer) {
+    const programData = await fetchProgramData();
 
-//     programData.forEach((program) => {
-//       const programBox = document.createElement("div");
-//       programBox.classList.add("program-box");
-//       programBox.innerHTML = `
-//         <h2>${program.name}</h2>
-//         <p>Level: ${program.level}</p>
-//         <p>Days a Week: ${program.days}</p>
-//         <p>Equipment: ${program.equipment}</p>
-//         <p>Workout Time: ${program.workoutTime}</p>
-//       `;
-//       programBox.addEventListener("click", () => {
-//         localStorage.setItem("selectedProgram", JSON.stringify(program));
-//         window.location.href = "./program.html";
-//       });
+    console.log(programData);
 
-//       programListContainer.appendChild(programBox);
-//     });
-//   }
-// });
+    programData.forEach((program) => {
+      const programDiv = document.createElement("div");
+      programDiv.textContent = `Program: ${program.name}, Level: ${program.level}`;
+      programInfoContainer.appendChild(programDiv);
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const selectedProgramString = localStorage.getItem("selectedProgram");
+
+  if (selectedProgramString) {
+    const selectedProgram = JSON.parse(selectedProgramString);
+    const programInfoContainer = document.querySelector(".renderProgramInfo");
+    if (programInfoContainer) {
+      programInfoContainer.innerHTML = `
+        <h2>Your Program:</h2>
+        <p>Name: ${selectedProgram.name}</p>
+        <p>Level: ${selectedProgram.level}</p>
+        <p>Days a Week: ${selectedProgram.days}</p>
+        <p>Equipment: ${selectedProgram.equipment}</p>
+        <p>Workout Time: ${selectedProgram.workoutTime}</p>
+      `;
+    }
+
+    const renderWorkoutTable = async () => {
+      try {
+        const response = await fetch("/api/getWorkoutData");
+        const data = await response.json();
+        const workoutData = data.workoutData[selectedProgram._id];
+        const workoutTableContainer =
+          document.getElementById("renderWorkoutTable");
+
+        if (workoutTableContainer) {
+          workoutTableContainer.innerHTML = `
+            <h3>Your workout</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Image</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${workoutData
+                  .map(
+                    (exercise) => `
+                  <tr>
+                    <td>${exercise.exercise}</td>
+                    <td>${exercise.image}</td>
+                    <td>${exercise.sets}</td>
+                    <td>${exercise.reps}</td>
+                  </tr>
+                `
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+          `;
+        }
+      } catch (error) {
+        console.error("Error fetching workout data:", error);
+      }
+    };
+
+    renderWorkoutTable();
+  } else {
+    //inform the user that the data is not exist
+  }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  renderProgramInfo();
+});
