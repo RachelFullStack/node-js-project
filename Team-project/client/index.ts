@@ -200,7 +200,7 @@ if (submitButton) {
         const result = await response.json();
         console.log(result);
 
-        window.location.href = "./program.html";
+        window.location.href = "./welcome.html";
       }
     } catch (error) {
       console.log(error);

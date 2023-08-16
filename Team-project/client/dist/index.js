@@ -222,7 +222,7 @@ if (submitButton) {
                 case 2:
                     result = _e.sent();
                     console.log(result);
-                    window.location.href = "./program.html";
+                    window.location.href = "./welcome.html";
                     _e.label = 3;
                 case 3: return [3 /*break*/, 5];
                 case 4:
