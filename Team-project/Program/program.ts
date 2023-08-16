@@ -1,3 +1,4 @@
+import { fetchProgramData } from "../dist/api";
 ///// TIMER /////
 let timerInterval: number | null;
 let startTime: number = 0;
@@ -156,17 +157,6 @@ if (completeButton) {
   });
 }
 
-async function fetchProgramData() {
-  try {
-    const response = await fetch("/api/getProgramData");
-    const data = await response.json();
-    return data.allProgramData;
-  } catch (error) {
-    console.error("Error fetching program data:", error);
-    return [];
-  }
-}
-
 async function fetchExerciseData() {
   try {
     const response = await fetch("/api/getExerciseData");
@@ -192,26 +182,68 @@ async function renderProgramInfo() {
   }
 }
 
-async function renderWorkoutTable() {
-  const workoutDataContainer = document.getElementById("renderWorkoutTable");
+document.addEventListener("DOMContentLoaded", async () => {
+  const selectedProgramString = localStorage.getItem("selectedProgram");
 
-  if (workoutDataContainer) {
-    const exerciseData = await fetchExerciseData();
-
-    exerciseData.forEach((exercise) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${exercise.exercise}</td>
-        <td>${exercise.image}</td>
-        <td>${exercise.sets}</td>
-        <td>${exercise.reps}</td>
+  if (selectedProgramString) {
+    const selectedProgram = JSON.parse(selectedProgramString);
+    const programInfoContainer = document.querySelector(".renderProgramInfo");
+    if (programInfoContainer) {
+      programInfoContainer.innerHTML = `
+        <h2>Your Program:</h2>
+        <p>Name: ${selectedProgram.name}</p>
+        <p>Level: ${selectedProgram.level}</p>
+        <p>Days a Week: ${selectedProgram.days}</p>
+        <p>Equipment: ${selectedProgram.equipment}</p>
+        <p>Workout Time: ${selectedProgram.workoutTime}</p>
       `;
-      workoutDataContainer.appendChild(row);
-    });
-  }
-}
+    }
 
+    const renderWorkoutTable = async () => {
+      try {
+        const response = await fetch("/api/getWorkoutData");
+        const data = await response.json();
+        const workoutData = data.workoutData[selectedProgram._id];
+        const workoutTableContainer =
+          document.getElementById("renderWorkoutTable");
+
+        if (workoutTableContainer) {
+          workoutTableContainer.innerHTML = `
+            <h3>Your workout</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Image</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${workoutData
+                  .map(
+                    (exercise) => `
+                  <tr>
+                    <td>${exercise.exercise}</td>
+                    <td>${exercise.image}</td>
+                    <td>${exercise.sets}</td>
+                    <td>${exercise.reps}</td>
+                  </tr>
+                `
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+          `;
+        }
+      } catch (error) {
+        console.error("Error fetching workout data:", error);
+      }
+    };
+
+    renderWorkoutTable();
+  }
+});
 document.addEventListener("DOMContentLoaded", () => {
   renderProgramInfo();
-  renderWorkoutTable();
 });

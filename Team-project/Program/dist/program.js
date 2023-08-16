@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,7 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
+var api_1 = require("../dist/api");
 ///// TIMER /////
 var timerInterval;
 var startTime = 0;
@@ -162,7 +164,7 @@ function fetchWorkoutData() {
 var completeButton = document.getElementById("completeButton");
 if (completeButton) {
     var isCompleted_1 = false;
-    completeButton.addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
+    completeButton.addEventListener("click", function () { return __awaiter(void 0, void 0, void 0, function () {
         var workoutData, response, result, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -198,32 +200,9 @@ if (completeButton) {
         });
     }); });
 }
-function fetchProgramData() {
-    return __awaiter(this, void 0, void 0, function () {
-        var response, data, error_3;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, fetch("/api/getProgramData")];
-                case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
-                    data = _a.sent();
-                    return [2 /*return*/, data.allProgramData];
-                case 3:
-                    error_3 = _a.sent();
-                    console.error("Error fetching program data:", error_3);
-                    return [2 /*return*/, []];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-}
 function fetchExerciseData() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, error_4;
+        var response, data, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -236,8 +215,8 @@ function fetchExerciseData() {
                     data = _a.sent();
                     return [2 /*return*/, data.exerciseData];
                 case 3:
-                    error_4 = _a.sent();
-                    console.error("Error fetching exercise data:", error_4);
+                    error_3 = _a.sent();
+                    console.error("Error fetching exercise data:", error_3);
                     return [2 /*return*/, []];
                 case 4: return [2 /*return*/];
             }
@@ -252,7 +231,7 @@ function renderProgramInfo() {
                 case 0:
                     programInfoContainer = document.querySelector(".renderProgramInfo");
                     if (!programInfoContainer) return [3 /*break*/, 2];
-                    return [4 /*yield*/, fetchProgramData()];
+                    return [4 /*yield*/, api_1.fetchProgramData()];
                 case 1:
                     programData = _a.sent();
                     programData.forEach(function (program) {
@@ -266,29 +245,49 @@ function renderProgramInfo() {
         });
     });
 }
-function renderWorkoutTable() {
-    return __awaiter(this, void 0, void 0, function () {
-        var workoutDataContainer, exerciseData;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    workoutDataContainer = document.getElementById("renderWorkoutTable");
-                    if (!workoutDataContainer) return [3 /*break*/, 2];
-                    return [4 /*yield*/, fetchExerciseData()];
-                case 1:
-                    exerciseData = _a.sent();
-                    exerciseData.forEach(function (exercise) {
-                        var row = document.createElement("tr");
-                        row.innerHTML = "\n        <td>" + exercise.exercise + "</td>\n        <td>" + exercise.image + "</td>\n        <td>" + exercise.sets + "</td>\n        <td>" + exercise.reps + "</td>\n      ";
-                        workoutDataContainer.appendChild(row);
-                    });
-                    _a.label = 2;
-                case 2: return [2 /*return*/];
+document.addEventListener("DOMContentLoaded", function () { return __awaiter(void 0, void 0, void 0, function () {
+    var selectedProgramString, selectedProgram_1, programInfoContainer, renderWorkoutTable;
+    return __generator(this, function (_a) {
+        selectedProgramString = localStorage.getItem("selectedProgram");
+        if (selectedProgramString) {
+            selectedProgram_1 = JSON.parse(selectedProgramString);
+            programInfoContainer = document.querySelector(".renderProgramInfo");
+            if (programInfoContainer) {
+                programInfoContainer.innerHTML = "\n        <h2>Your Program:</h2>\n        <p>Name: " + selectedProgram_1.name + "</p>\n        <p>Level: " + selectedProgram_1.level + "</p>\n        <p>Days a Week: " + selectedProgram_1.days + "</p>\n        <p>Equipment: " + selectedProgram_1.equipment + "</p>\n        <p>Workout Time: " + selectedProgram_1.workoutTime + "</p>\n      ";
             }
-        });
+            renderWorkoutTable = function () { return __awaiter(void 0, void 0, void 0, function () {
+                var response, data, workoutData, workoutTableContainer, error_4;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, 3, , 4]);
+                            return [4 /*yield*/, fetch("/api/getWorkoutData")];
+                        case 1:
+                            response = _a.sent();
+                            return [4 /*yield*/, response.json()];
+                        case 2:
+                            data = _a.sent();
+                            workoutData = data.workoutData[selectedProgram_1._id];
+                            workoutTableContainer = document.getElementById("renderWorkoutTable");
+                            if (workoutTableContainer) {
+                                workoutTableContainer.innerHTML = "\n            <h3>Your workout</h3>\n            <table>\n              <thead>\n                <tr>\n                  <th>Exercise</th>\n                  <th>Image</th>\n                  <th>Sets</th>\n                  <th>Reps</th>\n                </tr>\n              </thead>\n              <tbody>\n                " + workoutData
+                                    .map(function (exercise) { return "\n                  <tr>\n                    <td>" + exercise.exercise + "</td>\n                    <td>" + exercise.image + "</td>\n                    <td>" + exercise.sets + "</td>\n                    <td>" + exercise.reps + "</td>\n                  </tr>\n                "; })
+                                    .join("") + "\n              </tbody>\n            </table>\n          ";
+                            }
+                            return [3 /*break*/, 4];
+                        case 3:
+                            error_4 = _a.sent();
+                            console.error("Error fetching workout data:", error_4);
+                            return [3 /*break*/, 4];
+                        case 4: return [2 /*return*/];
+                    }
+                });
+            }); };
+            renderWorkoutTable();
+        }
+        return [2 /*return*/];
     });
-}
+}); });
 document.addEventListener("DOMContentLoaded", function () {
     renderProgramInfo();
-    renderWorkoutTable();
 });
