@@ -44,8 +44,11 @@ var usersRoute_1 = require("./users/usersRoute");
 var cookie_parser_1 = require("cookie-parser");
 dotenv.config();
 var app = express_1["default"]();
-var uri = process.env.MONGOOSE_URI +
-    "MONGOOSE_URI=mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project";
+app.use(express_1["default"].json());
+app.use(cookie_parser_1["default"]());
+app.use(express_1["default"].static("./client"));
+app.use("/api/", usersRoute_1["default"]);
+var uri = process.env.MONGOOSE_URI + "Training";
 if (uri) {
     mongoose_1["default"]
         .connect(uri)
@@ -54,10 +57,6 @@ if (uri) {
 else {
     console.log("No URI");
 }
-app.use(express_1["default"].json());
-app.use(cookie_parser_1["default"]());
-app.use(express_1["default"].static("./client"));
-app.use("/api/", usersRoute_1["default"]);
 var UserSchema = new mongoose_2.Schema({ name: String, src: String });
 var UserModel = mongoose_1["default"].model("users", UserSchema);
 app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {

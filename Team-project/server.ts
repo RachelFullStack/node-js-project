@@ -8,9 +8,13 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
-const uri: string | undefined =
-  process.env.MONGOOSE_URI +
-  "MONGOOSE_URI=mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project";
+app.use(express.json());
+
+app.use(cookieParser());
+app.use(express.static("./client"));
+app.use("/api/", router);
+
+const uri: string | undefined = process.env.MONGOOSE_URI + "Training";
 
 if (uri) {
   mongoose
@@ -20,12 +24,6 @@ if (uri) {
 } else {
   console.log("No URI");
 }
-
-app.use(express.json());
-
-app.use(cookieParser());
-app.use(express.static("./client"));
-app.use("/api/", router);
 
 const UserSchema = new Schema({ name: String, src: String });
 const UserModel = mongoose.model("users", UserSchema);
