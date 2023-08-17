@@ -36,6 +36,48 @@
       onsubmit="return validateForm()"
     >
       <label for="Days">Days a week:</label>
+      <input type="text" id="Days" name="Days" list="days_list" />
+      <datalist id="days_list">
+        <option value="2 Days a week">2 Days a week</option>
+        <option value="3 Days a week">3 Days a week</option>
+        <option value="4 Days a week">4 Days a week</option>
+        <option value="5 Days a week">5 Days a week</option>
+      </datalist>
+
+      <label for="Equipment">Equipment:</label>
+      <input
+        type="text"
+        id="Equipment"
+        name="Equipment"
+        list="equipment_list"
+      />
+      <datalist id="equipment_list">
+        <option value="Body weight">Body weight</option>
+        <option value="Dumbbells only">Dumbbells only</option>
+        <option value="Gym">Gym</option>
+      </datalist>
+
+      <label for="Level">Level:</label>
+      <input type="text" id="Level" name="Level" list="level_list" />
+      <datalist id="level_list">
+        <option value="beginner">beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </datalist>
+
+      <label for="Workout Time">Workout Time:</label>
+      <input
+        type="text"
+        id="WorkoutTime"
+        name="WorkoutTime"
+        list="workoutTime_list"
+      />
+      <datalist id="workoutTime_list">
+        <option value="30 minutes">30 minutes</option>
+        <option value="45 minutes">45 minutes</option>
+        <option value="60 minutes">60 minutes</option>
+      </datalist>
+      <!-- <label for="Days">Days a week:</label>
       <select id="Days" name="Days">
         <option value="2">2 Days a week</option>
         <option value="3">3 Days a week</option>
@@ -59,7 +101,7 @@
         <option value="30 minutes">30 minutes</option>
         <option value="45 minutes">45 minutes</option>
         <option value="60 minutes">60 minutes</option>
-      </select>
+      </select> -->
     </form>
 
     <div id="table-container">
