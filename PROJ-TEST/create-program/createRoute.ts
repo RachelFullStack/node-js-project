@@ -3,8 +3,8 @@ import {
   getAllData,
   getCategories,
   deleteAllData,
-  addProgram,
   addCategory,
+  addProgram,
   getProgramData,
 } from "./createController";
 
@@ -13,9 +13,9 @@ const router = express.Router();
 router
   .get("/get-all-data", getAllData)
   .get("/get-categories", getCategories)
-  .get("/get-program-data", getProgramData)
   .delete("/delete-all-data", deleteAllData)
+  .post("/add-category", addCategory)
   .post("/add-program", addProgram)
-  .post("/add-category", addCategory);
+  .get("/get-program-data", getProgramData);
 
 export default router;
