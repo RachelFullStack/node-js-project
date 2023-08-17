@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <!-- <script src="../Program/dist/program.js" defer></script> -->
+    <script src="./dist/timer.js" defer></script>
+    <script src="./dist/api.js" defer></script>
+    <script src="./dist/index.js" defer></script>
+    <script src="./dist/workoutData.js" defer></script>
+    <title>Program page</title>
+  </head>
+  <body onload="handleShowUser()">
+    <nav class="navbar">
+      <ul class="navbar__list">
+        <li class="navbar__item">
+          <a href="./index.html" class="navbar__link">sign in</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./create.html" class="navbar__link">Admin</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./welcome.html" class="navbar__link">All Programs</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./program.html" class="navbar__link">My Program</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h1>Programs Page</h1>
+
+    <h1 id="welcome-heading">
+      <strong> Hi <span id="userName"></span>, let's see more details </strong>
+    </h1>
+    <div class="container">
+      <div class="timer">
+        <div class="timer__display" id="timerDisplay">00:00</div>
+        <div class="timer__controls">
+          <button class="timer__button" id="startButton">Start</button>
+          <button class="timer__button" id="pauseButton">Pause</button>
+          <button class="timer__button" id="resetButton">Reset</button>
+        </div>
+      </div>
+      <div class="Program_info" id="ProgramInfo">
+        <h2>Your Program:</h2>
+        <div class="renderProgramInfo"></div>
+      </div>
+    </div>
+    <div class="workout-table">
+      <table>
+        <h3>Your workout</h3>
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Image</th>
+            <th>Sets</th>
+            <th>Reps</th>
+          </tr>
+        </thead>
+        <tbody id="renderWorkoutTable"></tbody>
+      </table>
+      <br />
+      <button id="completeButton" class="completeButton">done!</button>
+    </div>
+  </body>
+</html>
