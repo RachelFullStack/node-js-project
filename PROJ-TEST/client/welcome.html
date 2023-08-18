@@ -34,6 +34,62 @@
     </h1>
     <form id="filter-form">
       <label for="filter-level">Filter by Level:</label>
+      <input
+        type="text"
+        id="filter-level"
+        name="filter-level"
+        list="filter-level_list"
+      />
+      <datalist id="filter-level_list">
+        <option value="All Levels">All Levels</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </datalist>
+
+      <label for="filter-days">Filter by Days a Week:</label>
+      <input
+        type="text"
+        id="filter-days"
+        name="filter-days"
+        list="filter-days_list"
+      />
+      <datalist id="filter-days_list">
+        <option value="All Days">All Days</option>
+        <option value="2 Days a week">2 Days a week</option>
+        <option value="3 Days a week">3 Days a week</option>
+        <option value="4 Days a week">4 Days a week</option>
+        <option value="5 Days a week">5 Days a week</option>
+      </datalist>
+
+      <label for="filter-equipment">Filter by Equipment:</label>
+      <input
+        type="text"
+        id="filter-equipment"
+        name="filter-equipment"
+        list="filter-equipment_list"
+      />
+      <datalist id="filter-equipment_list">
+        <option value="All Equipment">All Equipment</option>
+        <option value="Body weight">Body weight</option>
+        <option value="Dumbbells only">Dumbbells only</option>
+        <option value="Gym">Gym</option>
+      </datalist>
+
+      <label for="filter-time">Filter by Workout Time:</label>
+      <input
+        type="text"
+        id="filter-time"
+        name="filter-time"
+        list="filter-time_list"
+      />
+      <datalist id="filter-time_list">
+        <option value="All Times">All Times</option>
+        <option value="30 minutes">30 minutes</option>
+        <option value="45 minutes">45 minutes</option>
+        <option value="60 minutes">60 minutes</option>
+      </datalist>
+      <!-- <label for="filter-level">Filter by Level:</label>
       <select id="filter-level" name="filter-level">
         <option value="all">All Levels</option>
         <option value="beginner">Beginner</option>
@@ -64,7 +120,7 @@
         <option value="30 minutes">30 minutes</option>
         <option value="45 minutes">45 minutes</option>
         <option value="60 minutes">60 minutes</option>
-      </select>
+      </select> -->
 
       <button id="apply-filter-button" type="button">Apply Filter</button>
     </form>

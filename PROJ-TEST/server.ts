@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import { Schema, model } from "mongoose";
-import routerUserRouter from "./users/usersRoute";
-import routerCreateRouter from "./create-program/createRoute";
+import userRouter from "./users/usersRoute";
+import createRouter from "./create-program/createRoute";
 import cookieParser from "cookie-parser";
 import User from "./users/usersModel";
 
@@ -14,10 +14,10 @@ app.use(express.json());
 
 app.use(cookieParser());
 app.use(express.static("./client"));
-app.use("/api/", routerUserRouter);
-app.use("/program/", routerCreateRouter);
+app.use("/api/", userRouter);
+app.use("/program/", createRouter);
 
-const uri: string | undefined = process.env.MONGOOSE_URI + "Fit-App";
+const uri: string | undefined = process.env.MONGOOSE_URI + "Training";
 
 if (uri) {
   mongoose
@@ -31,16 +31,16 @@ if (uri) {
 // const UserSchema = new Schema({ name: String, src: String });
 // const UserModel = mongoose.model("users", UserSchema);
 
-app.get("/api/user-get", async (req: any, res: any) => {
-  try {
-    const users = await User.find({});
-    res.send({ users });
-  } catch (error) {
-    console.log(error);
-  }
-});
+// app.get("/api/user-get", async (req: any, res: any) => {
+//   try {
+//     const users = await User.find({});
+//     res.send({ users });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
-app.post("/api/add-workout-data", async (req: any, res: any) => {
+app.post("/program/add-workout-data", async (req: any, res: any) => {
   try {
     const { workoutData } = req.body;
     console.log("Received workout data:", workoutData);

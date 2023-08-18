@@ -42,7 +42,6 @@ var dotenv = require("dotenv");
 var usersRoute_1 = require("./users/usersRoute");
 var createRoute_1 = require("./create-program/createRoute");
 var cookie_parser_1 = require("cookie-parser");
-var usersModel_1 = require("./users/usersModel");
 dotenv.config();
 var app = express_1["default"]();
 app.use(express_1["default"].json());
@@ -50,7 +49,7 @@ app.use(cookie_parser_1["default"]());
 app.use(express_1["default"].static("./client"));
 app.use("/api/", usersRoute_1["default"]);
 app.use("/program/", createRoute_1["default"]);
-var uri = process.env.MONGOOSE_URI + "Fit-App";
+var uri = process.env.MONGOOSE_URI + "Training";
 if (uri) {
     mongoose_1["default"]
         .connect(uri)
@@ -61,26 +60,15 @@ else {
 }
 // const UserSchema = new Schema({ name: String, src: String });
 // const UserModel = mongoose.model("users", UserSchema);
-app.get("/api/user-get", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, usersModel_1["default"].find({})];
-            case 1:
-                users = _a.sent();
-                res.send({ users: users });
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                console.log(error_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); });
-app.post("/api/add-workout-data", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+// app.get("/api/user-get", async (req: any, res: any) => {
+//   try {
+//     const users = await User.find({});
+//     res.send({ users });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+app.post("/program/add-workout-data", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var workoutData;
     return __generator(this, function (_a) {
         try {

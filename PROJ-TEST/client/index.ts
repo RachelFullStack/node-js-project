@@ -85,10 +85,13 @@ if (addButton) {
     if (tableCounter < maxTables) {
       tableCounter++;
 
-      const tableContainer = document.getElementById("table-container");
-      if (tableContainer) {
+      // const tableContainer = document.getElementById("table-container");
+      const programForm = document.getElementById(
+        "programForm"
+      ) as HTMLFormElement;
+      if (programForm) {
         const table = document.createElement("table");
-        tableContainer.appendChild(table);
+        programForm.appendChild(table);
 
         const tableBody = document.createElement("tbody");
         table.appendChild(tableBody);
@@ -166,6 +169,22 @@ if (submitButton) {
         const programData: Array<
           Array<{ exercise: string; image: File; sets: number; reps: number }>
         > = [];
+
+        const inputFields = document.querySelectorAll(
+          "#programForm > select"
+        ) as any;
+
+        console.log(inputFields);
+
+        const dataObject = {};
+        inputFields.forEach((input, index) => {
+          console.log(input.value);
+          console.log(input.id);
+          dataObject[input.id] = input.value;
+        });
+
+        console.log(dataObject);
+
         for (let tableIndex = 1; tableIndex <= tableCounter; tableIndex++) {
           const tableData: {
             exercise: string;
@@ -173,19 +192,62 @@ if (submitButton) {
             sets: number;
             reps: number;
           }[] = [];
-          for (let i = 1; i <= 8; i++) {
-            const exercise =
-              programForm.elements[`exercise_${i}_${tableIndex}`]?.value;
-            // console.log(programForm.elements[`exercise_${i}_${tableIndex}`]);
 
-            const image =
-              programForm.elements[`image_${i}_${tableIndex}`]?.files[0];
-            const sets = programForm.elements[`sets_${i}_${tableIndex}`]?.value;
-            const reps = programForm.elements[`reps_${i}_${tableIndex}`]?.value;
+          //---KKKK Add----
+
+          // const tableInputsaaaa = document.querySelectorAll(
+          //   "#programForm > table td > input "
+          // );
+
+          // console.log(tableInputsaaaa);
+
+          for (let i = 1; i <= 8; i++) {
+            console.log(`for is here`);
+
+            const exerciseInput = document.querySelector(
+              `#programForm > table td > input[name^=exercise_${i}]`
+            ) as any;
+
+            const exercise = exerciseInput.value;
+
+            const image111 = document.querySelector(
+              `#programForm > table td > input[name^=image_${i}]`
+            ) as any;
+            const image = image111.value;
+
+            const setsInput = document.querySelector(
+              `#programForm > table td > input[name^=sets_${i}]`
+            ) as any;
+
+            const sets = setsInput.value;
+
+            const repsInput = document.querySelector(
+              `#programForm > table td > input[name^=reps_${i}]`
+            ) as any;
+
+            const reps = repsInput.value;
 
             tableData.push({ exercise, image, sets, reps });
           }
-          programData.push(tableData);
+
+          // console.log(tableData);
+
+          //tableData.push({ exercise, image, sets, reps }); [{},{},{}]
+
+          //-----OLD---
+          // for (let i = 1; i <= 8; i++) {
+          //   const exercise =
+          //     programForm.elements[`exercise_${i}_${tableIndex}`]?.value;
+          //   // console.log(programForm.elements[`exercise_${i}_${tableIndex}`]);
+
+          //   const image =
+          //     programForm.elements[`image_${i}_${tableIndex}`]?.files[0];
+          //   const sets = programForm.elements[`sets_${i}_${tableIndex}`]?.value;
+          //   const reps = programForm.elements[`reps_${i}_${tableIndex}`]?.value;
+
+          //   tableData.push({ exercise, image, sets, reps });
+          // }
+          programData.push(tableData); //[[{},{}]]
         }
 
         // console.log(programData);
@@ -193,14 +255,30 @@ if (submitButton) {
         const response = await fetch("/program/add-program", {
           method: "POST",
           headers: {
+            Accept: "application/json",
+
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(programData),
+          body: JSON.stringify({ dataObject, programData }),
         });
         const result = await response.json();
-        console.log(result);
+        console.log("result:", result);
+        console.log("programData:", programData);
+        // xxxxxxxxx
+        const response2 = await fetch("/program/add-category", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
 
-        window.location.href = "./welcome.html";
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ dataObject }),
+        });
+        const result2 = await response2.json();
+        console.log("result2:", result2);
+        console.log("dataObject:", dataObject);
+
+        // window.location.href = "./welcome.html";
       }
     } catch (error) {
       console.log(error);
@@ -212,7 +290,7 @@ if (submitButton) {
 
 // async function fetchExerciseData() {
 //   try {
-//     const response = await fetch("/api/getExerciseData");
+//     const response = await fetch("/program/getExerciseData");
 //     const data = await response.json();
 //     return data.exerciseData;
 //   } catch (error) {
@@ -221,6 +299,18 @@ if (submitButton) {
 //   }
 // }
 
+// מה שהיה בקובץ היי פי אאי
+async function fetchProgramData() {
+  try {
+    const response = await fetch("/program/get-program-data");
+    const data = await response.json();
+    return data.allProgramData;
+  } catch (error) {
+    console.error("Error fetching program data:", error);
+    return [];
+  }
+}
+// ----------------------------------------------------
 async function renderProgramInfo() {
   const programInfoContainer = document.querySelector(".renderProgramInfo");
 
@@ -256,7 +346,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const renderWorkoutTable = async () => {
       try {
-        const response = await fetch("/api/getWorkoutData");
+        const response = await fetch("/program/getWorkoutData");
         const data = await response.json();
         const workoutData = data.workoutData[selectedProgram._id];
         const workoutTableContainer =
