@@ -128,6 +128,7 @@ exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, voi
                     })];
             case 1:
                 newCategory = _b.sent();
+                console.log(newCategory);
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 3];
             case 2:
@@ -139,13 +140,14 @@ exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, voi
     });
 }); };
 exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var programData, newPrograms, newAllData, error_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, dataObject, programData, newPrograms, newAllData, error_5;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
-                programData = req.body;
-                console.log(req.body);
+                _b.trys.push([0, 3, , 4]);
+                _a = req.body, dataObject = _a.dataObject, programData = _a.programData;
+                console.log(dataObject);
+                console.log(programData);
                 return [4 /*yield*/, Promise.all(programData.map(function (tableData) { return __awaiter(void 0, void 0, void 0, function () {
                         var exercises;
                         return __generator(this, function (_a) {
@@ -168,18 +170,18 @@ exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void
                         });
                     }); }))];
             case 1:
-                newPrograms = _a.sent();
+                newPrograms = _b.sent();
                 return [4 /*yield*/, createModel_1["default"].create({
                         category: req.body.categoryId,
                         program: newPrograms.flat()
                     })];
             case 2:
-                newAllData = _a.sent();
+                newAllData = _b.sent();
                 // console.log(newAllData);
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 4];
             case 3:
-                error_5 = _a.sent();
+                error_5 = _b.sent();
                 console.log(error_5);
                 res.status(500).send("didn't get data");
                 return [3 /*break*/, 4];

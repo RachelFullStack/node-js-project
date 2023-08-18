@@ -47,12 +47,12 @@ export const addCategory = async (req: any, res: any) => {
   try {
     const { Days, Equipment, level, WorkoutTime } = req.body;
     const newCategory = await Category.create({
-      Days,
-      Equipment,
-      level,
-      WorkoutTime,
+      Days: Days,
+      Equipment: Equipment,
+      level: level,
+      WorkoutTime: WorkoutTime,
     });
-
+    console.log(newCategory);
     res.status(200).send({ ok: true });
   } catch (error) {
     console.log(error);
@@ -61,9 +61,10 @@ export const addCategory = async (req: any, res: any) => {
 
 export const addProgram = async (req: any, res: any) => {
   try {
-    const programData = req.body;
+    const { dataObject, programData } = req.body;
 
-    console.log(req.body);
+    console.log(dataObject);
+    console.log(programData);
 
     const newPrograms = await Promise.all(
       programData.map(async (tableData: any) => {

@@ -131,10 +131,11 @@ if (addButton) {
     addButton.addEventListener("click", function () {
         if (tableCounter < maxTables) {
             tableCounter++;
-            var tableContainer = document.getElementById("table-container");
-            if (tableContainer) {
+            // const tableContainer = document.getElementById("table-container");
+            var programForm = document.getElementById("programForm");
+            if (programForm) {
                 var table = document.createElement("table");
-                tableContainer.appendChild(table);
+                programForm.appendChild(table);
                 var tableBody = document.createElement("tbody");
                 table.appendChild(tableBody);
                 var tableHeader = document.createElement("thead");
@@ -189,44 +190,75 @@ function validateForm() {
 var submitButton = document.getElementById("submit-button");
 if (submitButton) {
     submitButton.addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
-        var programForm, programData, tableIndex, tableData, i, exercise, image, sets, reps, response, result, error_2;
-        var _a, _b, _c, _d;
-        return __generator(this, function (_e) {
-            switch (_e.label) {
+        var programForm, programData, inputFields, dataObject_1, tableIndex, tableData, i, exerciseInput, exercise, image111, image, setsInput, sets, repsInput, reps, response, result, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _e.trys.push([0, 4, , 5]);
+                    _a.trys.push([0, 4, , 5]);
                     programForm = document.getElementById("programForm");
                     if (!programForm) return [3 /*break*/, 3];
                     programData = [];
+                    inputFields = document.querySelectorAll("#programForm > select");
+                    console.log(inputFields);
+                    dataObject_1 = {};
+                    inputFields.forEach(function (input, index) {
+                        console.log(input.value);
+                        console.log(input.id);
+                        dataObject_1[input.id] = input.value;
+                    });
+                    console.log(dataObject_1);
                     for (tableIndex = 1; tableIndex <= tableCounter; tableIndex++) {
                         tableData = [];
+                        //---Katya Add----
+                        // const tableInputsaaaa = document.querySelectorAll(
+                        //   "#programForm > table td > input "
+                        // );
+                        // console.log(tableInputsaaaa);
                         for (i = 1; i <= 8; i++) {
-                            exercise = (_a = programForm.elements["exercise_" + i + "_" + tableIndex]) === null || _a === void 0 ? void 0 : _a.value;
-                            image = (_b = programForm.elements["image_" + i + "_" + tableIndex]) === null || _b === void 0 ? void 0 : _b.files[0];
-                            sets = (_c = programForm.elements["sets_" + i + "_" + tableIndex]) === null || _c === void 0 ? void 0 : _c.value;
-                            reps = (_d = programForm.elements["reps_" + i + "_" + tableIndex]) === null || _d === void 0 ? void 0 : _d.value;
+                            console.log("for is here");
+                            exerciseInput = document.querySelector("#programForm > table td > input[name^=exercise_" + i + "]");
+                            exercise = exerciseInput.value;
+                            image111 = document.querySelector("#programForm > table td > input[name^=image_" + i + "]");
+                            image = image111.value;
+                            setsInput = document.querySelector("#programForm > table td > input[name^=sets_" + i + "]");
+                            sets = setsInput.value;
+                            repsInput = document.querySelector("#programForm > table td > input[name^=reps_" + i + "]");
+                            reps = repsInput.value;
                             tableData.push({ exercise: exercise, image: image, sets: sets, reps: reps });
                         }
-                        programData.push(tableData);
+                        // console.log(tableData);
+                        //tableData.push({ exercise, image, sets, reps }); [{},{},{}]
+                        //-----OLD---
+                        // for (let i = 1; i <= 8; i++) {
+                        //   const exercise =
+                        //     programForm.elements[`exercise_${i}_${tableIndex}`]?.value;
+                        //   // console.log(programForm.elements[`exercise_${i}_${tableIndex}`]);
+                        //   const image =
+                        //     programForm.elements[`image_${i}_${tableIndex}`]?.files[0];
+                        //   const sets = programForm.elements[`sets_${i}_${tableIndex}`]?.value;
+                        //   const reps = programForm.elements[`reps_${i}_${tableIndex}`]?.value;
+                        //   tableData.push({ exercise, image, sets, reps });
+                        // }
+                        programData.push(tableData); //[[{},{}]]
                     }
                     return [4 /*yield*/, fetch("/program/add-program", {
                             method: "POST",
                             headers: {
+                                Accept: "application/json",
                                 "Content-Type": "application/json"
                             },
-                            body: JSON.stringify(programData)
+                            body: JSON.stringify({ dataObject: dataObject_1, programData: programData })
                         })];
                 case 1:
-                    response = _e.sent();
+                    response = _a.sent();
                     return [4 /*yield*/, response.json()];
                 case 2:
-                    result = _e.sent();
+                    result = _a.sent();
                     console.log(result);
-                    window.location.href = "./welcome.html";
-                    _e.label = 3;
+                    _a.label = 3;
                 case 3: return [3 /*break*/, 5];
                 case 4:
-                    error_2 = _e.sent();
+                    error_2 = _a.sent();
                     console.log(error_2);
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
