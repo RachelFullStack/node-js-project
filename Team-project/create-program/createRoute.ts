@@ -8,9 +8,9 @@ import {
   getProgramData,
 } from "./createController";
 
-const router = express.Router();
+const createRouter = express.Router();
 
-router
+createRouter
   .get("/get-all-data", getAllData)
   .get("/get-categories", getCategories)
   .get("/get-program-data", getProgramData)
@@ -18,4 +18,4 @@ router
   .post("/add-program", addProgram)
   .post("/add-category", addCategory);
 
-export default router;
+export default createRouter;

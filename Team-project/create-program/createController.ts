@@ -65,7 +65,8 @@ export const addProgram = async (req: any, res: any) => {
 
     console.log(dataObject);
     console.log(programData);
-
+    // if (!dataObject || !programData)
+    //   throw new Error("dataObject or programData is empty");
     const newPrograms = await Promise.all(
       programData.map(async (tableData: any) => {
         const exercises = await Promise.all(

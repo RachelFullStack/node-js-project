@@ -190,13 +190,13 @@ function validateForm() {
 var submitButton = document.getElementById("submit-button");
 if (submitButton) {
     submitButton.addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
-        var programForm, programData, inputFields, dataObject_1, tableIndex, tableData, i, exerciseInput, exercise, image111, image, setsInput, sets, repsInput, reps, response, result, error_2;
+        var programForm, programData, inputFields, dataObject_1, tableIndex, tableData, i, exerciseInput, exercise, image111, image, setsInput, sets, repsInput, reps, response, result, response2, result2, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 4, , 5]);
+                    _a.trys.push([0, 6, , 7]);
                     programForm = document.getElementById("programForm");
-                    if (!programForm) return [3 /*break*/, 3];
+                    if (!programForm) return [3 /*break*/, 5];
                     programData = [];
                     inputFields = document.querySelectorAll("#programForm > select");
                     console.log(inputFields);
@@ -254,14 +254,30 @@ if (submitButton) {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     result = _a.sent();
-                    console.log(result);
-                    _a.label = 3;
-                case 3: return [3 /*break*/, 5];
+                    console.log("result:", result);
+                    console.log("programData:", programData);
+                    return [4 /*yield*/, fetch("/program/add-category", {
+                            method: "POST",
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ dataObject: dataObject_1 })
+                        })];
+                case 3:
+                    response2 = _a.sent();
+                    return [4 /*yield*/, response2.json()];
                 case 4:
+                    result2 = _a.sent();
+                    console.log("result2:", result2);
+                    console.log("dataObject:", dataObject_1);
+                    _a.label = 5;
+                case 5: return [3 /*break*/, 7];
+                case 6:
                     error_2 = _a.sent();
                     console.log(error_2);
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 7];
+                case 7: return [2 /*return*/];
             }
         });
     }); });
@@ -269,7 +285,7 @@ if (submitButton) {
 // // ----program
 // async function fetchExerciseData() {
 //   try {
-//     const response = await fetch("/api/getExerciseData");
+//     const response = await fetch("/program/getExerciseData");
 //     const data = await response.json();
 //     return data.exerciseData;
 //   } catch (error) {
@@ -277,6 +293,31 @@ if (submitButton) {
 //     return [];
 //   }
 // }
+// מה שהיה בקובץ היי פי אאי
+function fetchProgramData() {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, fetch("/program/get-program-data")];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    return [2 /*return*/, data.allProgramData];
+                case 3:
+                    error_3 = _a.sent();
+                    console.error("Error fetching program data:", error_3);
+                    return [2 /*return*/, []];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+// ----------------------------------------------------
 function renderProgramInfo() {
     return __awaiter(this, void 0, void 0, function () {
         var programInfoContainer, programData;
@@ -312,12 +353,12 @@ document.addEventListener("DOMContentLoaded", function () { return __awaiter(_th
                 programInfoContainer.innerHTML = "\n        <h2>Your Program:</h2>\n        <p>Name: " + selectedProgram_1.name + "</p>\n        <p>Level: " + selectedProgram_1.level + "</p>\n        <p>Days a Week: " + selectedProgram_1.days + "</p>\n        <p>Equipment: " + selectedProgram_1.equipment + "</p>\n        <p>Workout Time: " + selectedProgram_1.workoutTime + "</p>\n      ";
             }
             renderWorkoutTable = function () { return __awaiter(_this, void 0, void 0, function () {
-                var response, data, workoutData, workoutTableContainer, error_3;
+                var response, data, workoutData, workoutTableContainer, error_4;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             _a.trys.push([0, 3, , 4]);
-                            return [4 /*yield*/, fetch("/api/getWorkoutData")];
+                            return [4 /*yield*/, fetch("/program/getWorkoutData")];
                         case 1:
                             response = _a.sent();
                             return [4 /*yield*/, response.json()];
@@ -332,8 +373,8 @@ document.addEventListener("DOMContentLoaded", function () { return __awaiter(_th
                             }
                             return [3 /*break*/, 4];
                         case 3:
-                            error_3 = _a.sent();
-                            console.error("Error fetching workout data:", error_3);
+                            error_4 = _a.sent();
+                            console.error("Error fetching workout data:", error_4);
                             return [3 /*break*/, 4];
                         case 4: return [2 /*return*/];
                     }

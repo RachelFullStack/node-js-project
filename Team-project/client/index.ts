@@ -262,7 +262,21 @@ if (submitButton) {
           body: JSON.stringify({ dataObject, programData }),
         });
         const result = await response.json();
-        console.log(result);
+        console.log("result:", result);
+        console.log("programData:", programData);
+        // xxxxxxxxx
+        const response2 = await fetch("/program/add-category", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ dataObject }),
+        });
+        const result2 = await response2.json();
+        console.log("result2:", result2);
+        console.log("dataObject:", dataObject);
 
         // window.location.href = "./welcome.html";
       }
@@ -276,7 +290,7 @@ if (submitButton) {
 
 // async function fetchExerciseData() {
 //   try {
-//     const response = await fetch("/api/getExerciseData");
+//     const response = await fetch("/program/getExerciseData");
 //     const data = await response.json();
 //     return data.exerciseData;
 //   } catch (error) {
@@ -285,6 +299,18 @@ if (submitButton) {
 //   }
 // }
 
+// מה שהיה בקובץ היי פי אאי
+async function fetchProgramData() {
+  try {
+    const response = await fetch("/program/get-program-data");
+    const data = await response.json();
+    return data.allProgramData;
+  } catch (error) {
+    console.error("Error fetching program data:", error);
+    return [];
+  }
+}
+// ----------------------------------------------------
 async function renderProgramInfo() {
   const programInfoContainer = document.querySelector(".renderProgramInfo");
 
@@ -320,7 +346,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const renderWorkoutTable = async () => {
       try {
-        const response = await fetch("/api/getWorkoutData");
+        const response = await fetch("/program/getWorkoutData");
         const data = await response.json();
         const workoutData = data.workoutData[selectedProgram._id];
         const workoutTableContainer =
