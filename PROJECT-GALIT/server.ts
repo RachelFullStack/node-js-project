@@ -1,9 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import { Schema, model } from "mongoose";
 import user from "./route";
-import User from "./Model";
 import create from "./route";
 import cookieParser from "cookie-parser";
 

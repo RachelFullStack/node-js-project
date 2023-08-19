@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.getAllDataData = exports.addAllData = exports.addTable = exports.addInfo = exports.deleteAllData = exports.getInfos = exports.getDatabaseUser = exports.userLogin = exports.userRegistration = void 0;
-var Model_1 = require("./Model");
-var Model_2 = require("./Model");
+var model_1 = require("./model");
+var model_2 = require("./model");
 ///// USER /////
 // ----------------------------------------------------------------------
 exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -49,7 +49,7 @@ exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0
                 _b.trys.push([0, 2, , 3]);
                 _a = req.body, userName = _a.userName, userPassword = _a.userPassword;
                 console.log("userName: " + userName + ", userPassword: " + userPassword);
-                return [4 /*yield*/, Model_1["default"].create({
+                return [4 /*yield*/, model_1["default"].create({
                         userName: userName,
                         userPassword: userPassword
                     })];
@@ -76,7 +76,7 @@ exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 
                 _b.trys.push([0, 2, , 3]);
                 _a = req.body, userName = _a.userName, userPassword = _a.userPassword;
                 console.log(userName, userPassword);
-                return [4 /*yield*/, Model_1["default"].findOne({ userName: userName, userPassword: userPassword })];
+                return [4 /*yield*/, model_1["default"].findOne({ userName: userName, userPassword: userPassword })];
             case 1:
                 databaseUser = _b.sent();
                 if (!databaseUser)
@@ -106,7 +106,7 @@ exports.getDatabaseUser = function (req, res) { return __awaiter(void 0, void 0,
                 _a.trys.push([0, 2, , 3]);
                 user = req.cookies.user;
                 console.log(user);
-                return [4 /*yield*/, Model_1["default"].findById(user)];
+                return [4 /*yield*/, model_1["default"].findById(user)];
             case 1:
                 databaseUser = _a.sent();
                 if (!databaseUser)
@@ -130,7 +130,7 @@ exports.getInfos = function (_req, res) { return __awaiter(void 0, void 0, void 
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, Model_2.Info.find({})];
+                return [4 /*yield*/, model_2.Info.find({})];
             case 1:
                 Infos = _a.sent();
                 res.send({ Infos: Infos });
@@ -154,10 +154,10 @@ exports.deleteAllData = function (req, res) { return __awaiter(void 0, void 0, v
                 console.log(_id);
                 if (!_id)
                     throw new Error("ID not found");
-                return [4 /*yield*/, Model_2.AllData.findByIdAndDelete(_id)];
+                return [4 /*yield*/, model_2.AllData.findByIdAndDelete(_id)];
             case 1:
                 AllDataIndex = _a.sent();
-                return [4 /*yield*/, Model_2.AllData.find({})
+                return [4 /*yield*/, model_2.AllData.find({})
                         .populate("Info")
                         .populate("Table")
                         .exec()];
@@ -181,7 +181,7 @@ exports.addInfo = function (req, res) { return __awaiter(void 0, void 0, void 0,
             case 0:
                 _b.trys.push([0, 2, , 3]);
                 _a = req.body, Days = _a.Days, Equipment = _a.Equipment, Level = _a.Level, WorkoutTime = _a.WorkoutTime;
-                return [4 /*yield*/, Model_2.Info.create({
+                return [4 /*yield*/, model_2.Info.create({
                         Days: Days,
                         Equipment: Equipment,
                         Level: Level,
@@ -208,7 +208,7 @@ exports.addTable = function (req, res) { return __awaiter(void 0, void 0, void 0
             case 0:
                 _b.trys.push([0, 2, , 3]);
                 _a = req.body, Exercise = _a.Exercise, Image = _a.Image, Sets = _a.Sets, Reps = _a.Reps;
-                return [4 /*yield*/, Model_2.Table.create({
+                return [4 /*yield*/, model_2.Table.create({
                         Exercise: Exercise,
                         Image: Image,
                         Sets: Sets,
@@ -260,7 +260,7 @@ exports.addAllData = function (req, res) { return __awaiter(void 0, void 0, void
                     }); }))];
             case 1:
                 newAllDatas = _b.sent();
-                return [4 /*yield*/, Model_2.AllData.create({
+                return [4 /*yield*/, model_2.AllData.create({
                         Info: req.body.categoryId,
                         Table: newAllDatas.flat()
                     })];
@@ -283,7 +283,7 @@ exports.getAllDataData = function (_req, res) { return __awaiter(void 0, void 0,
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, Model_2.AllData.find({})
+                return [4 /*yield*/, model_2.AllData.find({})
                         .populate("Info")
                         .populate("Table")
                         .exec()];

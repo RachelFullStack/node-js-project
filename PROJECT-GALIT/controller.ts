@@ -1,5 +1,5 @@
-import User from "./Model";
-import { Info, Table, AllData } from "./Model";
+import User from "./model";
+import { Info, Table, AllData } from "./model";
 
 ///// USER /////
 
