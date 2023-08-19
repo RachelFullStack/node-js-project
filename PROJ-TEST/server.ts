@@ -17,7 +17,7 @@ app.use(express.static("./client"));
 app.use("/api/", userRouter);
 app.use("/program/", createRouter);
 
-const uri: string | undefined = process.env.MONGOOSE_URI + "Training";
+const uri: string | undefined = process.env.MONGOOSE_URI + "PROJ-TEST";
 
 if (uri) {
   mongoose

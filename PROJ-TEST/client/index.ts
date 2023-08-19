@@ -167,6 +167,7 @@ if (submitButton) {
 
         // if (isValid) {
         const programData: Array<
+        { exercise: string; image: File; sets: number; reps: number }
           Array<{ exercise: string; image: File; sets: number; reps: number }>
         > = [];
 
@@ -299,6 +300,8 @@ if (submitButton) {
 //   }
 // }
 
+
+
 // מה שהיה בקובץ היי פי אאי
 async function fetchProgramData() {
   try {
@@ -310,6 +313,8 @@ async function fetchProgramData() {
     return [];
   }
 }
+
+
 // ----------------------------------------------------
 async function renderProgramInfo() {
   const programInfoContainer = document.querySelector(".renderProgramInfo");

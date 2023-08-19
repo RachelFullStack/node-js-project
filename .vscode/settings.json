@@ -1,4 +1,5 @@
 {
   "compile-hero.disable-compile-files-on-did-save-code": false,
-  "cSpell.words": ["Galit", "trys"]
+  "cSpell.words": ["Galit", "trys"],
+  "liveServer.settings.port": 5502
 }

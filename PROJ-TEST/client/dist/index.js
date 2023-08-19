@@ -197,7 +197,9 @@ if (submitButton) {
                     _a.trys.push([0, 6, , 7]);
                     programForm = document.getElementById("programForm");
                     if (!programForm) return [3 /*break*/, 5];
-                    programData = [];
+                    Array < { exercise: string, image: File, sets: number, reps: number } >
+                        > ;
+                    [];
                     inputFields = document.querySelectorAll("#programForm > select");
                     console.log(inputFields);
                     dataObject_1 = {};

@@ -49,7 +49,7 @@ app.use(cookie_parser_1["default"]());
 app.use(express_1["default"].static("./client"));
 app.use("/api/", usersRoute_1["default"]);
 app.use("/program/", createRoute_1["default"]);
-var uri = process.env.MONGOOSE_URI + "Training";
+var uri = process.env.MONGOOSE_URI + "PROJ-TEST";
 if (uri) {
     mongoose_1["default"]
         .connect(uri)
