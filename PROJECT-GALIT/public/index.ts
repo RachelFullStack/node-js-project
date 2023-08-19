@@ -136,7 +136,7 @@ if (addButton) {
   });
 }
 
-interface Program {
+interface Info {
   _id: string;
   Days: number;
   Equipment: string;
@@ -151,7 +151,7 @@ interface Table {
   reps: number;
 }
 
-async function fetchAllData(): Promise<Program[]> {
+async function fetchAllData(): Promise<Info[]> {
   try {
     const response = await fetch("/program/get-program-data");
     const data = await response.json();
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const selectedProgramString = localStorage.getItem("selectedProgram");
 
   if (selectedProgramString) {
-    const selectedProgram: Program = JSON.parse(selectedProgramString);
+    const selectedProgram: Info = JSON.parse(selectedProgramString);
 
     const programInfoContainer = document.querySelector(".renderProgramInfo");
     if (programInfoContainer) {

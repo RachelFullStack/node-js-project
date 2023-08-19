@@ -1,9 +1,7 @@
-import express from "express";
+import * as express from "express";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import user from "./route";
-import create from "./route";
-import cookieParser from "cookie-parser";
+import router from "./route";
 
 dotenv.config();
 
@@ -18,12 +16,11 @@ if (uri) {
 }
 
 const app = express();
+
 app.use(express.json());
 
-app.use(cookieParser());
 app.use(express.static("./client"));
-app.use("/api/", user);
-app.use("/program/", create);
+app.use("/", router);
 
 app.listen(3000, () => {
   console.log("server listen on port 3000");
