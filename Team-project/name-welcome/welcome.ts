@@ -1,4 +1,4 @@
-import { fetchProgramData } from "../dist/api";
+import { fetchProgramData } from "../client/dist/api";
 
 const storedUsername = localStorage.getItem("username");
 if (storedUsername) {

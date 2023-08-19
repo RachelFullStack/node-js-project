@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var api_1 = require("../dist/api");
+var api_1 = require("../client/dist/api");
 var storedUsername = localStorage.getItem("username");
 if (storedUsername) {
     var usernamePlaceholder = document.getElementById("username-placeholder");
