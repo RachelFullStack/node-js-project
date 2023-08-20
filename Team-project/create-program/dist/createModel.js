@@ -28,5 +28,5 @@ var AllDataSchema = new mongoose_1["default"].Schema({
         },
     ]
 });
-exports.AllData = mongoose_1["default"].model("AllData", ProgramSchema);
+exports.AllData = mongoose_1["default"].model("AllData", AllDataSchema);
 exports["default"] = exports.program;

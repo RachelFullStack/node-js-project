@@ -46,7 +46,7 @@ exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, createModel_1["default"].find({})
+                return [4 /*yield*/, createModel_1.AllData.find({})
                         .populate("category")
                         .populate("program")
                         .exec()];
@@ -84,37 +84,28 @@ exports.getCategories = function (req, res) { return __awaiter(void 0, void 0, v
     });
 }); };
 exports.deleteAllData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _id, AllDataIndex, AllData, error_3;
+    var _id;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                _id = req.body;
-                console.log(_id);
-                if (!_id)
-                    throw new Error("uis not found");
-                return [4 /*yield*/, createModel_1["default"].findByIdAndDelete(_id)];
-            case 1:
-                AllDataIndex = _a.sent();
-                return [4 /*yield*/, createModel_1["default"].find({})
-                        .populate("category")
-                        .populate("program")
-                        .exec()];
-            case 2:
-                AllData = _a.sent();
-                res.send({ AllData: AllData });
-                return [3 /*break*/, 4];
-            case 3:
-                error_3 = _a.sent();
-                console.log(error_3);
-                res.status(500).send("didn't get AllData to delete");
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+        try {
+            _id = req.body;
+            console.log(_id);
+            // if (!_id) throw new Error(`uis not found`);
+            // const AllDataIndex = await AllData.findByIdAndDelete(_id);
+            // const AllData11 = await AllDataIndex.find({})
+            //   .populate("category")
+            //   .populate("program")
+            //   .exec();
+            // res.send({ AllData11 });
         }
+        catch (error) {
+            console.log(error);
+            res.status(500).send("didn't get AllData to delete");
+        }
+        return [2 /*return*/];
     });
 }); };
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, Days, Equipment, level, WorkoutTime, newCategory, error_4;
+    var _a, Days, Equipment, level, WorkoutTime, newCategory, error_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -132,15 +123,15 @@ exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, voi
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 3];
             case 2:
-                error_4 = _b.sent();
-                console.log(error_4);
+                error_3 = _b.sent();
+                console.log(error_3);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, dataObject, programData, newPrograms, newAllData, error_5;
+    var _a, dataObject, programData, newPrograms, newAllData, error_4;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -171,7 +162,7 @@ exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void
                     }); }))];
             case 1:
                 newPrograms = _b.sent();
-                return [4 /*yield*/, createModel_1["default"].create({
+                return [4 /*yield*/, createModel_1.AllData.create({
                         category: req.body.categoryId,
                         program: newPrograms.flat()
                     })];
@@ -181,8 +172,8 @@ exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void
                 res.status(200).send({ ok: true });
                 return [3 /*break*/, 4];
             case 3:
-                error_5 = _b.sent();
-                console.log(error_5);
+                error_4 = _b.sent();
+                console.log(error_4);
                 res.status(500).send("didn't get data");
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
@@ -190,22 +181,22 @@ exports.addProgram = function (req, res) { return __awaiter(void 0, void 0, void
     });
 }); };
 exports.getProgramData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var allProgramData, error_6;
+    var allProgramData, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, createModel_1["default"].find({})
-                        .populate("category")
-                        .populate("program")
+                return [4 /*yield*/, createModel_1.AllData.find({})
+                        .populate("Category")
+                        .populate("Program")
                         .exec()];
             case 1:
                 allProgramData = _a.sent();
                 res.send({ allProgramData: allProgramData });
                 return [3 /*break*/, 3];
             case 2:
-                error_6 = _a.sent();
-                console.log(error_6);
+                error_5 = _a.sent();
+                console.log(error_5);
                 res.status(500).send("error");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];

@@ -185,14 +185,13 @@ if (submitButton) {
 
         console.log(dataObject);
 
+        const tableData: {
+          exercise: string;
+          image: File;
+          sets: number;
+          reps: number;
+        }[] = [];
         for (let tableIndex = 1; tableIndex <= tableCounter; tableIndex++) {
-          const tableData: {
-            exercise: string;
-            image: File;
-            sets: number;
-            reps: number;
-          }[] = [];
-
           //---KKKK Add----
 
           // const tableInputsaaaa = document.querySelectorAll(
@@ -202,35 +201,35 @@ if (submitButton) {
           // console.log(tableInputsaaaa);
 
           for (let i = 1; i <= 8; i++) {
-            console.log(`for is here`);
-
             const exerciseInput = document.querySelector(
               `#programForm > table td > input[name^=exercise_${i}]`
             ) as any;
-
-            const exercise = exerciseInput.value;
-
-            const image111 = document.querySelector(
+            const imageInput = document.querySelector(
               `#programForm > table td > input[name^=image_${i}]`
             ) as any;
-            const image = image111.value;
-
             const setsInput = document.querySelector(
               `#programForm > table td > input[name^=sets_${i}]`
             ) as any;
-
-            const sets = setsInput.value;
-
             const repsInput = document.querySelector(
               `#programForm > table td > input[name^=reps_${i}]`
             ) as any;
 
+            const exercise = exerciseInput.value;
+            const image = imageInput.value;
+            const sets = setsInput.value;
             const reps = repsInput.value;
 
-            tableData.push({ exercise, image, sets, reps });
+            if (
+              exercise.length > 0 &&
+              image.length > 0 &&
+              sets.length > 0 &&
+              reps.length > 0
+            ) {
+              tableData.push({ exercise, image, sets, reps });
+            }
           }
 
-          // console.log(tableData);
+          console.log(tableData);
 
           //tableData.push({ exercise, image, sets, reps }); [{},{},{}]
 
@@ -252,31 +251,35 @@ if (submitButton) {
 
         // console.log(programData);
 
-        const response = await fetch("/program/add-program", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
+        if (tableData.length > 0) {
+          const response = await fetch("/program/add-program", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
 
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ dataObject, programData }),
-        });
-        const result = await response.json();
-        console.log("result:", result);
-        console.log("programData:", programData);
-        // xxxxxxxxx
-        const response2 = await fetch("/program/add-category", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ dataObject, programData }),
+          });
+          const result = await response.json();
+          console.log("result:", result);
+          console.log("programData:", programData);
+          // xxxxxxxxx
+          const response2 = await fetch("/program/add-category", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
 
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ dataObject }),
-        });
-        const result2 = await response2.json();
-        console.log("result2:", result2);
-        console.log("dataObject:", dataObject);
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ dataObject }),
+          });
+          const result2 = await response2.json();
+          console.log("result2:", result2);
+          console.log("dataObject:", dataObject);
+        } else {
+          alert(`tableData is empty`);
+        }
 
         // window.location.href = "./welcome.html";
       }
@@ -300,16 +303,16 @@ if (submitButton) {
 // }
 
 // מה שהיה בקובץ היי פי אאי
-async function fetchProgramData() {
-  try {
-    const response = await fetch("/program/get-program-data");
-    const data = await response.json();
-    return data.allProgramData;
-  } catch (error) {
-    console.error("Error fetching program data:", error);
-    return [];
-  }
-}
+// async function fetchProgramData() {
+//   try {
+//     const response = await fetch("/program/get-program-data");
+//     const data = await response.json();
+//     return data.allProgramData;
+//   } catch (error) {
+//     console.error("Error fetching program data:", error);
+//     return [];
+//   }
+// }
 // ----------------------------------------------------
 async function renderProgramInfo() {
   const programInfoContainer = document.querySelector(".renderProgramInfo");

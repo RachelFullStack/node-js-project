@@ -55,16 +55,21 @@ document.addEventListener("DOMContentLoaded", function () { return __awaiter(_th
             case 1:
                 programData = _a.sent();
                 console.log(programData);
-                programData.forEach(function (program) {
-                    var programBox = document.createElement("div");
-                    programBox.classList.add("program-box");
-                    programBox.innerHTML = "\n        <h2>" + program.name + "</h2>\n        <p>Level: " + program.level + "</p>\n        <p>Days a Week: " + program.days + "</p>\n        <p>Equipment: " + program.equipment + "</p>\n        <p>Workout Time: " + program.workoutTime + "</p>\n      ";
-                    programBox.addEventListener("click", function () {
-                        localStorage.setItem("selectedProgram", JSON.stringify(program));
-                        window.location.href = "../Program/program.html";
+                if (programData.length > 0) {
+                    programData.forEach(function (program) {
+                        var programBox = document.createElement("div");
+                        programBox.classList.add("program-box");
+                        programBox.innerHTML = "\n      <h2>" + program.name + "</h2>\n      <p>Level: " + program.level + "</p>\n      <p>Days a Week: " + program.days + "</p>\n      <p>Equipment: " + program.equipment + "</p>\n      <p>Workout Time: " + program.workoutTime + "</p>\n    ";
+                        programBox.addEventListener("click", function () {
+                            localStorage.setItem("selectedProgram", JSON.stringify(program));
+                            window.location.href = "../Program/program.html";
+                        });
+                        programListContainer.appendChild(programBox);
                     });
-                    programListContainer.appendChild(programBox);
-                });
+                }
+                else {
+                    programListContainer.innerHTML = "<div> No Data </div>";
+                }
                 _a.label = 2;
             case 2: return [2 /*return*/];
         }

@@ -32,6 +32,6 @@ const AllDataSchema = new mongoose.Schema({
   ],
 });
 
-export const AllData = mongoose.model("AllData", ProgramSchema);
+export const AllData = mongoose.model("AllData", AllDataSchema);
 
 export default program;

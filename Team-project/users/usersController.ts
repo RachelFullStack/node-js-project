@@ -1,5 +1,7 @@
+import { StringExpressionOperator } from "mongoose";
 import User from "./usersModel";
-
+import jwt from "jwt-simple";
+const secret: string = process.env.JWT_SECRET as string;
 // ----------------------------------------------------------------------
 export const userRegistration = async (req: any, res: any) => {
   try {
@@ -26,7 +28,10 @@ export const userLogin = async (req: any, res: any) => {
     const databaseUser = await User.findOne({ userName, userPassword });
     if (!databaseUser) throw new Error("the date didn't arrive");
     console.log(databaseUser);
-    res.cookie("user", databaseUser._id, {
+
+    const token = jwt.encode({ userId: databaseUser._id }, secret);
+
+    res.cookie("user", token, {
       maxAge: 50000000,
       httpOnly: true,
     });
@@ -42,9 +47,10 @@ export const getDatabaseUser = async (req: any, res: any) => {
   try {
     const { user } = req.cookies;
     console.log(user);
-    const databaseUser: any = await User.findById(user);
-    if (!databaseUser)
-      throw new Error("problem with function getDatabaseUser");
+    const decoded = jwt.decode(user, secret);
+    const { userId } = decoded;
+    const databaseUser: any = await User.findById(userId);
+    if (!databaseUser) throw new Error("problem with function getDatabaseUser");
     console.log(databaseUser);
     res.send({ databaseUser });
   } catch (error: any) {

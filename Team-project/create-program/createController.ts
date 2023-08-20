@@ -1,10 +1,10 @@
-import AllDataModel from "./createModel";
+import { AllData } from "./createModel";
 import { Category } from "./createModel";
 import { program } from "./createModel";
 
 export const getAllData = async (req: any, res: any) => {
   try {
-    const allData = await AllDataModel.find({})
+    const allData = await AllData.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -30,13 +30,13 @@ export const deleteAllData = async (req: any, res: any) => {
     const _id = req.body;
     console.log(_id);
 
-    if (!_id) throw new Error(`uis not found`);
-    const AllDataIndex = await AllDataModel.findByIdAndDelete(_id);
-    const AllData = await AllDataModel.find({})
-      .populate("category")
-      .populate("program")
-      .exec();
-    res.send({ AllData });
+    // if (!_id) throw new Error(`uis not found`);
+    // const AllDataIndex = await AllData.findByIdAndDelete(_id);
+    // const AllData11 = await AllDataIndex.find({})
+    //   .populate("category")
+    //   .populate("program")
+    //   .exec();
+    // res.send({ AllData11 });
   } catch (error) {
     console.log(error);
     res.status(500).send("didn't get AllData to delete");
@@ -80,7 +80,7 @@ export const addProgram = async (req: any, res: any) => {
       })
     );
 
-    const newAllData = await AllDataModel.create({
+    const newAllData = await AllData.create({
       category: req.body.categoryId,
       program: newPrograms.flat(),
     });
@@ -95,9 +95,9 @@ export const addProgram = async (req: any, res: any) => {
 
 export const getProgramData = async (req: any, res: any) => {
   try {
-    const allProgramData = await AllDataModel.find({})
-      .populate("category")
-      .populate("program")
+    const allProgramData = await AllData.find({})
+      .populate("Category")
+      .populate("Program")
       .exec();
     res.send({ allProgramData });
   } catch (error) {
