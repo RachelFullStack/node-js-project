@@ -11,6 +11,5 @@ import {
 router.post("/users/register-user", userRegistration);
 router.post("/users/login-user", userLogin);
 router.get("/users/get-user", getDatabaseUser);
-// router.post("/users/get-database-user", getDatabaseUser);
 
 export default router;

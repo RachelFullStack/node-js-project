@@ -29,9 +29,13 @@ export const userLogin = async (req: any, res: any) => {
     if (!databaseUser) throw new Error("the date didn't arrive");
     console.log(databaseUser);
 
-    const token = jwt.encode({ userId: databaseUser._id }, secret);
+    // const token = jwt.encode({ userId: databaseUser._id }, secret);
 
-    res.cookie("user", token, {
+    // res.cookie("user", token, {
+    //   maxAge: 50000000,
+    //   httpOnly: true,
+    // });
+    res.cookie("user", databaseUser._id, {
       maxAge: 50000000,
       httpOnly: true,
     });
@@ -47,9 +51,10 @@ export const getDatabaseUser = async (req: any, res: any) => {
   try {
     const { user } = req.cookies;
     console.log(user);
-    const decoded = jwt.decode(user, secret);
-    const { userId } = decoded;
-    const databaseUser: any = await User.findById(userId);
+    // const decoded = jwt.decode(user, secret);
+    // const { userId } = decoded;
+    // const databaseUser: any = await User.findById(userId);
+    const databaseUser: any = await User.findById(user);
     if (!databaseUser) throw new Error("problem with function getDatabaseUser");
     console.log(databaseUser);
     res.send({ databaseUser });
