@@ -38,12 +38,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.getSingleWorkout = exports.getWorkouts = exports.addWorkOut = exports.getAllData = exports.getCategories = exports.addCategory = void 0;
 var workoutModel_1 = require("../workout/workoutModel");
+// import Workout from "../workout/workoutModel";
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
-<<<<<<< HEAD
-var workoutModel_2 = require("../workout/workoutModel");
-=======
->>>>>>> c39077ffa213ed25934e915b04b1c6b2490c4704
 // --------------------------------------------------------------------//
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, Days, Equipment, Level, WorkoutTime, Title, newCategory, error_1;
@@ -108,7 +105,7 @@ exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, workoutModel_2["default"].find({})
+                return [4 /*yield*/, workoutModel_1["default"].find({})
                         .populate("category")
                         .populate("program")
                         .exec()];
