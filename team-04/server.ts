@@ -19,9 +19,15 @@ app.use(express.static("./client"));
 app.use("/fitnessApi/", userRouter);
 app.use("/fitnessApi/", workoutRouter);
 
+<<<<<<< HEAD
 const uri: string | undefined = process.env.MONGOOSE_URI + "-Training";
 
 // mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project
+=======
+const uri: string | undefined =
+  " mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project" +
+  "-Training";
+>>>>>>> 86f6b9c2a5400799c1afe02384953a9f7c8411b6
 
 if (uri) {
   mongoose
