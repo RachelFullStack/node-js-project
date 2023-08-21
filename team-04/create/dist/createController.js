@@ -40,7 +40,7 @@ exports.getSingleWorkout = exports.getWorkouts = exports.addWorkOut = exports.ge
 var workoutModel_1 = require("../workout/workoutModel");
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
-var createModel_1 = require("../../Team-project/create-program/createModel");
+var workoutModel_2 = require("../workout/workoutModel");
 // --------------------------------------------------------------------//
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, Days, Equipment, Level, WorkoutTime, Title, newCategory, error_1;
@@ -105,7 +105,7 @@ exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, createModel_1.AllData.find({})
+                return [4 /*yield*/, workoutModel_2["default"].find({})
                         .populate("category")
                         .populate("program")
                         .exec()];

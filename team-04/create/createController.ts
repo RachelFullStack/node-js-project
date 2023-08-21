@@ -1,8 +1,7 @@
 import Workout from "../workout/workoutModel";
 import Category from "../category/categoryModel";
 import Program from "../program/programModel";
-import { AllData } from "../../Team-project/create-program/createModel";
-
+import AllData from "../workout/workoutModel";
 // --------------------------------------------------------------------//
 export const addCategory = async (req: any, res: any) => {
   try {

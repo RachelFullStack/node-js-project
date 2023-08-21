@@ -19,7 +19,7 @@ app.use(express.static("./client"));
 app.use("/fitnessApi/", userRouter);
 app.use("/fitnessApi/", workoutRouter);
 
-const uri: string | undefined = process.env.MONGOOSE_URI + "-Training";
+const uri: string | undefined = process.env.MONGOOSE_URI + "Training";
 
 if (uri) {
   mongoose
