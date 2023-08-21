@@ -111,12 +111,13 @@ const showInUI = () => {
                     ></i>Time:
                   </p>
                    <span class="time"> ${workout.category.WorkoutTime}</span>
-                   <button id="deleteToBtnCard" onClick = "handleDeleteDataCard('${workout._id}')">DELETE</button>
+                
 
                 </li>
             </ul>
         </div>
     </a>
+    <button id="deleteToBtnCard" onClick = "handleDeleteDataCard('${workout._id}')">DELETE</button>
     `;
 
     workoutCardContainer.insertAdjacentHTML("beforeend", html);
@@ -207,8 +208,8 @@ filterBtn.addEventListener("click", filterData);
 //     })
 //       .then((res) => res.json())
 //       .then(({ allData }) => {
-//         showInUI();
-//         // workoutCardContainer.insertAdjacentHTML("beforeend", html);????
+//         // showInUI();
+//         workoutCardContainer.insertAdjacentHTML("beforeend", allData);
 //       })
 //       .catch((error) => {
 //         console.log(error);

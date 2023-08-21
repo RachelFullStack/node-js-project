@@ -113,6 +113,7 @@ hr {
       transition: all 0.3s;
       text-decoration: none;
       color: black;
+      margin-bottom: 62px;
     }
 
     .card:hover {
@@ -183,12 +184,11 @@ hr {
   }
 }
 #deleteToBtnCard {
-  background-color: #3498db;
   color: white;
   cursor: pointer;
   position: relative;
-  top: -312px;
-  left: -214px;
+  top: 361px;
+  left: -194px;
   height: 30px;
   width: 72px;
 }

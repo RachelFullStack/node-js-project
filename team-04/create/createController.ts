@@ -159,9 +159,9 @@ export const getSingleWorkout = async (req: any, res: any) => {
 //     const { _id } = req.body;
 //     console.log(_id);
 //     if (!_id) throw new Error("_ID WAN'T FOUND");
-//     const deleteAllDataFromCard = await AllData.findByIdAndDelete(_id);
-//     const allData = await AllData.find({});
-//     res.send({ ok: true, allData });
+//     const deleteAllDataFromCard = await Category.findByIdAndDelete(_id);
+//     const allData = await Category.find({});
+//     res.send({ ok: true, Category });
 //   } catch (error) {
 //     console.log(error);
 //     res.status(500).send(" error of delete one data card function:", error);
