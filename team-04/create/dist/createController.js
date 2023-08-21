@@ -40,7 +40,7 @@ exports.getSingleWorkout = exports.getWorkouts = exports.addWorkOut = exports.ge
 var workoutModel_1 = require("../workout/workoutModel");
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
-var workoutModel_2 = require("../workout/workoutModel");
+// import AllData from "../workout/workoutModel";
 // --------------------------------------------------------------------//
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, Days, Equipment, Level, WorkoutTime, Title, newCategory, error_1;
@@ -105,7 +105,7 @@ exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, workoutModel_2["default"].find({})
+                return [4 /*yield*/, workoutModel_1["default"].find({})
                         .populate("category")
                         .populate("program")
                         .exec()];
@@ -210,28 +210,26 @@ exports.getSingleWorkout = function (req, res) { return __awaiter(void 0, void 0
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                _a.trys.push([0, 2, , 3]);
                 id = req.params.id;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, workoutModel_1["default"].findById(id)
                         .populate("category")
                         .populate("program")
                         .exec()];
-            case 2:
+            case 1:
                 workout = _a.sent();
                 res.status(200).json({
                     ok: true,
                     message: "Program fetched successfully.",
                     workout: workout
                 });
-                return [3 /*break*/, 4];
-            case 3:
+                return [3 /*break*/, 3];
+            case 2:
                 error_6 = _a.sent();
                 console.log(error_6);
                 res.status(500).send("error");
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
@@ -245,10 +243,10 @@ exports.getSingleWorkout = function (req, res) { return __awaiter(void 0, void 0
 //     if (!_id) throw new Error("_ID WAN'T FOUND");
 //     if (!title) throw new Error("program name WAN'T FOUND");
 //     if (title)
-//       await AllData.findByIdAndUpdate(_id, {
+//       await Workout.findByIdAndUpdate(_id, {
 //         title: title,
 //       });
-//     const allData = await AllData.find({});
+//     const allData = await Workout.find({});
 //     res.send({ ok: true, allData });
 //   } catch (error) {
 //     console.log(error);
