@@ -38,4 +38,7 @@
 }
 .navbar button:hover {
   transform: scale(0.9);
+}
+.navbar .hide {
+  display: none;
 }/*# sourceMappingURL=navbar.css.map */

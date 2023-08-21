@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(255, 247, 237);
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+  padding: 20px;
+}
+
+hr {
+  width: 70%;
+  margin: 40px auto;
+  border: 1px solid black;
+}
+
+.timer__display {
+  font-size: 3rem;
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.timer__controls {
+  display: flex;
+  gap: 10px;
+}
+
+.timer__button {
+  padding: 8px 15px;
+  background-color: #2e2eff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.timer__button:hover {
+  background-color: #f05d9a;
+}
+
+.timer__button:active {
+  background-color: #f05d9a;
+}
+
+.Program_info {
+  margin-left: auto;
+}
+
+.workout-table {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #2e2eff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+img {
+  width: 100px;
+  height: auto;
+}
+
+.completeButton {
+  display: block;
+  margin: 20px auto; /* Center the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2e2eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.completeButton.completed {
+  background-color: #f05d9a;
+  pointer-events: none;
+}
+
+.completeButton:hover {
+  background-color: #f05d9a;
+  transform: scale(1.05);
+}
+
+.renderProgramInfo {
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 1px 0px 10px 3px rgba(211, 209, 209, 0.75);
+  padding: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.card {
+  width: 300px;
+  margin: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: black;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-header h2 {
+  text-align: center;
+  color: #2e2eff;
+  font-size: 25px;
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.card-header img {
+  width: 100%;
+  height: auto;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-body h3 {
+  font-size: 20px;
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.card-body p {
+  font-size: 14px;
+  color: #777;
+}
+
+.card-body ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  margin: auto;
+}
+
+.card-body ul li {
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.card-body ul li i {
+  margin-right: 10px;
+  color: #333;
+}
+
+/* Button styles */
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px;
+  color: #2e2eff;
+}/*# sourceMappingURL=style.css.map */
