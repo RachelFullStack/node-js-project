@@ -1,5 +1,4 @@
-//
-// // -------------------------------------------------------------------------//
+// ----------------------------------------------------------------------
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,38 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-function handleShowUser(eve) {
-    return __awaiter(this, void 0, void 0, function () {
-        var response, data, databaseUser, userHtml, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, fetch("/api/users/get-user")];
-                case 1:
-                    response = _a.sent();
-                    return [4 /*yield*/, response.json()];
-                case 2:
-                    data = _a.sent();
-                    console.log("data", data);
-                    databaseUser = data.databaseUser;
-                    userHtml = document.querySelector("#userName");
-                    if (!databaseUser)
-                        throw new Error("problem with Showing Database User function");
-                    if (!userHtml)
-                        throw new Error("No user element on DOM");
-                    userHtml.innerHTML = databaseUser.userName;
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    console.log(error_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-}
-// ----------------------------------------------------------------------
 // Signup/register
 function register(eve) {
     eve.preventDefault();
@@ -136,6 +103,38 @@ function login(eve) {
     catch (error) {
         console.error(error);
     }
+}
+// // -------------------------------------------------------------------------//
+function handleShowUser(eve) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, data, databaseUser, userHtml, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, fetch("/api/users/get-user")];
+                case 1:
+                    response = _a.sent();
+                    return [4 /*yield*/, response.json()];
+                case 2:
+                    data = _a.sent();
+                    console.log("data", data);
+                    databaseUser = data.databaseUser;
+                    userHtml = document.querySelector("#userName");
+                    if (!databaseUser)
+                        throw new Error("problem with Showing Database User function");
+                    if (!userHtml)
+                        throw new Error("No user element on DOM");
+                    userHtml.innerHTML = databaseUser.userName;
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_1 = _a.sent();
+                    console.log(error_1);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
 }
 // ------------------------------------------------------------------------------------
 // Signup
