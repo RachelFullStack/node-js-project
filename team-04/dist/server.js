@@ -6,6 +6,7 @@ var dotenv = require("dotenv");
 var usersRoute_1 = require("./users/usersRoute");
 var createRoute_1 = require("./create/createRoute");
 var cookie_parser_1 = require("cookie-parser");
+// import cors from "cors";
 // import jwt from "jwt-simple";
 // const secret: string = process.env.JWT_SECRET as string;
 dotenv.config();
@@ -24,7 +25,7 @@ if (uri) {
 else {
     console.log("No URI");
 }
-var myPort = process.env.PORT || 3000;
-app.listen(myPort, function () {
+var myPort = 3000;
+app.listen(3000, function () {
     console.log("server listen in http://localhost:" + myPort);
 });

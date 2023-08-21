@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 import userRouter from "./users/usersRoute";
 import workoutRouter from "./create/createRoute";
 import cookieParser from "cookie-parser";
-import cors from "cors";
+// import cors from "cors";
 
 // import jwt from "jwt-simple";
 // const secret: string = process.env.JWT_SECRET as string;
@@ -30,7 +30,7 @@ if (uri) {
   console.log("No URI");
 }
 
-const myPort = process.env.PORT || 3000;
-app.listen(myPort, () => {
+const myPort = 3000;
+app.listen(3000, () => {
   console.log(`server listen in http://localhost:${myPort}`);
 });
