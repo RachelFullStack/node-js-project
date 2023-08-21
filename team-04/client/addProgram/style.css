@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #fff7ed;
+  background-color: rgb(255, 247, 237);
 }
 
 #welcome-heading {
@@ -163,4 +163,4 @@ img {
 #submit-button:hover {
   transform: scale(0.98);
   transition: 0.2s ease-in-out;
-}
+}/*# sourceMappingURL=style.css.map */
