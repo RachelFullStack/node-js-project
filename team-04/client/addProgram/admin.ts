@@ -176,7 +176,7 @@ const submitData = async () => {
       console.log(id);
 
       await addProgram(id, programData);
-      // window.location.href = "./welcome.html";
+      window.location.href = "../home/home.html";
     }
   } catch (error) {
     console.log(error);

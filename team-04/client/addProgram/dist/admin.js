@@ -187,6 +187,7 @@ var submitData = function () { return __awaiter(_this, void 0, void 0, function 
                 return [4 /*yield*/, addProgram(id, programData)];
             case 2:
                 _a.sent();
+                window.location.href = "../home/home.html";
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
