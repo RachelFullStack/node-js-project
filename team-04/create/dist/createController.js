@@ -40,7 +40,6 @@ exports.getSingleWorkout = exports.getWorkouts = exports.addWorkOut = exports.ge
 var workoutModel_1 = require("../workout/workoutModel");
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
-// import AllData from "../workout/workoutModel";
 // --------------------------------------------------------------------//
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, Days, Equipment, Level, WorkoutTime, Title, newCategory, error_1;
