@@ -3,6 +3,7 @@ import Category from "../category/categoryModel";
 import Program from "../program/programModel";
 import { AllData } from "../../Team-project/create-program/createModel";
 
+// --------------------------------------------------------------------//
 export const addCategory = async (req: any, res: any) => {
   try {
     console.log(req.body);
@@ -29,6 +30,7 @@ export const addCategory = async (req: any, res: any) => {
   }
 };
 
+// --------------------------------------------------------------------//
 export const getCategories = async (req: any, res: any) => {
   try {
     const category = await Category.find({});
@@ -39,6 +41,7 @@ export const getCategories = async (req: any, res: any) => {
   }
 };
 
+// --------------------------------------------------------------------//
 export const getAllData = async (req: any, res: any) => {
   try {
     const allData = await AllData.find({})
@@ -52,6 +55,7 @@ export const getAllData = async (req: any, res: any) => {
   }
 };
 
+// --------------------------------------------------------------------//
 export const addWorkOut = async (req: any, res: any) => {
   try {
     const { programData } = req.body;
@@ -69,6 +73,7 @@ export const addWorkOut = async (req: any, res: any) => {
       })
     );
 
+    // --------------------------------------------------------------------//
     const newAllData = await Workout.create({
       category: req.body.CategoryId,
       program: newPrograms.flat(),
@@ -87,6 +92,7 @@ export const addWorkOut = async (req: any, res: any) => {
   }
 };
 
+// --------------------------------------------------------------------//
 export const getWorkouts = async (req: any, res: any) => {
   try {
     const allProgramData = await Workout.find({})
@@ -104,6 +110,7 @@ export const getWorkouts = async (req: any, res: any) => {
   }
 };
 
+// --------------------------------------------------------------------//
 export const getSingleWorkout = async (req: any, res: any) => {
   const { id } = req.params;
 

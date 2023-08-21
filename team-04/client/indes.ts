@@ -79,7 +79,7 @@
 
 // ----------------------------------------------------------------------
 
-// Signup
+// Signup/register
 function register(eve: any) {
   eve.preventDefault();
   try {

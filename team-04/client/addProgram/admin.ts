@@ -2,20 +2,18 @@ const maxTables = 5;
 let tableCounter = 0;
 let fill = 0;
 
-// variables
 const addButton = document.getElementById("add-table-button");
 const submitButton = document.getElementById("submit-button");
 
-// filter variables
-let title = document.getElementById("title") as HTMLSelectElement;
-let levelC = document.getElementById("filter-level") as HTMLSelectElement;
-let dayC = document.getElementById("filter-days") as HTMLSelectElement;
-let equipmenC = document.getElementById(
+let titleA = document.getElementById("title") as HTMLSelectElement;
+let levelB = document.getElementById("filter-level") as HTMLSelectElement;
+let daysC = document.getElementById("filter-days") as HTMLSelectElement;
+let equipmentD = document.getElementById(
   "filter-equipment"
 ) as HTMLSelectElement;
-let timC = document.getElementById("filter-time") as HTMLSelectElement;
+let timeE = document.getElementById("filter-time") as HTMLSelectElement;
 
-// Function for adding table
+// add table
 const addTable = () => {
   if (tableCounter < maxTables) {
     tableCounter++;
@@ -68,18 +66,17 @@ const addTable = () => {
   }
 };
 
-// Function for adding category
+// add category
 const addCategory = async () => {
   const categoryObj = {
-    Title: title.value,
-    Level: levelC.value,
-    Days: dayC.value,
-    Equipment: equipmenC.value,
-    WorkoutTime: timC.value,
+    Title: titleA.value,
+    Level: levelB.value,
+    Days: daysC.value,
+    Equipment: equipmentD.value,
+    WorkoutTime: timeE.value,
   };
   console.log(categoryObj);
 
-  // const api = "http://localhost:3000/fitnessApi/workout/addCategory";
   const response = await fetch("/fitnessApi/workout/addCategory", {
     method: "POST",
     headers: {
@@ -94,7 +91,7 @@ const addCategory = async () => {
   return result.id;
 };
 
-// Function for adding program
+// add program
 const addProgram = async (id: string, programData: any) => {
   const programObj = {
     CategoryId: id,
@@ -121,7 +118,7 @@ const addProgram = async (id: string, programData: any) => {
   }
 };
 
-// Function for submitting data
+// to fetch the data that submitted
 const submitData = async () => {
   try {
     const programForm = document.getElementById(
@@ -170,7 +167,7 @@ const submitData = async () => {
           tableData.push({ Exercise, image, sets, reps });
         }
 
-        programData.push(tableData); //[[{},{}]]
+        programData.push(tableData);
       }
       console.log(programData);
 

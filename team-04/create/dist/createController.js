@@ -41,6 +41,7 @@ var workoutModel_1 = require("../workout/workoutModel");
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
 var createModel_1 = require("../../Team-project/create-program/createModel");
+// --------------------------------------------------------------------//
 exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, Days, Equipment, Level, WorkoutTime, Title, newCategory, error_1;
     return __generator(this, function (_b) {
@@ -76,6 +77,7 @@ exports.addCategory = function (req, res) { return __awaiter(void 0, void 0, voi
         }
     });
 }); };
+// --------------------------------------------------------------------//
 exports.getCategories = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var category, error_2;
     return __generator(this, function (_a) {
@@ -96,6 +98,7 @@ exports.getCategories = function (req, res) { return __awaiter(void 0, void 0, v
         }
     });
 }); };
+// --------------------------------------------------------------------//
 exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var allData, error_3;
     return __generator(this, function (_a) {
@@ -119,6 +122,7 @@ exports.getAllData = function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); };
+// --------------------------------------------------------------------//
 exports.addWorkOut = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var programData, newPrograms, newAllData, error_4;
     return __generator(this, function (_a) {
@@ -172,6 +176,7 @@ exports.addWorkOut = function (req, res) { return __awaiter(void 0, void 0, void
         }
     });
 }); };
+// --------------------------------------------------------------------//
 exports.getWorkouts = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var allProgramData, error_5;
     return __generator(this, function (_a) {
@@ -199,6 +204,7 @@ exports.getWorkouts = function (req, res) { return __awaiter(void 0, void 0, voi
         }
     });
 }); };
+// --------------------------------------------------------------------//
 exports.getSingleWorkout = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, workout, error_6;
     return __generator(this, function (_a) {

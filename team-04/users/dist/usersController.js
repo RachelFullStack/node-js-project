@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.getUser = exports.login = exports.register = void 0;
 var usersModel_1 = require("./usersModel");
-// Registration
+// Register
 exports.register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, userName, userPassword, user, databaseUser, error_1;
     return __generator(this, function (_b) {
@@ -98,7 +98,6 @@ exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                     });
                 }
                 else {
-                    // 3. if Found, send response
                     // const token = jwt.encode({ userId: databaseUser._id }, secret);
                     // res.cookie("user", token, {
                     //   maxAge: 50000000,

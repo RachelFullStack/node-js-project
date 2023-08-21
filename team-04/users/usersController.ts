@@ -1,6 +1,6 @@
 import User from "./usersModel";
 
-// Registration
+// Register
 export const register = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
@@ -33,6 +33,7 @@ export const register = async (req: any, res: any) => {
   }
 };
 
+
 // Login
 export const login = async (req: any, res: any) => {
   try {
@@ -46,7 +47,7 @@ export const login = async (req: any, res: any) => {
         error: "Failed to login. User not found.",
       });
     } else {
-      // 3. if Found, send response
+
       // const token = jwt.encode({ userId: databaseUser._id }, secret);
       // res.cookie("user", token, {
       //   maxAge: 50000000,
@@ -68,6 +69,7 @@ export const login = async (req: any, res: any) => {
     res.status(500).send({ error: error.message });
   }
 };
+
 
 // Get User
 export const getUser = async (req: any, res: any) => {

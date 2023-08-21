@@ -45,7 +45,6 @@ var images = [
     "dumbell-4.webp",
     "dumbell-5.jpeg",
 ];
-// DOM elements
 var workoutCardContainer = document.querySelector(".card-container");
 var filterBtn = document.getElementById("apply-filter-button");
 var levels = document.getElementById("filter-level");
@@ -79,7 +78,7 @@ var getUserName = function () { return __awaiter(_this, void 0, void 0, function
     });
 }); };
 getUserName();
-// Getting all workouts
+// Getting all workouts:
 var getWorkouts = function () { return __awaiter(_this, void 0, void 0, function () {
     var response, data, err_1;
     return __generator(this, function (_a) {
@@ -106,7 +105,7 @@ var getWorkouts = function () { return __awaiter(_this, void 0, void 0, function
         }
     });
 }); };
-// function to show workouts in UI
+// function to render workouts to screen:
 var showInUI = function () {
     workoutCardContainer.innerHTML = "";
     if (filteredWorkouts.length === 0) {
@@ -122,7 +121,7 @@ var showInUI = function () {
     });
 };
 getWorkouts();
-// function to filter data
+// function to the user: filter program data
 var filterData = function (e) {
     console.log("ok,");
     e.preventDefault();

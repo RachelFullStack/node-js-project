@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-/*
-This is a program schema of the program
-*/
 const ProgramSchema = new mongoose.Schema({
   Exercise: String,
   image: String,

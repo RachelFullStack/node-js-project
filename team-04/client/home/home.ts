@@ -10,7 +10,6 @@ const images = [
   "dumbell-5.jpeg",
 ];
 
-// DOM elements
 const workoutCardContainer = document.querySelector(
   ".card-container"
 ) as HTMLDivElement;
@@ -39,13 +38,14 @@ const getUserName = async () => {
   if (!us) {
   } else userNameE.innerHTML = us;
   if (rl === "admin") {
+    // document.getElementById("admin")?.style.style;
     const adminE = document.getElementById("admin") as HTMLAnchorElement;
     if (adminE) adminE.style.display = "block";
   }
 };
 getUserName();
 
-// Getting all workouts
+// Getting all workouts:
 const getWorkouts = async () => {
   try {
     const response = await fetch("/fitnessApi/workout/getWorkouts");
@@ -60,7 +60,7 @@ const getWorkouts = async () => {
   }
 };
 
-// function to show workouts in UI
+// function to render workouts to screen:
 const showInUI = () => {
   workoutCardContainer.innerHTML = "";
   if (filteredWorkouts.length === 0) {
@@ -122,7 +122,7 @@ const showInUI = () => {
 };
 getWorkouts();
 
-// function to filter data
+// function to the user: filter program data
 const filterData = (e: any) => {
   console.log("ok,");
   e.preventDefault();

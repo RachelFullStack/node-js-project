@@ -72,7 +72,7 @@
 //   }
 // }
 // ----------------------------------------------------------------------
-// Signup
+// Signup/register
 function register(eve) {
     eve.preventDefault();
     try {

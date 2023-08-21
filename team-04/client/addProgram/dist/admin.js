@@ -38,16 +38,14 @@ var _this = this;
 var maxTables = 5;
 var tableCounter = 0;
 var fill = 0;
-// variables
 var addButton = document.getElementById("add-table-button");
 var submitButton = document.getElementById("submit-button");
-// filter variables
-var title = document.getElementById("title");
-var levelC = document.getElementById("filter-level");
-var dayC = document.getElementById("filter-days");
-var equipmenC = document.getElementById("filter-equipment");
-var timC = document.getElementById("filter-time");
-// Function for adding table
+var titleA = document.getElementById("title");
+var levelB = document.getElementById("filter-level");
+var daysC = document.getElementById("filter-days");
+var equipmentD = document.getElementById("filter-equipment");
+var timeE = document.getElementById("filter-time");
+// add table
 var addTable = function () {
     if (tableCounter < maxTables) {
         tableCounter++;
@@ -92,18 +90,18 @@ var addTable = function () {
         alert("Maximum number of tables reached.");
     }
 };
-// Function for adding category
+// add category
 var addCategory = function () { return __awaiter(_this, void 0, void 0, function () {
     var categoryObj, response, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 categoryObj = {
-                    Title: title.value,
-                    Level: levelC.value,
-                    Days: dayC.value,
-                    Equipment: equipmenC.value,
-                    WorkoutTime: timC.value
+                    Title: titleA.value,
+                    Level: levelB.value,
+                    Days: daysC.value,
+                    Equipment: equipmentD.value,
+                    WorkoutTime: timeE.value
                 };
                 console.log(categoryObj);
                 return [4 /*yield*/, fetch("/fitnessApi/workout/addCategory", {
@@ -123,7 +121,7 @@ var addCategory = function () { return __awaiter(_this, void 0, void 0, function
         }
     });
 }); };
-// Function for adding program
+// add program
 var addProgram = function (id, programData) { return __awaiter(_this, void 0, void 0, function () {
     var programObj, response, result;
     return __generator(this, function (_a) {
@@ -155,7 +153,7 @@ var addProgram = function (id, programData) { return __awaiter(_this, void 0, vo
         }
     });
 }); };
-// Function for submitting data
+// to fetch the data that submitted
 var submitData = function () { return __awaiter(_this, void 0, void 0, function () {
     var programForm, programData, tableIndex, tableData, i, exerciseInput, Exercise, image111, image, setsInput, sets, repsInput, reps, id, error_1;
     return __generator(this, function (_a) {
@@ -179,7 +177,7 @@ var submitData = function () { return __awaiter(_this, void 0, void 0, function 
                         reps = repsInput.value;
                         tableData.push({ Exercise: Exercise, image: image, sets: sets, reps: reps });
                     }
-                    programData.push(tableData); //[[{},{}]]
+                    programData.push(tableData);
                 }
                 console.log(programData);
                 return [4 /*yield*/, addCategory()];
