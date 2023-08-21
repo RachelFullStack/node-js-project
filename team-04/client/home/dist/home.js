@@ -52,7 +52,7 @@ var days = document.getElementById("filter-days");
 var equipment = document.getElementById("filter-equipment");
 var time = document.getElementById("filter-time");
 var userNameE = document.getElementById("userName");
-//  function to get user role and name
+// to get user role and name
 var getUserName = function () { return __awaiter(_this, void 0, void 0, function () {
     var params, userName, role, us, rl, adminE;
     return __generator(this, function (_a) {
@@ -116,7 +116,7 @@ var showInUI = function () {
         console.log(workout);
         var imgIndex = Math.floor(Math.random() * 5);
         console.log(imgIndex);
-        var html = "\n        <a class=\"card\" href = \"/userPrograms/userProgram.html?id=" + workout._id + "\">\n        <div class=\"card-header\">\n            <img src=\"/images/" + images[imgIndex] + "\" alt = \"Workout Image\" />\n        </div>\n        <div class=\"card-body\">\n            <h3>" + workout.category.Title + "</h3>\n            <ul>\n                <li>\n                  <p><i class=\"fas fa-signal\"\n                      style=\"color: blue;\"\n                    ></i>Level:</p>\n                   <span class=\"level\">" + workout.category.Level + "</span>\n                  </li>\n                  \n                <li>\n                  <p>\n                    <i class=\"fas fa-calendar-alt\" style=\"color: green;\"></i> Days:\n                  </p>\n                  <span class=\"days\">" + workout.category.Days + " Days a week</span>\n                </li>\n\n                <li>\n                  <p>\n                    <i class=\"fas fa-dumbbell\"\n                      style=\"color: red;\"\n                    ></i>Equipment:\n                  </p> \n                  <span class=\"equipment\"\n                    \n                  >" + workout.category.Equipment + "</span></li>\n                <li>\n                  <p>\n                    <i class=\"fas fa-clock\"\n                      style=\"color: orange;\"\n                    ></i>Time:\n                  </p>\n                   <span class=\"time\"> " + workout.category.WorkoutTime + "</span>\n                </li>\n            </ul>\n        </div>\n    </a>\n    ";
+        var html = "\n        <a class=\"card\" href = \"/userPrograms/userProgram.html?id=" + workout._id + "\">\n        <div class=\"card-header\">\n            <img src=\"/images/" + images[imgIndex] + "\" alt = \"Workout Image\" />\n        </div>\n        <div class=\"card-body\">\n            <h3>" + workout.category.Title + "</h3>\n            <ul>\n                <li>\n                  <p><i class=\"fas fa-signal\"\n                      style=\"color: blue;\"\n                    ></i>Level:</p>\n                   <span class=\"level\">" + workout.category.Level + "</span>\n                  </li>\n                  \n                <li>\n                  <p>\n                    <i class=\"fas fa-calendar-alt\" style=\"color: green;\"></i> Days:\n                  </p>\n                  <span class=\"days\">" + workout.category.Days + " Days a week</span>\n                </li>\n\n                <li>\n                  <p>\n                    <i class=\"fas fa-dumbbell\"\n                      style=\"color: red;\"\n                    ></i>Equipment:\n                  </p> \n                  <span class=\"equipment\"\n                    \n                  >" + workout.category.Equipment + "</span></li>\n                <li>\n                  <p>\n                    <i class=\"fas fa-clock\"\n                      style=\"color: orange;\"\n                    ></i>Time:\n                  </p>\n                   <span class=\"time\"> " + workout.category.WorkoutTime + "</span>\n                   <button id=\"deleteToBtnCard\" onClick = \"handleDeleteDataCard('" + workout._id + "')\">DELETE</button>\n\n                </li>\n            </ul>\n        </div>\n    </a>\n    ";
         workoutCardContainer.insertAdjacentHTML("beforeend", html);
     });
 };
@@ -166,3 +166,50 @@ var filterData = function (e) {
     showInUI();
 };
 filterBtn.addEventListener("click", filterData);
+// Edit;
+// ---------------------------------------------------
+// function handleEditProgramName(eve, _id: string) {
+//   try {
+//     eve.preventDefault();
+//     console.log("_id", _id);
+//     const title = eve.target.textContent;
+//     fetch("/fitnessApi/workout/editProgramName", {
+//       method: "PATCH",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         title,
+//         _id,
+//       }),
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+// // Delete
+// // ---------------------------------------------------
+// function handleDeleteDataCard(_id: string) {
+//   try {
+//     console.log("_id", _id);
+//     fetch("/fitnessApi/workout/deleteDataCard", {
+//       method: "DELETE",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ _id }),
+//     })
+//       .then((res) => res.json())
+//       .then(({ allData }) => {
+//         showInUI();
+//         // workoutCardContainer.insertAdjacentHTML("beforeend", html);????
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }

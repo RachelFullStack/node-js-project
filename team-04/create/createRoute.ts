@@ -5,6 +5,8 @@ import {
   addCategory,
   getSingleWorkout,
   getWorkouts,
+  // editProgramName,
+  // deleteDataCard,
 } from "./createController";
 
 const workoutRouter = express.Router();
@@ -15,5 +17,7 @@ workoutRouter
   .get("/workout/getWorkouts", getWorkouts)
   .post("/workout/addWorkout", addWorkOut)
   .get("/workout/getWorkout/:id", getSingleWorkout);
+// .patch("/workout/editProgramName", editProgramName)
+// .delete("/workout/deleteDataCard", deleteDataCard);
 
 export default workoutRouter;

@@ -130,3 +130,40 @@ export const getSingleWorkout = async (req: any, res: any) => {
     res.status(500).send("error");
   }
 };
+
+// edit program name
+// -------------------------------
+// export const editProgramName = async (req: any, res: any) => {
+//   try {
+//     const { _id, title } = req.body;
+//     console.log(title);
+//     console.log(_id);
+//     if (!_id) throw new Error("_ID WAN'T FOUND");
+//     if (!title) throw new Error("program name WAN'T FOUND");
+//     if (title)
+//       await AllData.findByIdAndUpdate(_id, {
+//         title: title,
+//       });
+//     const allData = await AllData.find({});
+//     res.send({ ok: true, allData });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(" error of Edit Program Name function:");
+//   }
+// };
+
+// // delete program
+// // -------------------------------
+// export const deleteDataCard = async (req: any, res: any) => {
+//   try {
+//     const { _id } = req.body;
+//     console.log(_id);
+//     if (!_id) throw new Error("_ID WAN'T FOUND");
+//     const deleteAllDataFromCard = await AllData.findByIdAndDelete(_id);
+//     const allData = await AllData.find({});
+//     res.send({ ok: true, allData });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send(" error of delete one data card function:", error);
+//   }
+// };

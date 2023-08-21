@@ -24,7 +24,7 @@ let equipment = document.getElementById(
 let time = document.getElementById("filter-time") as HTMLSelectElement;
 let userNameE = document.getElementById("userName") as HTMLSpanElement;
 
-//  function to get user role and name
+// to get user role and name
 const getUserName = async () => {
   const params = new URLSearchParams(window.location.search);
   const userName = params.get("userName");
@@ -111,6 +111,8 @@ const showInUI = () => {
                     ></i>Time:
                   </p>
                    <span class="time"> ${workout.category.WorkoutTime}</span>
+                   <button id="deleteToBtnCard" onClick = "handleDeleteDataCard('${workout._id}')">DELETE</button>
+
                 </li>
             </ul>
         </div>
@@ -166,3 +168,52 @@ const filterData = (e: any) => {
 };
 
 filterBtn.addEventListener("click", filterData);
+
+// Edit;
+// ---------------------------------------------------
+
+// function handleEditProgramName(eve, _id: string) {
+//   try {
+//     eve.preventDefault();
+//     console.log("_id", _id);
+//     const title = eve.target.textContent;
+//     fetch("/fitnessApi/workout/editProgramName", {
+//       method: "PATCH",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         title,
+//         _id,
+//       }),
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+// // Delete
+// // ---------------------------------------------------
+// function handleDeleteDataCard(_id: string) {
+//   try {
+//     console.log("_id", _id);
+//     fetch("/fitnessApi/workout/deleteDataCard", {
+//       method: "DELETE",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ _id }),
+//     })
+//       .then((res) => res.json())
+//       .then(({ allData }) => {
+//         showInUI();
+//         // workoutCardContainer.insertAdjacentHTML("beforeend", html);????
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
