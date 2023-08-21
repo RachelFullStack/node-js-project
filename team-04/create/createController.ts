@@ -1,7 +1,7 @@
 import Workout from "../workout/workoutModel";
 import Category from "../category/categoryModel";
 import Program from "../program/programModel";
-// import AllData from "../workout/workoutModel";
+import AllData from "../workout/workoutModel";
 
 // --------------------------------------------------------------------//
 export const addCategory = async (req: any, res: any) => {
@@ -44,7 +44,7 @@ export const getCategories = async (req: any, res: any) => {
 // --------------------------------------------------------------------//
 export const getAllData = async (req: any, res: any) => {
   try {
-    const allData = await Workout.find({})
+    const allData = await AllData.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -112,8 +112,9 @@ export const getWorkouts = async (req: any, res: any) => {
 
 // --------------------------------------------------------------------//
 export const getSingleWorkout = async (req: any, res: any) => {
+  const { id } = req.params;
+
   try {
-    const { id } = req.params;
     const workout = await Workout.findById(id)
       .populate("category")
       .populate("program")
@@ -140,10 +141,10 @@ export const getSingleWorkout = async (req: any, res: any) => {
 //     if (!_id) throw new Error("_ID WAN'T FOUND");
 //     if (!title) throw new Error("program name WAN'T FOUND");
 //     if (title)
-//       await Workout.findByIdAndUpdate(_id, {
+//       await AllData.findByIdAndUpdate(_id, {
 //         title: title,
 //       });
-//     const allData = await Workout.find({});
+//     const allData = await AllData.find({});
 //     res.send({ ok: true, allData });
 //   } catch (error) {
 //     console.log(error);
