@@ -36,60 +36,85 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getDatabaseUser = exports.userLogin = exports.userRegistration = void 0;
+exports.getUser = exports.login = exports.register = void 0;
 var usersModel_1 = require("./usersModel");
-// ----------------------------------------------------------------------
-exports.userRegistration = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, userPassword, databaseUser, error_1;
+// Registration
+exports.register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, userName, userPassword, user, databaseUser, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
+                _b.trys.push([0, 3, , 4]);
                 _a = req.body, userName = _a.userName, userPassword = _a.userPassword;
-                console.log("userName: " + userName + ", userPassword: " + userPassword);
+                return [4 /*yield*/, usersModel_1["default"].findOne({ userName: userName })];
+            case 1:
+                user = _b.sent();
+                if (user) {
+                    console.log(user);
+                    res.status(500).json({
+                        ok: false,
+                        error: "User already exists."
+                    });
+                    return [2 /*return*/];
+                }
                 return [4 /*yield*/, usersModel_1["default"].create({
                         userName: userName,
                         userPassword: userPassword
                     })];
-            case 1:
-                databaseUser = _b.sent();
-                console.log("databaseUser: " + databaseUser);
-                res.status(200).send({ ok: true });
-                return [3 /*break*/, 3];
             case 2:
+                databaseUser = _b.sent();
+                res.status(200).json({
+                    ok: true,
+                    message: "User created successfully.",
+                    databaseUser: databaseUser
+                });
+                return [3 /*break*/, 4];
+            case 3:
                 error_1 = _b.sent();
-                console.log(error_1);
-                res.status(500).send("error in register");
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                res.status(500).json({
+                    ok: false,
+                    error: "Failed to create user."
+                });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
-// ----------------------------------------------------------------------
-exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+// Login
+exports.login = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, userName, userPassword, databaseUser, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
                 _a = req.body, userName = _a.userName, userPassword = _a.userPassword;
-                console.log(userName, userPassword);
                 return [4 /*yield*/, usersModel_1["default"].findOne({ userName: userName, userPassword: userPassword })];
             case 1:
                 databaseUser = _b.sent();
-                if (!databaseUser)
-                    throw new Error("the date didn't arrive");
-                console.log(databaseUser);
-                // const token = jwt.encode({ userId: databaseUser._id }, secret);
-                // res.cookie("user", token, {
-                //   maxAge: 50000000,
-                //   httpOnly: true,
-                // });
-                res.cookie("user", databaseUser._id, {
-                    maxAge: 50000000,
-                    httpOnly: true
-                });
-                res.status(200).send({ ok: true });
+                if (!databaseUser) {
+                    res.status(500).json({
+                        ok: false,
+                        error: "Failed to login. User not found."
+                    });
+                }
+                else {
+                    // 3. if Found, send response
+                    // const token = jwt.encode({ userId: databaseUser._id }, secret);
+                    // res.cookie("user", token, {
+                    //   maxAge: 50000000,
+                    //   httpOnly: true,
+                    // });
+                    res.cookie("user", databaseUser._id, {
+                        maxAge: 50000000,
+                        httpOnly: true
+                    });
+                    res.status(200).json({
+                        ok: true,
+                        message: "User logged in successfully.",
+                        userName: databaseUser.userName,
+                        role: databaseUser.role
+                    });
+                }
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _b.sent();
@@ -100,8 +125,8 @@ exports.userLogin = function (req, res) { return __awaiter(void 0, void 0, void 
         }
     });
 }); };
-// ----------------------------------------------------------------------
-exports.getDatabaseUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+// Get User
+exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var user, databaseUser, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {

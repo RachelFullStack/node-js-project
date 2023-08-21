@@ -6,7 +6,9 @@ import userRouter from "./users/usersRoute";
 import createRouter from "./create-program/createRoute";
 import cookieParser from "cookie-parser";
 import User from "./users/usersModel";
+import jwt from "jwt-simple";
 
+const secret: string = process.env.JWT_SECRET as string;
 dotenv.config();
 
 const app = express();
@@ -27,9 +29,6 @@ if (uri) {
 } else {
   console.log("No URI");
 }
-
-// const UserSchema = new Schema({ name: String, src: String });
-// const UserModel = mongoose.model("users", UserSchema);
 
 // app.get("/api/user-get", async (req: any, res: any) => {
 //   try {

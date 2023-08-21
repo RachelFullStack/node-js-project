@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="./navbar-style/dist/navbar.css" />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <script src="./dist/indes.js" defer></script>
+  </head>
+  <body class="register-body">
+    <nav class="navbar">
+      <h1 class="navbar__title">Fitness Tracker</h1>
+      <ul class="navbar__list">
+        <!-- <li class="navbar__item">
+          <a href="./index.html" class="navbar__link">Home</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./create.html" class="navbar__link">Admin</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./welcome.html" class="navbar__link">All Programs</a>
+        </li>
+        <li class="navbar__item">
+          <a href="./program.html" class="navbar__link">My Program</a>
+        </li> -->
+        <a href="./login/login.html"><button>Login</button></a>
+      </ul>
+    </nav>
+
+    <div class = "container">
+      <form onsubmit="register(event)">
+        <h1>Register YourSelf</h1>
+        <input
+          type="text"
+          name="userName"
+          placeholder="Name"
+          required
+        />
+        <input
+          type="password"
+          name="userPassword"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
+
+  </body>
+</html>

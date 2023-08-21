@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://wallpapermemory.com/uploads/692/gym-wallpaper-hd-1920x1280-301986.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.4);
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  margin-top: 180px;
+  border-radius: 20px;
+  padding: 30px;
+}
+.container h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  gap: 10px;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+}
+form input {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  font-size: 17px;
+}
+form button {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 15px;
+  width: 50%;
+  align-self: flex-start;
+  padding: 10px;
+  margin-left: -10px;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+form button:hover {
+  transform: scale(0.9);
+  transition: 0.3s;
+  background-color: white;
+  color: black;
+}/*# sourceMappingURL=login.css.map */

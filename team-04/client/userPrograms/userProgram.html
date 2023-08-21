@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/global/navbar.css" />
+
+    <!-- <script src="../Program/dist/program.js" defer></script> -->
+    <script src="/dist/timer.js" defer></script>
+    <script src="/dist/userProgram.js" defer></script>
+    <title>Program page</title>
+  </head>
+  <body onload="handleShowUser()">
+    <nav class="navbar">
+      <h1 class="navbar__title">Fitness Tracker</h1>
+      <ul class="navbar__list">
+        <li class="navbar__item">
+          <a href="../home/home.html" class="navbar__link">Home</a>
+        </li>
+        <a href="../login/dist/login.css"
+          ><button style="color: white; background-color: red">
+            LogOut
+          </button></a
+        >
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="renderProgramInfo"></div>
+
+      <div class="timer">
+        <div class="timer__display" id="timerDisplay">00:00</div>
+        <div class="timer__controls">
+          <button class="timer__button" id="startButton">Start</button>
+          <button class="timer__button" id="pauseButton">Pause</button>
+          <button class="timer__button" id="resetButton">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <h1>Workout Details</h1>
+    <div class="workout-table">
+      <table>
+        <h3>Your workout</h3>
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Image</th>
+            <th>Sets</th>
+            <th>Reps</th>
+          </tr>
+        </thead>
+        <tbody id="renderWorkoutTable"></tbody>
+      </table>
+      <br />
+      <button id="completeButton" class="completeButton">done!</button>
+    </div>
+  </body>
+</html>
+
+<!--   <body onload="handleShowUser()"> -->

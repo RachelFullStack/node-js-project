@@ -1,7 +1,6 @@
 import { StringExpressionOperator } from "mongoose";
 import User from "./usersModel";
-import jwt from "jwt-simple";
-const secret: string = process.env.JWT_SECRET as string;
+
 // ----------------------------------------------------------------------
 export const userRegistration = async (req: any, res: any) => {
   try {

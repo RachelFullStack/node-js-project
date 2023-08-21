@@ -42,6 +42,7 @@ var dotenv = require("dotenv");
 var usersRoute_1 = require("./users/usersRoute");
 var createRoute_1 = require("./create-program/createRoute");
 var cookie_parser_1 = require("cookie-parser");
+var secret = process.env.JWT_SECRET;
 dotenv.config();
 var app = express_1["default"]();
 app.use(express_1["default"].json());
@@ -58,8 +59,6 @@ if (uri) {
 else {
     console.log("No URI");
 }
-// const UserSchema = new Schema({ name: String, src: String });
-// const UserModel = mongoose.model("users", UserSchema);
 // app.get("/api/user-get", async (req: any, res: any) => {
 //   try {
 //     const users = await User.find({});

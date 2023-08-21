@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="../navbar-style/dist/navbar.css" />
+    <link rel="stylesheet" href="./dist/home.css" />
+
+    <script src="../dist/home.js" defer></script>
+    <script src="https://kit.fontawesome.com/0075071575.js" crossorigin="anonymous"></script>
+  </head>
+  <body >
+    <nav class="navbar">
+      <h1 class="navbar__title">Fitness Tracker</h1>
+      <ul class="navbar__list">
+        <li class="navbar__item">
+          <a href="" class="navbar__link">Home</a>
+        </li>
+
+
+        <li class="navbar__item">
+          <a href="../addProgram/addProgram.html" id="admin" class="navbar__link hide">Admin</a>
+        </li>
+        <a href="../login/login.html"><button   style="color: white; background-color: red;">LogOut</button></a>
+      </ul>
+    </nav>
+
+    <!-- Main Page -->
+     
+    <h1 id="welcome-heading">
+      <p>Hi, <span id="userName"></span>! 👋 </p>
+      Choose a workout program to get started
+    </h1>
+
+    <div class="filterContainer"> 
+      <form id="filter-form">
+        <div class = "item1">
+          <select id="filter-level" name="filter-level" >
+              <option value="all">All Levels</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+          </select>
+          
+          <select id="filter-days" name="filter-days">
+              <option value="all">All Days</option>
+              <option value="2">2 Days a week</option>
+              <option value="3">3 Days a week</option>
+              <option value="4">4 Days a week</option>
+              <option value="5">5 Days a week</option>
+              <option value="6">6 Days a week</option>
+          </select>
+          
+      </div>
+
+      <div class = "item2">
+        <select id="filter-equipment" name="filter-equipment">
+          <option value="all">All Equipment</option>
+          <option value="Threadmill">Threadmill</option>
+          <option value="Dumbbells">Dumbbells</option>
+          <option value="Gym">Gym</option>
+          <option value="BenchPress">Bench Press</option>
+          <option value="Elliptical">Elliptical</option>
+          <option value="Barbell">Barbell</option>
+          <option value="Kettlebell">Kettlebell</option>
+          <option value="ResistanceBands">Resistance Bands</option>
+          <option value="RowingMachine">Rowing Machine</option>
+          <option value="SpinBike">Spin Bike</option>
+          <option value="YogaMat">Yoga Mat</option>
+          <option value="JumpRope">Jump Rope</option>
+      </select>
+      
+
+      <select id="filter-time" name="filter-time">
+        <option value="all">All Time</option>
+        <option value="15">15 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="45">45 minutes</option>
+        <option value="60">60 minutes</option>
+        <option value="75">75 minutes</option>
+        <option value="90">90 minutes</option>
+        <option value="105">105 minutes</option>
+        <option value="120">120 minutes</option>
+        <option value="150">150 minutes</option>
+        <option value="180">180 minutes</option>
+    </select>
+    
+        </div>
+      
+        <button id="apply-filter-button" type="button">Apply Filter</button>
+      </form>
+
+    </div>
+
+    <hr>
+
+    <div class="workout">
+      <h1>All Programs</h1>
+      <div id="workout-list">
+        <div class="card-container">
+
+          <div class="card-container">
+
+              <p>Fetching Data......</p>
+      </div>
+      
+      </div>
+    </div>
+  
+  </body>
+</html>
