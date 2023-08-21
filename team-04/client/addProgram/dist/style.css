@@ -159,7 +159,6 @@ img {
   cursor: pointer;
   display: block;
   margin: 20px auto;
-  /* Center the button */
 }
 #submit-button:hover {
   transform: scale(0.98);
