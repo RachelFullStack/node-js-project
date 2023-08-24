@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var mongoose_1 = require("mongoose");
+// This is a category schema of the program
 var categorySchema = new mongoose_1["default"].Schema({
     Title: String,
     Days: Number,

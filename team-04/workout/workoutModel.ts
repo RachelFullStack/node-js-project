@@ -14,6 +14,6 @@ const workoutSchema = new mongoose.Schema({
   ],
 });
 
-export const Workout = mongoose.model("AllData", workoutSchema);
+export const AllWorkoutData = mongoose.model("allWorkoutData", workoutSchema);
 
-export default Workout;
+export default AllWorkoutData;

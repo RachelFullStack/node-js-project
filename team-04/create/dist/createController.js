@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.getSingleWorkout = exports.getWorkouts = exports.addWorkOut = exports.getAllData = exports.getCategories = exports.addCategory = void 0;
+// import AllData from "../workout/workoutModel";
 var workoutModel_1 = require("../workout/workoutModel");
-// import Workout from "../workout/workoutModel";
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
 // --------------------------------------------------------------------//

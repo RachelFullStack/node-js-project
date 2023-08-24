@@ -1,5 +1,5 @@
-import AllData from "../workout/workoutModel";
-// import Workout from "../workout/workoutModel";
+// import AllData from "../workout/workoutModel";
+import AllWorkoutData from "../workout/workoutModel";
 import Category from "../category/categoryModel";
 import Program from "../program/programModel";
 
@@ -44,7 +44,7 @@ export const getCategories = async (req: any, res: any) => {
 // --------------------------------------------------------------------//
 export const getAllData = async (req: any, res: any) => {
   try {
-    const allData = await AllData.find({})
+    const allData = await AllWorkoutData.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -74,7 +74,7 @@ export const addWorkOut = async (req: any, res: any) => {
     );
 
     // --------------------------------------------------------------------//
-    const newAllData = await AllData.create({
+    const newAllData = await AllWorkoutData.create({
       category: req.body.CategoryId,
       program: newPrograms.flat(),
     });
@@ -95,7 +95,7 @@ export const addWorkOut = async (req: any, res: any) => {
 // --------------------------------------------------------------------//
 export const getWorkouts = async (req: any, res: any) => {
   try {
-    const allProgramData = await AllData.find({})
+    const allProgramData = await AllWorkoutData.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -115,7 +115,7 @@ export const getSingleWorkout = async (req: any, res: any) => {
   const { id } = req.params;
 
   try {
-    const workout = await AllData.findById(id)
+    const workout = await AllWorkoutData.findById(id)
       .populate("category")
       .populate("program")
       .exec();

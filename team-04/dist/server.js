@@ -16,7 +16,7 @@ app.use(cookie_parser_1["default"]());
 app.use(express_1["default"].static("./client"));
 app.use("/fitnessApi/", usersRoute_1["default"]);
 app.use("/fitnessApi/", createRoute_1["default"]);
-var uri = process.env.MONGOOSE_URI + "-Training";
+var uri = process.env.MONGOOSE_URI + "-TARTAR";
 // mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project
 if (uri) {
     mongoose_1["default"]
