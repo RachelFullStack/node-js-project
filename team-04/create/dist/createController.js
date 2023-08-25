@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.getSingleWorkout = exports.getWorkouts = exports.addWorkOut = exports.getAllData = exports.getCategories = exports.addCategory = void 0;
-// import AllData from "../workout/workoutModel";
 var workoutModel_1 = require("../workout/workoutModel");
 var categoryModel_1 = require("../category/categoryModel");
 var programModel_1 = require("../program/programModel");
@@ -159,6 +158,7 @@ exports.addWorkOut = function (req, res) { return __awaiter(void 0, void 0, void
                     })];
             case 2:
                 newAllData = _a.sent();
+                // console.log(newAllData);
                 res.status(200).json({
                     ok: true,
                     message: "Program created successfully."

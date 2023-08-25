@@ -19,7 +19,7 @@ app.use(express.static("./client"));
 app.use("/fitnessApi/", userRouter);
 app.use("/fitnessApi/", workoutRouter);
 
-const uri: string | undefined = process.env.MONGOOSE_URI + "-TARTAR";
+const uri: string | undefined = process.env.MONGOOSE_URI + "-Training";
 
 // mongodb+srv://GalitL:3314402002Ga@cluster0.mrjladc.mongodb.net/project
 

@@ -19,5 +19,4 @@ workoutRouter
   .get("/workout/getWorkout/:id", getSingleWorkout);
 // .patch("/workout/editProgramName", editProgramName)
 // .delete("/workout/deleteDataCard", deleteDataCard);
-
 export default workoutRouter;

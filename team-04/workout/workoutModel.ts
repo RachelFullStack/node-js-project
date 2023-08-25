@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
+// Scheme for workout
 const workoutSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -14,6 +15,6 @@ const workoutSchema = new mongoose.Schema({
   ],
 });
 
-export const AllWorkoutData = mongoose.model("allWorkoutData", workoutSchema);
+export const Workout = mongoose.model("AllData", workoutSchema);
 
-export default AllWorkoutData;
+export default Workout;

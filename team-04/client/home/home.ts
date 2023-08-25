@@ -45,7 +45,7 @@ const getUserName = async () => {
 };
 getUserName();
 
-// Getting all workouts:
+// Getting all workouts
 const getWorkouts = async () => {
   try {
     const response = await fetch("/fitnessApi/workout/getWorkouts");
@@ -59,7 +59,6 @@ const getWorkouts = async () => {
     console.log(err);
   }
 };
-
 // function to render workouts to screen:
 const showInUI = () => {
   workoutCardContainer.innerHTML = "";
@@ -124,7 +123,6 @@ const showInUI = () => {
   });
 };
 getWorkouts();
-
 // function to the user: filter program data
 const filterData = (e: any) => {
   console.log("ok,");

@@ -5,6 +5,7 @@ export const register = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
 
+
     const user = await User.findOne({ userName });
     if (user) {
       console.log(user);
@@ -15,10 +16,12 @@ export const register = async (req: any, res: any) => {
       return;
     }
 
+
     const databaseUser = await User.create({
       userName,
       userPassword,
     });
+
 
     res.status(200).json({
       ok: true,
@@ -33,21 +36,19 @@ export const register = async (req: any, res: any) => {
   }
 };
 
-
 // Login
 export const login = async (req: any, res: any) => {
   try {
     const { userName, userPassword } = req.body;
 
-    const databaseUser = await User.findOne({ userName, userPassword });
 
+    const databaseUser = await User.findOne({ userName, userPassword });
     if (!databaseUser) {
       res.status(500).json({
         ok: false,
         error: "Failed to login. User not found.",
       });
     } else {
-
       // const token = jwt.encode({ userId: databaseUser._id }, secret);
       // res.cookie("user", token, {
       //   maxAge: 50000000,
@@ -69,7 +70,6 @@ export const login = async (req: any, res: any) => {
     res.status(500).send({ error: error.message });
   }
 };
-
 
 // Get User
 export const getUser = async (req: any, res: any) => {

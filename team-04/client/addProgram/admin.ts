@@ -5,13 +5,13 @@ let fill = 0;
 const addButton = document.getElementById("add-table-button");
 const submitButton = document.getElementById("submit-button");
 
-let titleA = document.getElementById("title") as HTMLSelectElement;
-let levelB = document.getElementById("filter-level") as HTMLSelectElement;
-let daysC = document.getElementById("filter-days") as HTMLSelectElement;
-let equipmentD = document.getElementById(
+let title = document.getElementById("title") as HTMLSelectElement;
+let levelC = document.getElementById("filter-level") as HTMLSelectElement;
+let dayC = document.getElementById("filter-days") as HTMLSelectElement;
+let equipmenC = document.getElementById(
   "filter-equipment"
 ) as HTMLSelectElement;
-let timeE = document.getElementById("filter-time") as HTMLSelectElement;
+let timC = document.getElementById("filter-time") as HTMLSelectElement;
 
 // add table
 const addTable = () => {
@@ -65,15 +65,14 @@ const addTable = () => {
     alert("Maximum number of tables reached.");
   }
 };
-
 // add category
 const addCategory = async () => {
   const categoryObj = {
-    Title: titleA.value,
-    Level: levelB.value,
-    Days: daysC.value,
-    Equipment: equipmentD.value,
-    WorkoutTime: timeE.value,
+    Title: title.value,
+    Level: levelC.value,
+    Days: dayC.value,
+    Equipment: equipmenC.value,
+    WorkoutTime: timC.value,
   };
   console.log(categoryObj);
 
@@ -171,12 +170,11 @@ const submitData = async () => {
       }
       console.log(programData);
 
-      // add category
       const id = await addCategory();
       console.log(id);
 
       await addProgram(id, programData);
-      window.location.href = "../home/home.html";
+      // window.location.href = "./welcome.html";
     }
   } catch (error) {
     console.log(error);

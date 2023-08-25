@@ -1,9 +1,9 @@
-// import AllData from "../workout/workoutModel";
-import AllWorkoutData from "../workout/workoutModel";
+import AllDataModel from "../workout/workoutModel";
 import Category from "../category/categoryModel";
 import Program from "../program/programModel";
 
 // --------------------------------------------------------------------//
+
 export const addCategory = async (req: any, res: any) => {
   try {
     console.log(req.body);
@@ -44,7 +44,7 @@ export const getCategories = async (req: any, res: any) => {
 // --------------------------------------------------------------------//
 export const getAllData = async (req: any, res: any) => {
   try {
-    const allData = await AllWorkoutData.find({})
+    const allData = await AllDataModel.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -74,11 +74,12 @@ export const addWorkOut = async (req: any, res: any) => {
     );
 
     // --------------------------------------------------------------------//
-    const newAllData = await AllWorkoutData.create({
+    const newAllData = await AllDataModel.create({
       category: req.body.CategoryId,
       program: newPrograms.flat(),
     });
 
+    // console.log(newAllData);
     res.status(200).json({
       ok: true,
       message: "Program created successfully.",
@@ -95,7 +96,7 @@ export const addWorkOut = async (req: any, res: any) => {
 // --------------------------------------------------------------------//
 export const getWorkouts = async (req: any, res: any) => {
   try {
-    const allProgramData = await AllWorkoutData.find({})
+    const allProgramData = await AllDataModel.find({})
       .populate("category")
       .populate("program")
       .exec();
@@ -115,7 +116,7 @@ export const getSingleWorkout = async (req: any, res: any) => {
   const { id } = req.params;
 
   try {
-    const workout = await AllWorkoutData.findById(id)
+    const workout = await AllDataModel.findById(id)
       .populate("category")
       .populate("program")
       .exec();

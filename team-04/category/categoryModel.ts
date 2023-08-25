@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-// This is a category schema of the program
+
+// Scheme for category
 const categorySchema = new mongoose.Schema({
   Title: String,
   Days: Number,

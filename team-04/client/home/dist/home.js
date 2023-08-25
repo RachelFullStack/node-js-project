@@ -78,7 +78,7 @@ var getUserName = function () { return __awaiter(_this, void 0, void 0, function
     });
 }); };
 getUserName();
-// Getting all workouts:
+// Getting all workouts
 var getWorkouts = function () { return __awaiter(_this, void 0, void 0, function () {
     var response, data, err_1;
     return __generator(this, function (_a) {

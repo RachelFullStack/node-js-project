@@ -91,6 +91,7 @@ hr {
   padding: 30px;
   width: 90%;
   margin: auto;
+  /* Button styles */
 }
 .workout #workout-list .card-container {
   display: flex;
@@ -170,8 +171,8 @@ hr {
   color: white;
   cursor: pointer;
   position: relative;
-  top: 361px;
-  left: -194px;
+  top: 10px;
+  left: -335px;
   height: 30px;
   width: 72px;
 }

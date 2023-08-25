@@ -7,29 +7,22 @@
     <title>Registration Page</title>
     <link rel="stylesheet" href="./navbar-style/dist/navbar.css" />
     <link rel="stylesheet" href="./dist/style.css" />
- 
+
     <script src="./dist/indes.js" defer></script>
-    <script src="./userPrograms/dist/timer.js" defer></script>
-    <script src="./userPrograms/dist/userProgram.js" defer></script>
   </head>
   <body class="register-body">
+    <!-- NavBar -->
     <nav class="navbar">
       <h1 class="navbar__title">Fitness Tracker</h1>
       <ul class="navbar__list">
-
         <a href="./login/login.html"><button>Login</button></a>
       </ul>
     </nav>
 
-    <div class = "container">
+    <div class="container">
       <form onsubmit="register(event)">
         <h1>Register YourSelf</h1>
-        <input
-          type="text"
-          name="userName"
-          placeholder="Name"
-          required
-        />
+        <input type="text" name="userName" placeholder="Name" required />
         <input
           type="password"
           name="userPassword"
@@ -38,6 +31,6 @@
         />
         <button type="submit">Register</button>
       </form>
-
+    </div>
   </body>
 </html>

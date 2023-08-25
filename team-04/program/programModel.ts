@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
-const programSchema = new mongoose.Schema({
+// Scheme for program
+const ProgramSchema = new mongoose.Schema({
   Exercise: String,
   image: String,
   sets: Number,
   reps: Number,
 });
 
-const Program = mongoose.model("program", programSchema);
+const Program = mongoose.model("program", ProgramSchema);
 
 export default Program;

@@ -40,11 +40,11 @@ var tableCounter = 0;
 var fill = 0;
 var addButton = document.getElementById("add-table-button");
 var submitButton = document.getElementById("submit-button");
-var titleA = document.getElementById("title");
-var levelB = document.getElementById("filter-level");
-var daysC = document.getElementById("filter-days");
-var equipmentD = document.getElementById("filter-equipment");
-var timeE = document.getElementById("filter-time");
+var title = document.getElementById("title");
+var levelC = document.getElementById("filter-level");
+var dayC = document.getElementById("filter-days");
+var equipmenC = document.getElementById("filter-equipment");
+var timC = document.getElementById("filter-time");
 // add table
 var addTable = function () {
     if (tableCounter < maxTables) {
@@ -97,11 +97,11 @@ var addCategory = function () { return __awaiter(_this, void 0, void 0, function
         switch (_a.label) {
             case 0:
                 categoryObj = {
-                    Title: titleA.value,
-                    Level: levelB.value,
-                    Days: daysC.value,
-                    Equipment: equipmentD.value,
-                    WorkoutTime: timeE.value
+                    Title: title.value,
+                    Level: levelC.value,
+                    Days: dayC.value,
+                    Equipment: equipmenC.value,
+                    WorkoutTime: timC.value
                 };
                 console.log(categoryObj);
                 return [4 /*yield*/, fetch("/fitnessApi/workout/addCategory", {
@@ -187,7 +187,6 @@ var submitData = function () { return __awaiter(_this, void 0, void 0, function 
                 return [4 /*yield*/, addProgram(id, programData)];
             case 2:
                 _a.sent();
-                window.location.href = "../home/home.html";
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
